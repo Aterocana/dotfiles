@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "import files from home folder into the repository?" -n 1 -r
+read -p "import files from home folder into the repository? [y/Y] " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # copy from home folder all configurations

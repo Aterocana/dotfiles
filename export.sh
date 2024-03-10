@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "export files from repository to into home folder?" -n 1 -r
+read -p "export files from repository to into home folder? [y/Y] "  -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # backup current configurations
@@ -24,7 +24,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp .zshrc ~/
 	cp .gitconfig ~
 	cp -r config/tmux ~/.config/
-	cp $fname/.config/tmux/plugins ~/.config/tmux/
+	cp -r $fname/.config/tmux/plugins ~/.config/tmux/
 	cp -r config/nvim ~/.config/
 	cp -r config/alacritty ~/.config/
 	cp -r config/dlv ~/.config/
