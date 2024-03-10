@@ -1,0 +1,2 @@
+exec ssh-add /home/mauri/.ssh/gitlab
+exec ssh-add /home/mauri/.ssh/github_rsa

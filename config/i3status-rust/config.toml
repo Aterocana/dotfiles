@@ -1,0 +1,79 @@
+[theme]
+theme = "gruvbox-dark"
+
+[icons]
+icons = "awesome6"
+
+[[block]]
+block = "pacman"
+interval = 600
+format = "$icon $pacman updates available"
+format_singular = "$icon $pacman update available"
+format_up_to_date = "updated"
+critical_updates_regex = "(linux |linux-lts|linux-zen)"
+ 
+[[block]]
+block = "weather"
+format = "$icon $weather ($location) $temp"
+interval = 120
+[block.service]
+name = "openweathermap"
+api_key = "70806b7de628c7601b9a78d7e4687c17"
+city_id = "3181631"
+units = "metric"
+
+[[block]]
+block = "cpu"
+interval = 3
+format = "$icon$utilization"
+ 
+[[block]]
+block = "memory"
+format = "$icon$mem_avail.eng(prefix:M)/$mem_total.eng(prefix:M)($mem_total_used_percents.eng(w:2))"
+format_alt = "$icon_swap$swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)($swap_used_percents.eng(w:2))"
+interval = 10
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+
+[[block]]
+block = "temperature"
+interval = 10
+format = "$icon $max"
+format_alt = "$icon $min min, $max max, $average avg"
+ 
+[[block]]
+block = "net"
+format = "$icon {$signal_strength $ssid $frequency|}"
+[[block.click]]
+button = "left"
+cmd = "gnome-control-center"
+#interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+#interface_name_include = []
+ 
+[[block]]
+block = "sound"
+step_width = 1
+format = "$output_name{ $volume|}"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+[block.mappings]
+"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__hw_Dock__sink" = "🔈"
+"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Headphones__sink" = "🔈"
+"bluez_sink.A0_DE_0F_22_76_72.a2dp_sink" = "🎧"
+"alsa_output.usb-Sony_Interactive_Entertainment_DualSense_Wireless_Controller-00.analog-surround-40" = " "
+"alsa_output.pci-0000_00_1f.3.analog-stereo" = " "
+# show_volume_when_muted = true
+# 
+[[block]]
+block = "battery"
+driver = "upower"
+format = "$percentage $time"
+ 
+[[block]]                                                                                                                                                                       
+block = "time"                                                                                                                                                                  
+format = "$timestamp.datetime(f:'%H:%M:%S', l:it_IT)"
+interval = 1                                                                                                                                                                   
+ 

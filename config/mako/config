@@ -1,0 +1,10 @@
+output='Dell Inc. DELL U2417H 5K9YD85HAG0L'
+layer=overlay
+max-visible=5
+background-color=#000000cc
+border-color=#ffffffff
+border-size=5
+border-radius=15
+font=Droid Sans Regular 10
+format=<b>%a</b>\n<i>%s</i>\n\n%b
+group-by=app-name
