@@ -22,9 +22,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r .zsh ~/
 	cp $fname/.zsh/secret.zsh ~/.zsh/
 	cp .zshrc ~/
-	cp -r .config/tmux .
-	cp -r .config/nvim .
-	cp .gitconfig .
+	cp .gitconfig ~
+	cp -r .config/tmux ~/config/
+	cp -r .config/nvim ~/config/
 	cp -r .config/alacritty ~/config/
 	cp -r .config/dlv ~/config/
 	cp -r .config/i3status-rust ~/config/
