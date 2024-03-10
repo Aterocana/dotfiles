@@ -9,7 +9,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp ~/.zshrc .
 	cp ~/.gitconfig .
 	mkdir -p config/tmux/
-	cp -r ~/.config/tmux/tmux.conf config/tmux.conf
+	cp -r ~/.config/tmux/tmux.conf config/tmux/tmux.conf
 	cp -r ~/.config/nvim config/
 	cp -r ~/.config/alacritty config/
 	cp -r ~/.config/dlv config/

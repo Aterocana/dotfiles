@@ -9,7 +9,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mv ~/.zsh $fname/
 	mv ~/.zshrc $fname/
 	mv ~/.gitconfig $fname/
-	mkdir -p $fname/config
+	mkdir -p $fname/.config
 	mv ~/.config/tmux $fname/.config/
 	mv ~/.config/nvim $fname/.config/
 	mv ~/.config/alacritty $fname/.config/
@@ -20,14 +20,15 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# deploy current configuration
 	cp -r .zsh ~/
-	cp $fname/.zsh/secret.zsh ~/.zsh/
+	cp $fname/.zsh/secrets.zsh ~/.zsh/
 	cp .zshrc ~/
 	cp .gitconfig ~
-	cp -r .config/tmux ~/config/
-	cp -r .config/nvim ~/config/
-	cp -r .config/alacritty ~/config/
-	cp -r .config/dlv ~/config/
-	cp -r .config/i3status-rust ~/config/
-	cp -r .config/sway ~/config/
-	cp -r .config/mako ~/config/
+	cp -r config/tmux ~/.config/
+	cp $fname/.config/tmux/plugins ~/.config/tmux/
+	cp -r config/nvim ~/.config/
+	cp -r config/alacritty ~/.config/
+	cp -r config/dlv ~/.config/
+	cp -r config/i3status-rust ~/.config/
+	cp -r config/sway ~/.config/
+	cp -r config/mako ~/.config/
 fi
