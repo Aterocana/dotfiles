@@ -42,3 +42,113 @@ require('go').setup({
 		highlight = "Comment",
 	},
 })
+
+require("structrue-go").setup({
+	show_others_method = true, -- bool show methods of struct whose not in current file
+	show_filename = true, -- bool
+	number = "no", -- show number: no | nu | rnu
+	fold_open_icon = "  ",
+	fold_close_icon = "  ",
+	cursor_symbol_hl = "guibg=Gray guifg=White", -- symbol hl under cursor,
+	indent = "┠",  -- Hierarchical indent icon, nil or empty will be a tab
+	position = "botright", -- window position,default botright,also can set float
+	symbol = { -- symbol style
+		filename = {
+		    hl = "guifg=#0096C7", -- highlight symbol
+		    icon = " " -- symbol icon
+		},
+		package = {
+		    hl = "guifg=#0096C7",
+		    icon = " "
+		},
+		import = {
+		    hl = "guifg=#0096C7",
+		    icon = " ◈ "
+		},
+		const = {
+		    hl = "guifg=#E44755",
+		    icon = " π ",
+		},
+		variable = {
+		    hl = "guifg=#52A5A2",
+		    icon = " ◈ ",
+		},
+		func = {
+		    hl = "guifg=#CEB996",
+		    icon = "   ",
+		},
+		interface = {
+		    hl = "guifg=#00B4D8",
+		    icon = "❙ "
+		},
+		type = {
+		    hl = "guifg=#00B4D8",
+		    icon = "▱ ",
+		},
+		struct = {
+		    hl = "guifg=#00B4D8",
+		    icon = "❏ ",
+		},
+		field = {
+		    hl = "guifg=#CEB996",
+		    icon = " ▪ "
+		},
+		method_current = {
+		    hl = "guifg=#CEB996",
+		    icon = " ƒ "
+		},
+		method_others = {
+		    hl = "guifg=#CEB996",
+		    icon = "   "
+		},
+	},
+	keymap = {
+		toggle = "<leader>m", -- toggle structure-go window
+		show_others_method_toggle = "H", -- show or hidden the methods of struct whose not in current file
+		symbol_jump = "<CR>", -- jump to then symbol file under cursor
+		center_symbol = "\\f", -- Center the highlighted symbol
+		fold_toggle = "\\z",
+		refresh = "R", -- refresh symbols
+		preview_open = "P", -- preview  symbol context open
+		preview_close = "\\p" -- preview  symbol context close
+	},
+	fold = { -- fold symbols
+		import = true,
+		const = false,
+		variable = false,
+		type = false,
+		interface = false,
+		func = false,
+	},
+})
+require("hierarchy-tree-go").setup({
+	icon = {
+		fold = "", -- fold icon
+		unfold = "", -- unfold icon
+		func = "₣", -- symbol
+		last = '☉', -- last level icon
+	},
+	hl = {
+		current_module = "guifg=Green", -- highlight cwd module line
+		others_module = "guifg=Black", -- highlight others module line
+		cursorline = "guibg=Gray guifg=White" -- hl  window cursorline
+	},
+	keymap = {
+		--global keymap
+		incoming = "<space>fi", -- call incoming under cursorword
+		outgoing = "<space>fo", -- call outgoing under cursorword
+		open = "<space>ho", -- open hierarchy win
+		close = "<space>hc", -- close hierarchy win
+		-- focus: if hierarchy win is valid but is not current win, set to current win
+		-- focus: if hierarchy win is valid and is current win, close
+		-- focus  if hierarchy win not existing,open and focus
+		focus = "<space>fu",
+
+		-- bufkeymap
+		expand = "o", -- expand or collapse hierarchy
+		jump = "<CR>", -- jump
+		move = "<space><space>" -- switch the hierarchy window position, must be current win
+	}
+})
+require("telescope").load_extension("goimpl")
+vim.api.nvim_set_keymap('n', '<leader>im', [[<cmd>lua require'telescope'.extensions.goimpl.goimpl{}<CR>]], {noremap=true, silent=true})

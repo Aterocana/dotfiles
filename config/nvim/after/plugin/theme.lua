@@ -1,5 +1,6 @@
-function Theme(theme)
+function Theme(theme, darkness)
 	theme = theme or "gruvbox"
+	darkness = darkness or "dark"
 	require("gruvbox").setup({
 		terminal_colors = true, -- add neovim terminal colors
 		undercurl = true,
@@ -25,10 +26,10 @@ function Theme(theme)
 		transparent_mode = true,
 	})
 		vim.cmd.colorscheme(theme)
-		vim.o.background = "dark"
+		vim.o.background = darkness
 		require("notify").setup({
 			background_colour = "#000000",
 		})
 end
 
-Theme("gruvbox")
+Theme("gruvbox", "dark")

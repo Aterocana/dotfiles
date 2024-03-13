@@ -1,18 +1,22 @@
 [user]
 	name = Aterocana
 	email = dominicimaurizio@gmail.com
-[core]
-	editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
-[push]
-	default = matching
-	followTags = true
-[init]
-	defaultBranch = main
-[interactive]
-	diffFilter = diff-so-fancy --patch
+[alias]
+	st = status -sb
+	lg = log -p
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls = ls-files
 [color]
-	ui = true
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -26,3 +30,13 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[push]
+	default = matching
+	followTags = true
+[init]
+	defaultBranch = main
+[interactive]
+	diffFilter = diff-so-fancy --patch
