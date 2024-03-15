@@ -26,7 +26,10 @@ return {
 	{ "tpope/vim-repeat" },
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.5',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		config = function ()
+			pcall(require("telescope").load_extension, "fzf")
+		end
 	},
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "mbbill/undotree" },
