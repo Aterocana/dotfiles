@@ -24,6 +24,7 @@ return {
 	},
 	{ "tpope/vim-surround" },
 	{ "tpope/vim-repeat" },
+	{ "kevinhwang91/nvim-ufo", dependencies = {"kevinhwang91/promise-async"} },
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.5',
 		dependencies = { 'nvim-lua/plenary.nvim' },
@@ -31,7 +32,6 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 		end
 	},
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "mbbill/undotree" },
 	{
 		"iamcco/markdown-preview.nvim",
