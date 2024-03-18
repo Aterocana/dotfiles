@@ -3,7 +3,6 @@ return {
 		"mfussenegger/nvim-dap",
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
-
 			require('dap-go').setup {
 				-- Additional dap configurations can be added.
 				-- dap_configurations accepts a list of tables where each entry
@@ -44,8 +43,6 @@ return {
 			dapui.setup()
 
 			dap.listeners.before.attach.dapui_config = function()
-			--	widgets.sidebar(widgets.scopes).open()
-			--	widgets.sidebar(widgets.frames).open()
 				dapui.open()
 			end
 			dap.listeners.before.launch.dapui_config = function()
@@ -58,6 +55,11 @@ return {
 				dapui.close()
 			end
 
+			local dap_vscode = require("dap.ext.vscode")
+			vim.keymap.set('n', '<leader>db', function()
+				dap_vscode.load_launchjs(".vscode/launch_vim.json", {})
+				-- dap.continue()
+			end)
 			vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 			vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 			vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)

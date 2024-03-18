@@ -19,17 +19,20 @@ function Theme(theme, darkness)
 		invert_tabline = false,
 		invert_intend_guides = false,
 		inverse = true, -- invert background for search, diffs, statuslines and errors
-		contrast = "", -- can be "hard", "soft" or empty string
+		contrast = "hard", -- can be "hard", "soft" or empty string
 		palette_overrides = {},
 		overrides = {},
 		dim_inactive = false,
 		transparent_mode = true,
 	})
-		vim.cmd.colorscheme(theme)
-		vim.o.background = darkness
-		require("notify").setup({
-			background_colour = "#000000",
-		})
+	vim.cmd.colorscheme(theme)
+	vim.o.background = darkness
+	require("notify").setup({
+		background_colour = "#000000",
+	})
+
+	-- override style for highlighted text, in order to properly work with illuminate plugin
+	vim.cmd('hi IlluminatedWordText guibg=#504945 gui=bold')
 end
 
 Theme("gruvbox", "dark")
