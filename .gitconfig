@@ -14,8 +14,8 @@
 	local = yellow
 	remote = green
 [color "status"]
-	added = yellow
-	changed = green
+	added = green
+	changed = yellow
 	untracked = cyan
 [color "diff-highlight"]
 	oldNormal = red bold
