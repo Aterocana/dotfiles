@@ -1,6 +1,7 @@
 return {
 	{ "christoomey/vim-tmux-navigator" },
 	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
+	{ 'akinsho/toggleterm.nvim', version = "*", config = true },
 	{
 		"nvim-pack/nvim-spectre",
 		dependencies = {
@@ -27,7 +28,13 @@ return {
 	{ "kevinhwang91/nvim-ufo", dependencies = {"kevinhwang91/promise-async"} },
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.5',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		dependencies = {
+			{ 'nvim-lua/plenary.nvim' },
+			{
+				"isak102/telescope-git-file-history.nvim",
+				dependencies = { "tpope/vim-fugitive" }
+			},
+		},
 		config = function ()
 			pcall(require("telescope").load_extension, "fzf")
 		end

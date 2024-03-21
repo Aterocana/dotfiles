@@ -1,6 +1,10 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		dependencies = {
+			"Joakker/lua-json5",
+			build = "./install.sh"
+		},
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
 			require('dap-go').setup {
@@ -55,10 +59,11 @@ return {
 				dapui.close()
 			end
 
+			require('dap.ext.vscode').json_decode = require'json5'.parse
 			local dap_vscode = require("dap.ext.vscode")
 			vim.keymap.set('n', '<leader>db', function()
 				dap_vscode.load_launchjs(".vscode/launch_vim.json", {})
-				-- dap.continue()
+				dap.continue()
 			end)
 			vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 			vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
@@ -89,5 +94,8 @@ return {
 		end
 	},
 	{"leoluz/nvim-dap-go", dependencies = {"mfussenegger/nvim-dap"}},
-	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap"} }
+	{ "rcarriga/nvim-dap-ui", dependencies = { 
+		{ "mfussenegger/nvim-dap" },
+		{ "nvim-neotest/nvim-nio" },
+	} }
 }
