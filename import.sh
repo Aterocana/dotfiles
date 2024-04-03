@@ -24,4 +24,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r ~/.config/i3status-rust config/
 	cp -r ~/.config/sway config/
 	cp -r ~/.config/mako config/
+	mkdir -p local
+	cp -r ~/.local/scripts local/
 fi

@@ -42,7 +42,4 @@ local exitTerm = function()
   vim.cmd(":ToggleTerm");
 end
 
-vim.keymap.set("t", "<ESC><ESC>", exitTerm)
-vim.keymap.set("n", "<ESC><ESC>", exitTerm)
-vim.keymap.set("i", "<ESC><ESC>", exitTerm)
-vim.keymap.set("v", "<ESC><ESC>", exitTerm)
+vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm)

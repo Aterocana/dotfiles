@@ -26,7 +26,7 @@ snippets=(
   doc ~/Documents/
   d ~/Downloads/
   p ~/Documents/Programming/
-  go ~/Documents/Programming/Go/
+  go ~/Documents/Programming/go/
   rust ~/Documents/Programming/rust
   vim ~/.config/nvim/
 )
@@ -38,3 +38,4 @@ zle -N expand-snippet
 
 bindkey "\ej" expand-snippet
 bindkey -M emacs '^[[3;5~' kill-word
+bindkey -s ^f "tmux-sessionizer\n"
