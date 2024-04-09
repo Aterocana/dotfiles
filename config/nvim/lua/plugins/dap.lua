@@ -59,13 +59,11 @@ return {
 				dapui.close()
 			end
 
-			require('dap.ext.vscode').json_decode = require'json5'.parse
-			local dap_vscode = require("dap.ext.vscode")
-			vim.keymap.set('n', '<leader>db', function()
-				dap_vscode.load_launchjs(".vscode/launch_vim.json", {})
+			vim.keymap.set('n', '<F5>', function() 
+				require('dap.ext.vscode').json_decode = require'json5'.parse
+				require("dap.ext.vscode").load_launchjs(".vscode/launch_vim.json", {})
 				dap.continue()
 			end)
-			vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 			vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 			vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
 			vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
