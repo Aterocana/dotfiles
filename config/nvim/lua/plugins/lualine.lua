@@ -43,23 +43,20 @@ return {
 				lualine_a = {'mode'},
 				lualine_b = {
 					{
-						'buffers',
-						use_mode_colors = true,
+						'branch',
+						icons = "",
+						fmt = branch_name_fmt,
 					},
-					--symbols = {
-					--	modified = ' ●',      -- Text to show when the buffer is modified
-					--	alternate_file = '#', -- Text to show to identify the alternate file
-					--	directory =  '',     -- Text to show when the buffer is a directory
-					--},
+					'diff',
+					'diagnostics',
 				},
-				lualine_c = {},
-				lualine_x = {
+				lualine_c = {
 					{
 						'filename',
 						file_status = true,      -- Displays file status (readonly status, modified status)
 						newfile_status = false,  -- Display new file status (new file means no write after created)
 
-						-- path: 
+						-- path:
 						-- 0: Just the filename
 						-- 1: Relative path
 						-- 2: Absolute path
@@ -75,17 +72,21 @@ return {
 							unnamed = '[No Name]', -- Text to show for unnamed buffers.
 							newfile = '[New]',     -- Text to show for newly created file before first write
 						}
-					}
+					},
+				},
+				lualine_x = {
+					{
+						'buffers',
+						use_mode_colors = true,
+					},
+					--symbols = {
+					--	modified = ' ●',      -- Text to show when the buffer is modified
+					--	alternate_file = '#', -- Text to show to identify the alternate file
+					--	directory =  '',     -- Text to show when the buffer is a directory
+					--},
 				},
 
 				lualine_y = {
-					{
-						'branch',
-						icons = "",
-						fmt = branch_name_fmt,
-					},
-					'diff',
-					'diagnostics',
 				},
 				lualine_z = {'location'}
 			},
