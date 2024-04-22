@@ -20,6 +20,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mkdir -p $fname/.config
 	mv ~/.config/tmux $fname/.config/
 	mv ~/.config/nvim $fname/.config/
+	mv ~/.config/xdg-desktop-portal $fname/.config/
 	mv ~/.config/alacritty $fname/.config/
 	mv ~/.config/dlv $fname/.config/
 	mv ~/.config/i3status-rust $fname/.config/
@@ -36,6 +37,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r config/tmux ~/.config/
 	cp -r $fname/.config/tmux/plugins ~/.config/tmux/
 	cp -r config/nvim ~/.config/
+	cp -r config/xdg-desktop-portal ~/.config/
 	cp -r config/alacritty ~/.config/
 	cp -r config/dlv ~/.config/
 	cp -r config/i3status-rust ~/.config/
