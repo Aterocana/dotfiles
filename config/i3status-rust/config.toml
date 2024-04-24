@@ -11,7 +11,7 @@ format = "$icon $pacman updates available"
 format_singular = "$icon $pacman update available"
 format_up_to_date = "updated"
 critical_updates_regex = "(linux |linux-lts|linux-zen)"
- 
+
 [[block]]
 block = "weather"
 format = "$icon $weather ($location) $temp"
@@ -26,7 +26,7 @@ units = "metric"
 block = "cpu"
 interval = 3
 format = "$icon$utilization"
- 
+
 [[block]]
 block = "memory"
 format = "$icon$mem_avail.eng(prefix:M)/$mem_total.eng(prefix:M)($mem_total_used_percents.eng(w:2))"
@@ -42,7 +42,7 @@ block = "temperature"
 interval = 10
 format = "$icon $max"
 format_alt = "$icon $min min, $max max, $average avg"
- 
+
 [[block]]
 block = "net"
 format = "$icon {$signal_strength $ssid $frequency|}"
@@ -51,7 +51,17 @@ button = "left"
 cmd = "gnome-control-center"
 #interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
 #interface_name_include = []
- 
+
+# VPN
+[[block]]
+block = "custom"
+json = true
+command = "/home/mauri/.config/i3status-rust/vpn.sh status"
+interval = 3
+[[block.click]]
+button = "left"
+cmd = "/home/mauri/.config/i3status-rust/vpn.sh toggle"
+
 [[block]]
 block = "sound"
 step_width = 1
@@ -67,14 +77,14 @@ cmd = "pavucontrol"
 "alsa_output.usb-Sony_Interactive_Entertainment_DualSense_Wireless_Controller-00.analog-surround-40" = " "
 "alsa_output.pci-0000_00_1f.3.analog-stereo" = " "
 # show_volume_when_muted = true
-# 
+#
 [[block]]
 block = "battery"
 driver = "upower"
 format = "$percentage $time"
- 
-[[block]]                                                                                                                                                                       
-block = "time"                                                                                                                                                                  
+
+[[block]]
+block = "time"
 format = "$timestamp.datetime(f:'%H:%M:%S', l:it_IT)"
-interval = 1                                                                                                                                                                   
- 
+interval = 1
+

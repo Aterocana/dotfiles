@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 
-vpn="CDN77"
+st=`ip a | grep ppp0`
+vpn_folder=/home/mauri/Documents/VPN
 
 if [[ "${1}" == "status" ]]; then
-  if nmcli -t con show $vpn | grep -qi 'VPN connected'; then
-	echo ""
+  if [ -z $st ]; then
+	STATE="Critical"
   else
-	echo ""
+	STATE="Good"
   fi
+  echo "{\"icon\":\"\",\"state\":\"${STATE}\",\"text\":\" \"}"
 
 elif [[ "${1}" == "toggle" ]]; then
-  if nmcli -t con show $vpn | grep -qi 'VPN connected'; then
-	nmcli con down $vpn
-	notify-send "$vpn VPN Down"
+  if [ -z $st ]; then
+	cat "$vpn_folder/sudopwd" | sudo -S "$vpn_folder/vpn.sh"
+	if [[ $? -ne 0 ]]; then
+		notify-send "failed to start VPN"
+	fi
   else
-	nmcli con up $vpn
-	notify-send "$vpn VPN Active"
+	cat "$vpn_folder/sudopwd" | sudo -S pkill openfortivpn
+	notify-send "VPN Down"
   fi
 fi
