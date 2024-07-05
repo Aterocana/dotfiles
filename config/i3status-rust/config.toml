@@ -57,7 +57,7 @@ cmd = "gnome-control-center"
 block = "custom"
 json = true
 command = "/home/mauri/.config/i3status-rust/vpn.sh status"
-interval = 3
+interval = 30
 [[block.click]]
 button = "left"
 cmd = "/home/mauri/.config/i3status-rust/vpn.sh toggle"

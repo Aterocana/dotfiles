@@ -37,7 +37,17 @@ return {
 		},
 		config = function ()
 			pcall(require("telescope").load_extension, "fzf")
-		end
+			local actions = require("telescope.actions")
+			require("telescope").setup({
+				defaults = {
+					mappings = {
+						n = {
+							["<C-C>"] = actions.close,
+						},
+					},
+				},
+			})
+		end,
 	},
 	{ "mbbill/undotree" },
 	{

@@ -35,7 +35,6 @@ return {
 		},
 		config = function ()
 			require("gopher").setup()
-			require"gopher.dap".setup()
 		end
 	},
 }
