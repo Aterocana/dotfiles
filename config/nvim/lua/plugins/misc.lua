@@ -1,4 +1,11 @@
 return {
+	{
+		'stevearc/oil.nvim',
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "echasnovski/mini.icons" },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+	},
 	{ "christoomey/vim-tmux-navigator" },
 	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true },

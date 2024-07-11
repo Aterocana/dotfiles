@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Oil)
 
 -- Visual mode: use J and K to move selected portion down or up.
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
