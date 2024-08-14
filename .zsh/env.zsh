@@ -2,10 +2,6 @@
 export PATH=$PATH:/usr/lib/go/bin:$HOME/go/bin
 export GOBIN=$HOME/go/bin
 
-# RUST
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$(rustc --print sysroot)/lib/rustlib/src/rust/src
-
 # My scripts
 export PATH=$PATH:$HOME/.local/scripts
 
