@@ -16,7 +16,6 @@ set $right l
 # Autostart
 exec --no-startup-id mako &> /tmp/mako.log
 exec clipmenud
-exec nextcloud
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 include ~/.config/sway/sway.d/themes
 

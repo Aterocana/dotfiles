@@ -44,3 +44,5 @@ end
 
 vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm)
 vim.keymap.set("n", "<leader>db", '<CMD>DBUIToggle<CR>')
+
+vim.keymap.set("v", "<leader>y", '"+y', {})
