@@ -1,6 +1,11 @@
+# Global
 output='Dell Inc. DELL U2417H 5K9YD85HAG0L'
-layer=overlay
+max-history=100
 max-visible=5
+default-timeout=5000
+
+# Style
+layer=overlay
 background-color=#000000cc
 border-color=#ffffffff
 border-size=5
@@ -8,3 +13,14 @@ border-radius=15
 font=Droid Sans Regular 10
 format=<b>%a</b>\n<i>%s</i>\n\n%b
 group-by=app-name
+
+# Criteria
+[urgency=high]
+border-color=#f5a97f
+default-timeout=0
+
+[category=test]
+history=0
+
+[category=setting]
+history=0
