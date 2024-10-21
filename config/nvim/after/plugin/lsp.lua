@@ -52,7 +52,8 @@ local lspkind = require('lspkind')
 cmp.setup({
 	snippet = {
 		expand = function (args)
-			require("luasnip").lsp_expand(args.body)
+			local ls = require("luasnip")
+			ls.lsp_expand(args.body)
 		end
 	},
 	mapping = cmp.mapping.preset.insert({
@@ -62,11 +63,11 @@ cmp.setup({
 		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 	}),
 	sources = {
-		{name = 'luasnip', keyword_length = 2},
 		{name = 'nvim_lsp'},
-		{name = 'buffer', keyword_length = 3},
-		{name = 'path'},
-		{name = 'nvim_lua'},
+		{name = 'luasnip'},
+		--{name = 'buffer', keyword_length = 3},
+		--{name = 'path'},
+		--{name = 'nvim_lua'},
 	},
 	formatting = {
 		format = lspkind.cmp_format({

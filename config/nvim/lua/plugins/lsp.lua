@@ -6,6 +6,7 @@ return {
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{
 		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			{
 				"onsails/lspkind-nvim",
@@ -18,14 +19,20 @@ return {
 				-- use opts = {} for passing setup options
 				-- this is equalent to setup({}) function
 			},
+			{
+				"L3MON4D3/LuaSnip",
+				-- dependencies = {
+				-- 	{"rafamadriz/friendly-snippets"},
+				-- },
+				version = "v2.*",
+				build = "make install_jsregexp",
+				config = function ()
+					local ls = require("luasnip")
+					ls.config.setup({
+						enable_autosnippets = true,
+					})
+				end
+			},
 		},
-	},
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = {
-			{"rafamadriz/friendly-snippets"},
-		},
-		version = "v2.*",
-		build = "make install_jsregexp",
 	},
 }
