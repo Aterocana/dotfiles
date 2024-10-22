@@ -1,5 +1,9 @@
 return {
 	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+	},	
+	{
 		'stevearc/oil.nvim',
 		opts = {},
 		-- Optional dependencies
