@@ -1,3 +1,7 @@
+require('nvim-treesitter.configs').setup {
+  ensure_installed = "go",
+}
+
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.go",

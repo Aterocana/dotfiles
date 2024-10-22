@@ -1,9 +1,4 @@
 return {
-	{
-		"code-biscuits/nvim-biscuits",
-		dependencies = {"nvim-treesitter/nvim-treesitter"},
-		build = ":TSUpdate"
-	},
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lewis6991/gitsigns.nvim" },
 	{
