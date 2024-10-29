@@ -4,11 +4,12 @@ local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local c = ls.choice_node
+local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 
 vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
-vim.keymap.set({"i", "s"}, "C-n", function() ls.jump( 1) end, {silent = true})
-vim.keymap.set({"i", "s"}, "C-p", function() ls.jump(-1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<leader><leader>>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<leader><leader><", function() ls.jump(-1) end, {silent = true})
 
 vim.keymap.set({"i", "s"}, "<C-E>", function()
 	if ls.choice_active() then
@@ -16,8 +17,13 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 	end
 end, {silent = true})
 
+local test_snippet = function (position)
+	return sn(nil, t("example"))
+end
+
 ls.add_snippets("go", {
-	s({trig="iferr", name="Error Handling", snippetType="autosnippet", desc="Generic golang error handling, with switchable propagation using plain, errors.WithStack or errors.Wrapf", wordTrig=true},
+	s(
+		{trig="iferr", name="Error Handling", snippetType="autosnippet", desc="Generic golang error handling, with switchable propagation using plain, errors.WithStack or errors.Wrapf", wordTrig=true},
 		{
 			t({"if err != nil {", ""}),
 			t("\treturn "),
@@ -39,11 +45,17 @@ ls.add_snippets("go", {
 		}
 	),
 	s(
-		{trig="switch", name="Switch case", snippetType="snippet", desc="Golang switch completion", wordTrig=true},
+		{trig="swc", name="Switch case", snippetType="snippet", desc="Golang switch completion", wordTrig=true},
 		{
 			t("switch "), i(1, "variable"), t({"{", ""}),
 			t({"\tcase "}), i(2, "condition"), t({":", ""}),
 			t({"","}"})
 		}
-	)
+	),
+	s(
+		{ trig = "pf", name = "Formatted Print", dscr = "Insert a formatted print statement" },
+		{
+			t("fmt.Printf(\"%v\\n\", "), i(1, "value"), t(")")
+		}
+	),
 })

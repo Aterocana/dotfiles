@@ -28,6 +28,7 @@ return {
 				build = "make install_jsregexp",
 				config = function ()
 					local ls = require("luasnip")
+					ls.setup({})
 					ls.config.setup({
 						enable_autosnippets = true,
 					})
