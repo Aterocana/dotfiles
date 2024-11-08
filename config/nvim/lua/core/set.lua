@@ -8,6 +8,7 @@ vim.opt.expandtab = false
 
 vim.opt.smartindent = true
 vim.opt.showcmd = true
+vim.opt.showmode = false -- Don't show the mode, since it's already in the status line
 
 vim.opt.wrap = true
 vim.opt.wrapmargin=1
@@ -28,3 +29,16 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+vim.opt.list = true
+vim.opt.listchars = {
+	tab = "→ ",
+	lead = '·',
+	trail = '•',
+	nbsp = "␣",
+	eol = "↲",
+	extends="⟩",
+	precedes="⟨"
+}
+vim.g.have_nerd_font = true
+vim.opt.cursorline = true
