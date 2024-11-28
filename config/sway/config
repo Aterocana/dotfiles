@@ -17,6 +17,7 @@ set $right l
 exec --no-startup-id mako &> /tmp/mako.log
 exec clipmenud
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec /usr/bin/syncthing serve
 include ~/.config/sway/sway.d/themes
 
 # Favourite applications

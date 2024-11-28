@@ -38,11 +38,11 @@ warning_swap = 80
 critical_mem = 95
 critical_swap = 95
 
-[[block]]
-block = "temperature"
-interval = 10
-format = "$icon $max"
-format_alt = "$icon $min min, $max max, $average avg"
+#[[block]]
+#block = "temperature"
+#interval = 10
+#format = "$icon $max"
+#format_alt = "$icon $min min, $max max, $average avg"
 
 [[block]]
 block = "net"
@@ -57,11 +57,11 @@ cmd = "gnome-control-center"
 [[block]]
 block = "custom"
 json = true
-command = "/home/mauri/.config/i3status-rust/vpn.sh status"
-interval = 30
+command = "/home/mauri/.config/i3status-rust/vpn_ufficio.sh status"
+interval = 10
 [[block.click]]
 button = "left"
-cmd = "/home/mauri/.config/i3status-rust/vpn.sh toggle"
+cmd = "/home/mauri/.config/i3status-rust/vpn_ufficio.sh toggle"
 
 [[block]]
 block = "sound"
