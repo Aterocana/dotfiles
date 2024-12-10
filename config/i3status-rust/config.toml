@@ -61,7 +61,7 @@ command = "/home/mauri/.config/i3status-rust/vpn_ufficio.sh status"
 interval = 10
 [[block.click]]
 button = "left"
-cmd = "/home/mauri/.config/i3status-rust/vpn_ufficio.sh toggle"
+cmd = "sudo /home/mauri/.config/i3status-rust/vpn_ufficio.sh toggle"
 
 [[block]]
 block = "sound"

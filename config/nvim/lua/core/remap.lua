@@ -3,8 +3,12 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Oil, { desc = "Open file manager in cu
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndotree buffer" })
 
 -- Visual mode: use J and K to move selected portion down or up.
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc = "Move selected portion down"})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "Move selected portion up"})
+
+-- Visual mode: indent selection right or left
+vim.keymap.set("v", "<", "<gv", {desc= "indent selection to the left"})
+vim.keymap.set("v", ">", ">gv", {desc= "indent selection to the right"})
 
 -- Normal mode: scroll down or up half of the page and apply zz (center vertically on cursor)
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -16,9 +20,17 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Down Window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Up Window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Right Window" })
 
--- Split Windows
+-- Windows Managing
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>-", ":split<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>wK", "<CMD>windcmd K<CR>", { desc = "Move [w]indow UP" })
+vim.keymap.set("n", "<leader>wJ", "<CMD>windcmd J<CR>", { desc = "Move [w]indow DOWN" })
+vim.keymap.set("n", "<leader>wH", "<CMD>windcmd H<CR>", { desc = "Move [w]indow LEFT" })
+vim.keymap.set("n", "<leader>wL", "<CMD>windcmd L<CR>", { desc = "Move [w]indow RIGHT" })
+vim.keymap.set("n", "<leader>wk", "<CMD>resize +5<CR>", { desc = "Resize [w]indow UP" })
+vim.keymap.set("n", "<leader>wj", "<CMD>resize -5<CR>", { desc = "Resize [w]indow DOWN" })
+vim.keymap.set("n", "<leader>wh", "<CMD>vertical resize +3<CR>", { desc = "Resize [w]indow LEFT" })
+vim.keymap.set("n", "<leader>wl", "<CMD>vertical resize -3<CR>", { desc = "Resize [w]indow RIGHT" })
 
 -- Substitution
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[S]ubstitution on current word"})
