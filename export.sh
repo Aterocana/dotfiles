@@ -5,7 +5,7 @@
 # modify it under the terms of the GNU General Public License
 # version 2 as published by the Free Software Foundation.
 
-read -p "export files from repository to into home folder? [y/Y] "  -n 1 -r
+read -p "export files from repository to into home folder? [y/N] "  -n 1 -r
 echo
 
 commit=`git rev-parse HEAD`
