@@ -37,7 +37,7 @@ ls.add_snippets("go", {
   env.s(
 	{ trig = "pf", name = "Formatted Print", snippetType="snippet", dscr = "Insert a formatted print statement" },
 	{
-	  env.t("fmt.Printf(\"%v\\n\", "), env.i(1, "value"), env.t(")")
+	  env.t("fmt.Printf(\"%v\\n\", "), env.i(1, "value"), env.t(")"),
 	}
   )
 })

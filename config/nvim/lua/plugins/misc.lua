@@ -1,15 +1,15 @@
 return {
-	{ "akinsho/toggleterm.nvim", version = "*", config = true },
-	{ "lewis6991/gitsigns.nvim" },
+	{ "akinsho/toggleterm.nvim", version = "*", config = true }, -- terminal embedded int Nvim
+	{ "lewis6991/gitsigns.nvim" }, -- git enhancements
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" }
-	},
+	}, -- managing favourite files
 	{ "tpope/vim-fugitive" },
-	{ "tpope/vim-surround" },
-	{ "tpope/vim-repeat" },
-	{ "kevinhwang91/nvim-ufo", dependencies = {"kevinhwang91/promise-async"} },
+	{ "tpope/vim-surround" }, -- shortcut to work with brackets, parenthesis
+	{ "tpope/vim-repeat" }, -- improve . operator to repeat operations
+	{ "kevinhwang91/nvim-ufo", dependencies = {"kevinhwang91/promise-async"} }, -- helper for folding chunk of code
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.8',
 		dependencies = {
@@ -33,7 +33,7 @@ return {
 			})
 		end,
 	},
-	{ "mbbill/undotree" },
+	{ "mbbill/undotree" }, -- it gives an undotree to revert or navigate through changes
 	{
 		"stevearc/dressing.nvim",
 		config = function ()
@@ -53,7 +53,7 @@ return {
 				},
 			})
 		end
-	},
+	}, -- syntax highlighter 
 	{
 		"atiladefreitas/dooing",
 		config = function()
@@ -91,5 +91,5 @@ return {
 		keys = {
 			{ "<leader>td", desc = "Toggle Todo List" },
 		},
-	},
+	}, -- toggle a todo list
 }

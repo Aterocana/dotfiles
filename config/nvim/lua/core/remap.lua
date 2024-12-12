@@ -63,5 +63,6 @@ vim.keymap.set('n', '<leader>rt', function ()
 	require("neotest").run.run({ suite = false, strategy = "dap"})
 end, { desc = "[R]un [T]est"})
 
+-- Navigate definitions in new buffers
 vim.keymap.set("n", "gD", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", { desc = 'Go To Definition in a new Tab'})
 vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", { desc = 'Go To Definition in a new Tab'})
