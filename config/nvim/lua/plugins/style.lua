@@ -50,6 +50,20 @@ return {
 	  })
 	end
   },
+  {
+	"RRethy/vim-illuminate",
+	config = function ()
+	  require("illuminate").configure({
+		under_cursor = false,
+		filetypes_denylist = {
+		  "DressingSelect",
+		  "Outline",
+		  "TelescopePrompt",
+		  "harpoon",
+		},
+	  })
+	end
+  }, -- syntax highlighter 
   --	{
   --		"sphamba/smear-cursor.nvim",
   --
