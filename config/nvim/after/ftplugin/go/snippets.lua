@@ -3,6 +3,22 @@ require("luasnip.loaders.from_lua").lazy_load()
 
 local env = SnipEnv
 
+local errWrap = function ()
+  return env.fmt([[
+	errors.Wrapf({}, "{}")
+	]], {
+	  env.i(1, "err"),
+	  env.i(2, ""),
+	})
+end
+
+local errStack = function ()
+  return env.fmt("errors.WithStack({})", {
+	env.i(1, "err")
+  })
+
+end
+
 ls.add_snippets("go", {
   env.s(
 	{trig="iferr", name="Error Handling", snippetType="autosnippet", desc="Generic golang error handling, with switchable propagation using plain, errors.WithStack or errors.Wrapf", wordTrig=true},
@@ -39,5 +55,21 @@ ls.add_snippets("go", {
 	{
 	  env.t("fmt.Printf(\"%v\\n\", "), env.i(1, "value"), env.t(")"),
 	}
+  ),
+  env.s(
+	{ trig = "errwrap", name = "Auto Error Wrapped", snippetType="autosnippet", desc = "error wrapped with errors.Wrapf"},
+	{ errWrap(), }
+  ),
+  env.s(
+	{ trig = "errwrap", name = "Error Wrapped", snippetType="snippet", desc = "error wrapped with errors.Wrapf"},
+	{ errWrap(), }
+  ),
+  env.s(
+	{ trig = "errstack", name = "Auto Error With Stack", snippetType="autosnippet", desc = "error with errors.WithStack"},
+	{ errStack(), }
+  ),
+  env.s(
+	{ trig = "errstack", name = "Error With Stack", snippetType="snippet", desc = "error with errors.WithStack"},
+	{ errStack(), }
   )
 })

@@ -59,13 +59,13 @@ return {
 	  local cmp = require('cmp')
 	  --local cmp_select = {behavior = cmp.SelectBehavior.Select}
 	  local cmp_action = require('lsp-zero').cmp_action()
-	  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-	  --
-	  -- If you want insert `(` after select function or method item
-	  cmp.event:on(
-		'confirm_done',
-		cmp_autopairs.on_confirm_done()
-	  )
+--	  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+--	  --
+--	  -- If you want insert `(` after select function or method item
+--	  cmp.event:on(
+--		'confirm_done',
+--		cmp_autopairs.on_confirm_done()
+--	  )
 
 	  -- this is the function that loads the extra snippets to luasnip
 	  -- from rafamadriz/friendly-snippets

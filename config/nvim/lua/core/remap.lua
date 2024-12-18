@@ -41,12 +41,6 @@ vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Open [L]azyNVim Manager
 -- (visual mode) paste selection in system clipboard
 vim.keymap.set("v", "<leader>y", '"+y"', { desc = "[Y]ank into system clipboard"})
 
--- terminal
-local exitTerm = function ()
-	vim.cmd(":ToggleTerm");
-end
-vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm, {desc = "Toggle Terminal"})
-
 -- toggle debugger
 vim.keymap.set("n", "<leader>db", '<CMD>DBUIToggle<CR>', {desc = "Toggle [D]e[B]ug view"})
 
@@ -66,3 +60,11 @@ end, { desc = "[R]un [T]est"})
 -- Navigate definitions in new buffers
 vim.keymap.set("n", "gD", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", { desc = 'Go To Definition in a new Tab'})
 vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", { desc = 'Go To Definition in a new Tab'})
+
+-- Terminal
+local exitTerm = function ()
+	vim.cmd(":ToggleTerm");
+end
+vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm, {desc = "Toggle Terminal"})
+-- vim.keymap.set("t", "<C-C>", "<C-\\><C-N>", { desc = "exit from term mode"})
+vim.keymap.set("n", "<leader>build", "<CMD>TermExec cmd='make build'<CR>", {desc = "run `make build` cmd in the terminal"})
