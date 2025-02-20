@@ -39,7 +39,7 @@ ls.add_snippets("go", {
 	  env.t({"if err != nil {", ""}),
 	  env.t({"\tsrv.handleError(w, r, err, \"\")", ""}),
 	  env.t({"\treturn", ""}),
-	  env.t({"", "}",}),
+	  env.t({"}"}),
 	}
   ),
   env.s(
@@ -50,6 +50,28 @@ ls.add_snippets("go", {
 	  env.t({"","}"})
 	}
   ),
+--  env.s(
+--	{trig="dbtx", name="Start a DB tx with special ctx", snippetType="autosnippet", desc="dlabscore/db transactional context wrapper", wordTrig=true},
+--	{
+--	  env.t({"cctx, err := db.getTxfromCtx(ctx)", ""}),
+--	  env.t({"if err != nil {", ""}),
+--	  env.t("\treturn "),
+--	  env.c(1, {
+--		env.t("errors.WithStack(err)"),
+--		env.t("err"),
+--		env.t("errors.Wrapf(err, \"\")"),
+--	  }),
+--	  env.t({"", "}", ""}),
+--	  env.t("defer cctx.Rollback()"),
+--	  env.t("")
+--	}
+--  ),
+--  env.s(
+--	{trig="dbcm", name="Commit a DB tx with special ctx", snippetType="snippet", desc="dlabscore/db transactional context wrapper commit", wordTrig=true},
+--	{
+--	  env.t({"cctx.Commit()"}),
+--	}
+--  ),
   env.s(
 	{ trig = "pf", name = "Formatted Print", snippetType="snippet", dscr = "Insert a formatted print statement" },
 	{

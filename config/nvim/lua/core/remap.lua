@@ -54,7 +54,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 vim.keymap.set('n', '<leader>rt', function ()
-	require("neotest").run.run({ suite = false, strategy = "dap"})
+  require("neotest").run.run({ suite = false, strategy = "dap"})
 end, { desc = "[R]un [T]est"})
 
 -- Navigate definitions in new buffers
@@ -63,8 +63,25 @@ vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>",
 
 -- Terminal
 local exitTerm = function ()
-	vim.cmd(":ToggleTerm");
+  vim.cmd(":ToggleTerm");
 end
 vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm, {desc = "Toggle Terminal"})
 -- vim.keymap.set("t", "<C-C>", "<C-\\><C-N>", { desc = "exit from term mode"})
 vim.keymap.set("n", "<leader>build", "<CMD>TermExec cmd='make build'<CR>", {desc = "run `make build` cmd in the terminal"})
+
+-- Tests
+vim.keymap.set("n", "<leader>tt", function ()
+  require("neotest").run.run()
+end , {desc="run nearest [T]es[T]"})
+
+vim.keymap.set("n", "<leader>tdb", function ()
+  require("neotest").run.run({strategy="dap"})
+end, {desc="run nearest [T]est in [D]e[B]ug mode"})
+
+vim.keymap.set("n", "<leader>tat", function ()
+  require("neotest").run.attach()
+end, {desc="[AT]tach to the [T]est"})
+
+vim.keymap.set("n", "<leader>tst", function ()
+  require("neotest").run.stop()
+end, {desc="[ST]op the [T]est"})
