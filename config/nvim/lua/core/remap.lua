@@ -70,18 +70,18 @@ vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm, {desc = "Toggle Ter
 vim.keymap.set("n", "<leader>build", "<CMD>TermExec cmd='make build'<CR>", {desc = "run `make build` cmd in the terminal"})
 
 -- Tests
-vim.keymap.set("n", "<leader>tt", function ()
+vim.keymap.set("n", "<Leader>tt", function ()
   require("neotest").run.run()
 end , {desc="run nearest [T]es[T]"})
 
-vim.keymap.set("n", "<leader>tdb", function ()
+vim.keymap.set("n", "<Leader>db", function ()
   require("neotest").run.run({strategy="dap"})
 end, {desc="run nearest [T]est in [D]e[B]ug mode"})
 
-vim.keymap.set("n", "<leader>tat", function ()
+vim.keymap.set("n", "<Leader>at", function ()
   require("neotest").run.attach()
 end, {desc="[AT]tach to the [T]est"})
 
-vim.keymap.set("n", "<leader>tst", function ()
+vim.keymap.set("n", "<Leader>st", function ()
   require("neotest").run.stop()
 end, {desc="[ST]op the [T]est"})

@@ -38,22 +38,4 @@ return {
 	end,
 	opts = {},
   },
-  {
-	"cademichael/gotest.nvim",
-	dependencies = {
-	  'nvim-treesitter/nvim-treesitter',
-	  'nvim-telescope/telescope.nvim',
-	},
-	config = function()
-	  -- defaults
-	  vim.g.gotest = {
-		test_cmd = "gotest -run ",
-		preview_cutoff = 0,
-		preview_width = 0.67
-	  }
-	  local goTest = require("gotest")
-	  vim.keymap.set("n", "<Leader>tf", goTest.goFuncTester, {desc = "run a Go test"})
-	  vim.keymap.set("n", "<Leader>tm", goTest.goModTester, {desc = "run a Go module test suite"})
-	end
-  },
 }
