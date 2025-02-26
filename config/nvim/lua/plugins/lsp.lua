@@ -9,7 +9,7 @@ return {
 	config = function ()
 	  local lsp_zero = require('lsp-zero')
 	  local opts = {
-		ensure_installed = {'gopls', 'rust_analyzer', 'lua_ls'},
+		ensure_installed = {'gopls', 'lua_ls'},
 		handlers = {
 		  lsp_zero.default_setup,
 		  lua_ls = function()
