@@ -15,14 +15,13 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "<leader>vr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end)
 
 -- to learn how to use mason.nvim with lsp-zero
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {'gopls', 'lua_ls'},
   handlers = {

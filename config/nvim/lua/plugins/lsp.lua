@@ -1,6 +1,12 @@
 return {
   { "williamboman/mason.nvim", config=function ()
-	require('mason').setup({})
+	require('mason').setup({
+	  ensure_installed = {
+		"gopls",
+		"dockerls",
+		"bashls",
+	  }
+	})
   end },
   -- to learn how to use mason.nvim with lsp-zero
   -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
@@ -104,7 +110,7 @@ return {
 		}),
 		sources = {
 		  {name = 'nvim_lsp', keyword_length = 2 },
-		  { name = "nvim_lsp_signature_help" },
+		  {name = "nvim_lsp_signature_help" },
 		  {name = 'luasnip'},
 		  {name = 'buffer', keyword_length = 3},
 		  {name = 'path'},
