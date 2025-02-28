@@ -39,7 +39,8 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Open [L]azyNVim Manager"})
 
 -- (visual mode) paste selection in system clipboard
-vim.keymap.set("v", "<leader>y", '"+y"', { desc = "[Y]ank into system clipboard"})
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "[Y]ank into system clipboard"})
+vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[Y]ank into system clipboard"})
 
 -- toggle debugger
 vim.keymap.set("n", "<leader>db", '<CMD>DBUIToggle<CR>', {desc = "Toggle [D]e[B]ug view"})
