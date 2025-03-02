@@ -15,9 +15,13 @@ local get_node_text = vim.treesitter.get_node_text
 local function same(index)
   return f(function (args)
 	return args[1]
-  end, {index})	
+  end, {index})
 end
 
+-- search throgh treesitter for:
+-- method_declaration (func receiver)
+-- function_declaration (func)
+-- func_literal (anonymous func assigned to variable)
 vim.treesitter.query.set(
   "go",
   "LuaSnip_Result",
@@ -38,14 +42,15 @@ local transform = function(text, info)
 	  info.index = info.index + 1
 
 	  return c(info.index, {
+		-- Old style (pre 1.13, see https://go.dev/blog/go1.13-errors), using
+		-- https://github.com/pkg/errors
+		t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
+		t(string.format('errors.Wrapf(%s, "%s")', info.err_name, info.func_name)),
 		t(string.format('fmt.Errorf("%s: %%v", %s)', info.func_name, info.err_name)),
 		t(info.err_name),
 		-- Be cautious with wrapping, it makes the error part of the API of the
 		-- function, see https://go.dev/blog/go1.13-errors#whether-to-wrap
 		t(string.format('fmt.Errorf("%s: %%w", %s)', info.func_name, info.err_name)),
-		-- Old style (pre 1.13, see https://go.dev/blog/go1.13-errors), using
-		-- https://github.com/pkg/errors
-		t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
 	  })
 	else
 	  return t "err"

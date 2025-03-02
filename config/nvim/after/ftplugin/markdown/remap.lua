@@ -1,0 +1,7 @@
+vim.keymap.set("n", "gd", ":ObsidianFollowLink<CR>", { desc = "follow obsidian link"})
+vim.keymap.set("n", "gD", ":ObsidianFollowLink vsplit<CR>", { desc = "follow obsidian link"})
+vim.keymap.set("n", "<leader>vr", ":ObsidianBacklins<CR>", { desc = "show obsidian backlinks"})
+vim.keyamp.set("n", "<leader>pro", ":PeekOpen<CR>", { desc = "[O]pen markdown [Pr]review "})
+vim.keyamp.set("n", "<leader>prc", ":PeekOpen<CR>", { desc = "[C]lose markdown [Pr]review "})
+vim.keyamp.set("n", "<leader>tag", ":ObsidianTag<CR>", { desc = "View defined [TAG]s"})
+vim.keyamp.set("n", "<leader>toc", ":ObsidianTOC<CR>", { desc = "View [T]able [o]f [C]ontents"})
