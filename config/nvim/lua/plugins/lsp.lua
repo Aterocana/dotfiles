@@ -5,28 +5,28 @@ return {
 		"gopls",
 		"dockerls",
 		"bashls",
+	  },
+	  dependencies = {
+		{
+		  "williamboman/mason-lspconfig.nvim",
+		  config = function ()
+			local lsp_zero = require('lsp-zero')
+			local opts = {
+			  ensure_installed = {'gopls', 'lua_ls'},
+			  handlers = {
+				lsp_zero.default_setup,
+				lua_ls = function()
+				  local lua_opts = lsp_zero.nvim_lua_ls()
+				  require('lspconfig').lua_ls.setup(lua_opts)
+				end,
+			  }
+			}
+			require('mason-lspconfig').setup(opts)
+		  end,
+		},
 	  }
 	})
   end },
-  -- to learn how to use mason.nvim with lsp-zero
-  -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-  {
-	"williamboman/mason-lspconfig.nvim",
-	config = function ()
-	  local lsp_zero = require('lsp-zero')
-	  local opts = {
-		ensure_installed = {'gopls', 'lua_ls'},
-		handlers = {
-		  lsp_zero.default_setup,
-		  lua_ls = function()
-			local lua_opts = lsp_zero.nvim_lua_ls()
-			require('lspconfig').lua_ls.setup(lua_opts)
-		  end,
-		}
-	  }
-	  require('mason-lspconfig').setup(opts)
-	end,
-  },
   {
 	"VonHeikemen/lsp-zero.nvim", branch = "v4.x",
 	config = function ()
