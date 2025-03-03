@@ -32,13 +32,14 @@ vim.opt.updatetime = 50
 
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "→ ",
-	lead = '·',
-	trail = '•',
-	nbsp = "␣",
-	eol = "↲",
-	extends="⟩",
-	precedes="⟨"
+  tab = "→ ",
+  lead = '·',
+  trail = '•',
+  nbsp = "␣",
+  eol = "↲",
+  extends="⟩",
+  precedes="⟨"
 }
 vim.g.have_nerd_font = true
 vim.opt.cursorline = true
+vim.opt.conceallevel = 1
