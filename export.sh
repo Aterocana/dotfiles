@@ -19,6 +19,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mv ~/.gitconfig $fname/
 	mkdir -p $fname/.config
 	mv ~/.config/tmux $fname/.config/
+	mv ~/.config/tmuxinator $fname/.config/
 	mv ~/.config/nvim $fname/.config/
 	mv ~/.config/xdg-desktop-portal $fname/.config/
 	mv ~/.config/alacritty $fname/.config/
@@ -35,6 +36,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp .zshrc ~/
 	cp .gitconfig ~
 	cp -r config/tmux ~/.config/
+	cp -r config/tmuxinator ~/.config/
 	cp -r $fname/.config/tmux/plugins ~/.config/tmux/
 	cp -r config/nvim ~/.config/
 	cp -r config/xdg-desktop-portal ~/.config/

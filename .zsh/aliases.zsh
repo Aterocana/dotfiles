@@ -8,6 +8,7 @@ alias autoremove='if [[ ! -n $(pacman -Qdt) ]]; then echo "No packages to remove
 alias clean-cache='sudo pacman -Scc'
 
 # Utilities
+alias mux='tmuxinator'
 alias unzip='extract'
 alias ls='ls --color=always --group-directories-first'
 alias ll='ls -lh'

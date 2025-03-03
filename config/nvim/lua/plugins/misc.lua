@@ -1,6 +1,10 @@
 return {
   { "akinsho/toggleterm.nvim", version = "*", config = true }, -- terminal embedded int Nvim
   { "lewis6991/gitsigns.nvim" }, -- git enhancements
+  {
+	'sindrets/diffview.nvim',
+	dependencies = 'nvim-lua/plenary.nvim',
+  },
   { "tpope/vim-fugitive" },
   { "tpope/vim-surround" }, -- shortcut to work with brackets, parenthesis
   { "tpope/vim-repeat" }, -- improve . operator to repeat operations
