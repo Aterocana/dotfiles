@@ -1,3 +1,4 @@
+eval "$(zoxide init zsh)"
 autoload -U zmv
 autoload -U modify-current-argument #necessaria per expand-snippet
 
@@ -38,4 +39,3 @@ zle -N expand-snippet
 
 bindkey "\ej" expand-snippet
 bindkey -M emacs '^[[3;5~' kill-word
-bindkey -s ^f "tmux-sessionizer\n"

@@ -7,7 +7,7 @@ corner_radius 5
 shadows enable
 shadow_blur_radius 20
 
-default_dim_inactive 1.0
+#default_dim_inactive 1.0
 titlebar_separator enable
 #:::::::::disable_window_borders::::::::
 for_window [class="^.*"] border pixel 0

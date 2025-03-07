@@ -4,5 +4,6 @@ local format_sync_grp = vim.api.nvim_create_augroup("AutoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.lua",
   command = ":normal gg=G",
+  --command = ":normal gg=G",
   group = format_sync_grp,
 })

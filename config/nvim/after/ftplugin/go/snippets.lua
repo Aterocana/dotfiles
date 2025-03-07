@@ -11,6 +11,19 @@ local ts_locals = require "nvim-treesitter.locals"
 local ts_utils = require "nvim-treesitter.ts_utils"
 local get_node_text = vim.treesitter.get_node_text
 
+local function go_error(info)
+  return c(info.index, {
+	-- Old style (pre 1.13, see https://go.dev/blog/go1.13-errors), using
+	-- https://github.com/pkg/errors
+	t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
+	t(string.format('errors.Wrapf(%s, "%s")', info.err_name, info.func_name)),
+	t(string.format('fmt.Errorf("%s: %%v", %s)', info.func_name, info.err_name)),
+	t(info.err_name),
+	-- Be cautious with wrapping, it makes the error part of the API of the
+	-- function, see https://go.dev/blog/go1.13-errors#whether-to-wrap
+	t(string.format('fmt.Errorf("%s: %%w", %s)', info.func_name, info.err_name)),
+  })
+end
 
 local function same(index)
   return f(function (args)
@@ -41,17 +54,19 @@ local transform = function(text, info)
 	if info then
 	  info.index = info.index + 1
 
-	  return c(info.index, {
-		-- Old style (pre 1.13, see https://go.dev/blog/go1.13-errors), using
-		-- https://github.com/pkg/errors
-		t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
-		t(string.format('errors.Wrapf(%s, "%s")', info.err_name, info.func_name)),
-		t(string.format('fmt.Errorf("%s: %%v", %s)', info.func_name, info.err_name)),
-		t(info.err_name),
-		-- Be cautious with wrapping, it makes the error part of the API of the
-		-- function, see https://go.dev/blog/go1.13-errors#whether-to-wrap
-		t(string.format('fmt.Errorf("%s: %%w", %s)', info.func_name, info.err_name)),
-	  })
+	  return go_error(info)
+
+	  --	  return c(info.index, {
+	  --		-- Old style (pre 1.13, see https://go.dev/blog/go1.13-errors), using
+	  --		-- https://github.com/pkg/errors
+	  --		t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
+	  --		t(string.format('errors.Wrapf(%s, "%s")', info.err_name, info.func_name)),
+	  --		t(string.format('fmt.Errorf("%s: %%v", %s)', info.func_name, info.err_name)),
+	  --		t(info.err_name),
+	  --		-- Be cautious with wrapping, it makes the error part of the API of the
+	  --		-- function, see https://go.dev/blog/go1.13-errors#whether-to-wrap
+	  --		t(string.format('fmt.Errorf("%s: %%w", %s)', info.func_name, info.err_name)),
+	  --	  })
 	else
 	  return t "err"
 	end
@@ -114,7 +129,8 @@ local function go_result_type(info)
   return { t "nil" }
 end
 
--- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
+-- go_ret_vals returns the error name and the function name from an expression like `myerr := fn()`.
+-- the returned object has the following shape: {index: snippet node index, err_name: myerr, func_name: fn}
 local go_ret_vals = function(args)
   return snippet_from_nodes(
 	nil,
@@ -145,8 +161,19 @@ ls.add_snippets("go", {
 	i(0),
   }),
   s({trig="iferr", name="Error Handling", snippetType="autosnippet", desc = "Go Error Handling", wordTrgi=true}, {
+	--  t "if ",
+	--  i(1, { "err"}),
+	--  t {" != nil; {", "\treturn "},
+	--  go_error({
+	--  'index': 1,
+	--  'err_name': same(1),
+	--  'func_name': "error",
+	--	}),
+
+
+
 	t { "if err != nil {", "\treturn " },
-	d(1, go_ret_vals, { 2, 3 }),
+	d(1, go_ret_vals, { 1, 2 }),
 	t { "", "}" },
 	i(0),
   }),
@@ -173,5 +200,16 @@ ls.add_snippets("go", {
 	  t("fmt.Printf(\"%v\\n\", "), i(1, "value"), t(")"),
 	}
   ),
+  s(
+	{ trig = "timefmt", name = "time.Time placeholder format", snippetType = "snippet", desc = "Insert the time.Time.Format placeholder format"},
+	{
+	  c( 1,
+		{
+		  t("\"2006-01-02T15:04:05Z07:00\""),
+		  t("\"Mon Jan 02 15:04:05 MST 2006\"")
+		}
+	  )
+	}
+  )
 })
 

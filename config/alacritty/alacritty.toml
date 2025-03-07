@@ -3,7 +3,7 @@ import = ["/home/mauri/.config/alacritty/themes/alacritty-gruvbox-dark.toml"]
 live_config_reload = true
 
 [font]
-size = 10
+size = 9.5
 [font.bold]
 family = "0xProto Nerd Font"
 style = "Bold"
