@@ -22,8 +22,8 @@ exec /usr/bin/syncthing serve
 include ~/.config/sway/sway.d/themes
 
 # Favourite applications
-set $term alacritty -e tmux
-#set $term kitty -e tmux
+set $term alacritty --listen-on=unix:/tmp/kitty.sock -e tmux
+set $term kitty -e tmux
 set $browser google-chrome-stable --profile-directory=Default
 set $browser-work google-chrome-stable --profile-directory="Profile 2"
 # Note: it's recommended that you pass the final command to sway

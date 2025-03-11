@@ -40,6 +40,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r $fname/.config/tmux/plugins ~/.config/tmux/
 	cp -r config/nvim ~/.config/
 	cp -r config/xdg-desktop-portal ~/.config/
+	cp -r config/kitty ~/.config/
 	cp -r config/alacritty ~/.config/
 	cp -r config/dlv ~/.config/
 	cp -r config/i3status-rust ~/.config/

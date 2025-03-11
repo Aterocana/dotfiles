@@ -18,9 +18,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp ~/.gitconfig .
 	mkdir -p config/tmux/
 	cp -r ~/.config/tmux/tmux.conf config/tmux/tmux.conf
-	cp -r ~/.config/tmux/sesh.conf config/tmux/sesh.conf
+	cp -r ~/.config/tmux/tmux.d config/tmux/tmux.d
 	cp -r ~/.config/xdg-desktop-portal config/
 	cp -r ~/.config/nvim config/
+	cp -r ~/.config/kitty config/
 	cp -r ~/.config/alacritty config/
 	cp -r ~/.config/dlv config/
 	cp -r ~/.config/i3status-rust config/
