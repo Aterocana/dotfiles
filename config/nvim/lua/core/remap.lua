@@ -90,3 +90,9 @@ end, {desc="[ST]op the [T]est"})
 -- Tasks
 vim.keymap.set("n", "<Leader>mk", ":OverseerRun <CR>", {desc="run a task ([M]a[K]e)"})
 vim.keymap.set("n", "<Leader>vmk", ":OverseerToggle <CR>", {desc="toggle task panel [V]iew [M]a[K]e"})
+
+-- JSON Visual Mode
+vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>")
+vim.keymap.set("v", "<SPACE>jug", ":'<,'>!jq -c<CR>")
+vim.keymap.set("v", "<SPACE>jes", ":'<,'>!jq -c<CR>gv !jq -R<CR>")
+vim.keymap.set("v", "<SPACE>jun", ":'<,'>!jq -r<CR>")
