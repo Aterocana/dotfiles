@@ -12,7 +12,8 @@ return 	{
 	require( "nvim-treesitter.configs" ).setup {
 	  -- A list of parser names,or "all" (the five listed parsers should always be installed)
 	  ensure_installed = {
-		"go", "gomod", "gowork", "gosum",
+		"go", "gomod", "gowork", "gosum", "gotmpl",
+		"comment",
 		"proto",
 		"dockerfile",
 		"c",
