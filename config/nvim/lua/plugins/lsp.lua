@@ -1,18 +1,11 @@
 return {
   { "williamboman/mason.nvim", config=function ()
-	require('mason').setup({
-	  ensure_installed = {
-		"gopls",
-		"dockerls",
-		"bashls",
-	  },
-	})
+	require('mason').setup({})
   end },
-  {
-	"williamboman/mason-lspconfig.nvim",
+  {	"williamboman/mason-lspconfig.nvim",
 	config = function ()
 	  local opts = {
-		ensure_installed = {'gopls', 'lua_ls'},
+		ensure_installed = {'gopls', 'dockerls', 'lua_ls', 'bashls'},
 	  }
 	  require('mason-lspconfig').setup(opts)
 	end,
@@ -42,7 +35,6 @@ return {
 		desc = 'LSP actions',
 		callback = function (event)
 		  local opts = {buffer = event.buf}
-
 		  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- see popup definition
 		  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- goto definition
 		  vim.keymap.set("n", "<M-LeftMouse>", vim.lsp.buf.definition, opts) -- goto definition with mouse
@@ -126,15 +118,34 @@ return {
 			  fallback()
 			end
 		  end),
+		  ["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+			  cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+			  luasnip.expand_or_jump()
+			else
+			  fallback()
+			end
+		  end, {"i", "s"}),
+
+		  ["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+			  cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+			  luasnip.jump(-1)
+			else
+			  fallback()
+			end
+		  end, {"i", "s"}),
+		  ['<C-e>'] = cmp.mapping.abort(),
 		}),
-		sources = {
+		sources = cmp.config.sources({
 		  {name = 'nvim_lsp', keyword_length = 2 },
 		  {name = "nvim_lsp_signature_help" },
 		  {name = 'luasnip'},
-		  {name = 'buffer', keyword_length = 3},
 		  {name = 'path'},
 		  {name = 'nvim_lua'},
-		},
+		}, {name = 'buffer', keyword_length = 3}),
 		formatting = {
 		  format = lspkind.cmp_format({
 			mode = 'symbol_text', -- show only symbol annotations
