@@ -1,5 +1,5 @@
 local ls = require("luasnip")
-local env = SnipEnv
+local fn = ls.function_node
 
 vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
 vim.keymap.set({"i", "s"}, "<Right>", function() ls.jump( 1) end, {silent = true})
@@ -22,22 +22,22 @@ end
 
 ls.add_snippets(nil, {
   all = {
-	env.s(
+	ls.s(
 	  {
 		trig = "date",
 		namr = "Date",
 		dscr = "Date in the form of YYYY-MM-DD hh:mm",
 	  }, {
-		env.func(date, {}),
+		fn(date, {}),
 	  }
 	),
-	env.s(
+	ls.s(
 	  {
 		trig = "sig",
 		namr = "Signature",
 		dscr = "insert signature"
 	  }, {
-		env.func(signature, {})
+		fn(signature, {})
 	  }
 	),
   },

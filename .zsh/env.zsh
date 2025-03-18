@@ -8,3 +8,5 @@ export PATH=$PATH:$HOME/.local/scripts
 export _JAVA_AWT_WM_NONREPARENTING=1
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
+
+eval "$(zoxide init zsh)"

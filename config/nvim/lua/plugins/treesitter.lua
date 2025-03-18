@@ -3,13 +3,12 @@ return 	{
   build = ":TSUpdate",
   dependencies = {
 	{"nvim-treesitter/nvim-treesitter-textobjects"},
-	{
-	  "nvim-treesitter/nvim-treesitter-context",
-	  opts = { enabled = true, mode = "topline", line_numbers = true },
-	}
+	{ "nvim-treesitter/nvim-treesitter-context",
+	  opts = { enabled = true, mode = "topline", line_numbers = true }}
   },
   config = function ()
-	require( "nvim-treesitter.configs" ).setup {
+	---@diagnostic disable-next-line: missing-fields
+	require( "nvim-treesitter.configs" ).setup({
 	  -- A list of parser names,or "all" (the five listed parsers should always be installed)
 	  ensure_installed = {
 		"go", "gomod", "gowork", "gosum", "gotmpl",
@@ -53,7 +52,7 @@ return 	{
 		-- Disable slow treesitter highlight for large files
 		disable = function(lang, buf)
 		  local max_filesize = 100 * 1024 -- 100 KB
-		  local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+		  local ok, stats = pcall(vim.fs_stat, vim.api.nvim_buf_get_name(buf))
 		  if ok and stats and stats.size > max_filesize then
 			return true
 		  end
@@ -64,6 +63,15 @@ return 	{
 		-- Using this option may slow down your editor,and you may see some duplicate highlights.
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
+	  },
+	  incremental_selection = {
+		enable = true,
+		keymaps = {
+		  init_selection = "<leader>ss",
+		  node_incremental = "<leader>si",
+		  scope_incremental = "<leader>sc",
+		  node_decremental = "<leader>sd",
+		}
 	  },
 	  textobjects = {
 		select = {
@@ -80,6 +88,12 @@ return 	{
 			["iB"] = "@block.inner",
 			["aB"] = "@block.outer",
 		  },
+		},
+		selection_modes = {
+		  ['@parameter.outer'] = 'v', -- charwise
+		  ['@function.outer'] = 'V', -- linewise
+		  --['@function.outer'] = '<c-v>', -- blockwise
+		  ['@class.outer'] = '<c-v>', -- blockwise
 		},
 		move = {
 		  enable = true,
@@ -107,7 +121,7 @@ return 	{
 		  },
 		},
 	  },
-	}
+	})
 
 	-- ufo setup
 	vim.o.foldcolumn = '0' -- '0' is not bad
@@ -115,6 +129,7 @@ return 	{
 	vim.o.foldlevelstart = 99
 	vim.o.foldenable = true
 
+	---@diagnostic disable-next-line: missing-fields
 	require('ufo').setup({
 	  provider_selector = function(bufnr, filetype, buftype)
 		return {'treesitter', 'indent'}

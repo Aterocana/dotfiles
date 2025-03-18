@@ -12,8 +12,8 @@ function path() {
            print }"
 }
 
-function insert_sudo () { 
-	zle beginning-of-line; zle -U "sudo " 
+function insert_sudo () {
+	zle beginning-of-line; zle -U "sudo "
 }
 
 # ALT+S ANTEPONE "sudo" A SINISTRA NEL COMANDO
@@ -39,3 +39,21 @@ zle -N expand-snippet
 
 bindkey "\ej" expand-snippet
 bindkey -M emacs '^[[3;5~' kill-word
+
+# Sesh sessions
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '\ef' sesh-sessions
+bindkey -M vicmd '\ef' sesh-sessions
+bindkey -M viins '\ef' sesh-sessions

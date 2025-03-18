@@ -45,12 +45,12 @@ root: ~/
 # attach: false
 
 windows:
-  - v3: 
+  - v3:
     - ~/Documents/Programming/go/dlabs-api-v3
-    - vim .
-  - core: 
+    - nvim -c ':Telescope find_files'
+  - core:
     - ~/Documents/Programming/go/dlabscloudcore
-    - vim .
-  - mig: 
+    - nvim -c ':Telescope find_files'
+  - mig:
     - ~/Documents/Programming/go/cloud-migrations
-    - vim .
+    - nvim -c ':Telescope find_files'

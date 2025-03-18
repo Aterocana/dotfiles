@@ -5,6 +5,11 @@ local i = ls.insert_node
 local t = ls.text_node
 local d = ls.dynamic_node
 local c = ls.choice_node
+local fmt = require("luasnip.extras.fmt").fmt
+
+-- Repeats the node in the specified position
+-- rep(<position>)
+local rep = require("luasnip.extras").rep
 local snippet_from_nodes = ls.sn
 
 local ts_locals = require "nvim-treesitter.locals"
@@ -184,6 +189,15 @@ ls.add_snippets("go", {
 	  t({"\tsrv.handleError(w, r, err, \"\")", ""}),
 	  t({"\treturn", ""}),
 	  t({"}"}),
+	}
+  ),
+  s(
+	{trig="httpdo", name="HTTP perform request", snippetType="snippet", desc="Go perform HTTP request"},
+	{
+	  fmt("resp, err := {}.Do({})", {
+		i(1, "http.DefaultClient"),
+		i(2, "req"),
+	  }),
 	}
   ),
   s(

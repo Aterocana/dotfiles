@@ -33,7 +33,7 @@ vim.keymap.set("n", "<leader>wh", "<CMD>vertical resize +3<CR>", { desc = "Resiz
 vim.keymap.set("n", "<leader>wl", "<CMD>vertical resize -3<CR>", { desc = "Resize [w]indow RIGHT" })
 
 -- Substitution
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[S]ubstitution on current word"})
+vim.keymap.set("n", "<leader>sub", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[S]ubstitution on current word"})
 
 -- open Lazy Packet Manager UI
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Open [L]azyNVim Manager"})
@@ -95,7 +95,7 @@ vim.keymap.set("n", "<Leader>mk", ":OverseerRun <CR>", {desc="run a task ([M]a[K
 vim.keymap.set("n", "<Leader>vmk", ":OverseerToggle <CR>", {desc="toggle task panel [V]iew [M]a[K]e"})
 
 -- JSON Visual Mode
-vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>")
-vim.keymap.set("v", "<SPACE>jug", ":'<,'>!jq -c<CR>")
-vim.keymap.set("v", "<SPACE>jes", ":'<,'>!jq -c<CR>gv !jq -R<CR>")
-vim.keymap.set("v", "<SPACE>jun", ":'<,'>!jq -r<CR>")
+vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the selection"})
+vim.keymap.set("v", "<SPACE>jug", ":'<,'>!jq -c<CR>", {desc = "[J]SON [UG]lify (minify) the selection"})
+vim.keymap.set("v", "<SPACE>jes", ":'<,'>!jq -c<CR>gv !jq -R<CR>", {desc = "[J]SON [ES]scape the file (it first minifies it)"})
+vim.keymap.set("v", "<SPACE>jun", ":'<,'>!jq -r<CR>", {desc = "[J]SON [UN]escape the selection"})
