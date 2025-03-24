@@ -16,6 +16,7 @@ local function branch_name_fmt(branch)
   end
   return branch
 end
+
 require('lualine').setup {
   options = {
 	icons_enabled = true,
@@ -75,13 +76,13 @@ require('lualine').setup {
 	},
 	lualine_x = {
 	  {
-		'buffers',
-		use_mode_colors = true,
-		symbols = {
-		  modified = ' ●',      -- Text to show when the buffer is modified
-		  alternate_file = '#', -- Text to show to identify the alternate file
-		  directory =  '',     -- Text to show when the buffer is a directory
-		},
+		'diagnostics',
+		sources = { 'nvim_lsp', 'nvim_diagnostic' },
+		sections = { 'error', 'warn', 'info', 'hint' },
+		symbols = {error = ' ', warn = ' ', info = ' ', hint = '󰟶 '},
+		colored = true,           -- Displays diagnostics status in color if set to true.
+		update_in_insert = false, -- Update diagnostics in insert mode.
+		always_visible = false,   -- Show diagnostics even if there are none.
 	  },
 	},
 
