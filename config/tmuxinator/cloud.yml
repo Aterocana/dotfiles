@@ -47,10 +47,10 @@ root: ~/
 windows:
   - v3:
     - ~/Documents/Programming/go/dlabs-api-v3
-    - nvim -c ':Telescope find_files'
+    - nvim .
   - core:
     - ~/Documents/Programming/go/dlabscloudcore
-    - nvim -c ':Telescope find_files'
+    - nvim .
   - mig:
     - ~/Documents/Programming/go/cloud-migrations
-    - nvim -c ':Telescope find_files'
+    - nvim .

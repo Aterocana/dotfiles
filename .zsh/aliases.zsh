@@ -9,12 +9,15 @@ alias clean-cache='sudo pacman -Scc'
 
 # Utilities
 alias mux='tmuxinator'
+alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
 alias unzip='extract'
-alias ls='ls --color=always --group-directories-first'
+alias ls='eza --git --icons=always --color=always --group-directories-first'
+#alias ls='ls --color=always --group-directories-first'
 alias ll='ls -lh'
 alias lh='ll -ah'
 alias cat='bat'
 alias proc='ps -aux | grep'
+#alias tree="eza -T"
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias vim='nvim'
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
