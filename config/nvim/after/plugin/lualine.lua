@@ -48,7 +48,15 @@ require('lualine').setup {
 		fmt = branch_name_fmt,
 	  },
 	  'diff',
-	  'diagnostics',
+	  {
+		'diagnostics',
+		sources = { 'nvim_lsp', 'nvim_diagnostic' },
+		sections = { 'error', 'warn', 'info', 'hint' },
+		symbols = {error = ' ', warn = ' ', info = ' ', hint = '󰟶 '},
+		colored = true,           -- Displays diagnostics status in color if set to true.
+		update_in_insert = false, -- Update diagnostics in insert mode.
+		always_visible = false,   -- Show diagnostics even if there are none.
+	  },
 	},
 	lualine_c = {
 	  {
@@ -75,15 +83,6 @@ require('lualine').setup {
 	  },
 	},
 	lualine_x = {
-	  {
-		'diagnostics',
-		sources = { 'nvim_lsp', 'nvim_diagnostic' },
-		sections = { 'error', 'warn', 'info', 'hint' },
-		symbols = {error = ' ', warn = ' ', info = ' ', hint = '󰟶 '},
-		colored = true,           -- Displays diagnostics status in color if set to true.
-		update_in_insert = false, -- Update diagnostics in insert mode.
-		always_visible = false,   -- Show diagnostics even if there are none.
-	  },
 	},
 
 	lualine_y = {

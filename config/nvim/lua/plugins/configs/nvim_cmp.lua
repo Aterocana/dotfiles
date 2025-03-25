@@ -34,6 +34,12 @@ local M = {
 		vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 	  end,
 	})
+	vim.api.nvim_create_autocmd({'LspAttach', 'InsertEnter', 'InsertLeave'}, {
+	  callback = function (args)
+		local enabled = args.event ~= 'InsertEnter'
+		vim.lsp.inlay_hint.enable(enabled, {bufnr = args.buf})
+	  end
+	})
 
 	require('lspconfig').gopls.setup({
 	  capabilities = lspconfig_default.capabilities,
@@ -56,7 +62,7 @@ local M = {
 			parameterNames = true,
 			rangeVariableTypes = true,
 		  },
-		  usePlaceholders = true,
+		  usePlaceholders = false,
 		  analyses = {
 			unusedvariable = true
 		  }
