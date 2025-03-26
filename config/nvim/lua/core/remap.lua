@@ -51,9 +51,8 @@ vim.keymap.set("n", "<leader>h", ":set list!<CR>", { desc = "Toggle [H]idden cha
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<leader>ti', function ()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, {desc = "[T]oggle [I]nlay_hints"})
+
+vim.keymap.set('n', '<leader>ti', require('core.inlay_hints').toggle_hint, {desc = "[T]oggle [I]nlay_hints"})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -70,7 +69,7 @@ vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>",
 local exitTerm = function ()
   vim.cmd(":ToggleTerm");
 end
-vim.keymap.set({"t", "n", "i", "v"}, "<ESC><ESC>", exitTerm, {desc = "Toggle Terminal"})
+vim.keymap.set({"t", "n", "i", "v"}, "<M-t>", exitTerm, {desc = "Toggle Terminal"})
 -- vim.keymap.set("t", "<C-C>", "<C-\\><C-N>", { desc = "exit from term mode"})
 vim.keymap.set("n", "<leader>build", "<CMD>TermExec cmd='make build'<CR>", {desc = "run `make build` cmd in the terminal"})
 
@@ -100,7 +99,3 @@ vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the 
 vim.keymap.set("v", "<SPACE>jug", ":'<,'>!jq -c<CR>", {desc = "[J]SON [UG]lify (minify) the selection"})
 vim.keymap.set("v", "<SPACE>jes", ":'<,'>!jq -c<CR>gv !jq -R<CR>", {desc = "[J]SON [ES]scape the file (it first minifies it)"})
 vim.keymap.set("v", "<SPACE>jun", ":'<,'>!jq -r<CR>", {desc = "[J]SON [UN]escape the selection"})
-
-vim.keymap.set("n", "<SPACE><SPACE>b", function ()
-  require("core.buffers").print_bufs()
-end)
