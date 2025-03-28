@@ -50,7 +50,7 @@ require('lualine').setup {
 	  'diff',
 	  {
 		'diagnostics',
-		sources = { 'nvim_lsp', 'nvim_diagnostic' },
+		sources = { 'nvim_lsp' },
 		sections = { 'error', 'warn', 'info', 'hint' },
 		symbols = {error = ' ', warn = ' ', info = ' ', hint = '󰟶 '},
 		colored = true,           -- Displays diagnostics status in color if set to true.

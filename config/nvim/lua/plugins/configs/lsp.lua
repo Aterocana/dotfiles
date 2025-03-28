@@ -1,0 +1,163 @@
+local M = {}
+
+local lspconfig = require('lspconfig')
+local lspconfig_default = lspconfig.util.default_config
+
+lspconfig_default.capabilities = vim.tbl_deep_extend(
+  'force',
+  lspconfig_default.capabilities,
+  require('cmp_nvim_lsp').default_capabilities()
+)
+
+local gopls_config = function ()
+  lspconfig.gopls.setup({
+	capabilities = lspconfig_default.capabilities,
+	analyses = {
+	  shadow = true,
+	  unusedwrite = true,
+	  unusedvariable = true,
+	},
+	staticcheck = true,
+	gofumpt = true,
+
+	settings = {
+	  gopls = {
+		hints = {
+		  assignVariableTypes = true,
+		  compositeLiteralFields = true,
+		  compositeLiteralTypes = true,
+		  constantValues = true,
+		  functionTypeParameters = true,
+		  parameterNames = true,
+		  rangeVariableTypes = true,
+		},
+		usePlaceholders = false,
+		analyses = {
+		  unusedvariable = true
+		}
+	  }
+	}
+  })
+
+  --lspconfig.golangci_lint_ls.setup({})
+end
+
+local luals_config = function ()
+  lspconfig.lua_ls.setup({
+	on_init = function(client)
+	  --if client.workspace_folders then
+	  --  local path = client.workspace_folders[1].name
+	  --  if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc')) then
+	  --    return
+	  --  end
+	  --end
+
+	  client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+		runtime = { version = 'LuaJIT' },
+		-- Make the server aware of Neovim runtime files
+		workspace = {
+		  checkThirdParty = false,
+		  library = {
+			vim.env.VIMRUNTIME
+			-- Depending on the usage, you might want to add additional paths here.
+			-- "${3rd}/luv/library"
+			-- "${3rd}/busted/library",
+		  }
+		  -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+		  -- library = vim.api.nvim_get_runtime_file("", true)
+		}
+	  })
+	end,
+
+	settings = {
+	  Lua = {
+		runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
+		diagnostic = { globals = {"vim"}},
+		workspace = {
+		  -- Make the server aware of Neovim runtime files
+		  library = vim.api.nvim_get_runtime_file("", true),
+		},
+		-- Do not send telemetry data containing a randomized but unique identifier
+		telemetry = {
+		  enable = false,
+		},
+
+		hint = {enable = true},
+	  }
+	},
+  })
+end
+
+local bashls_config = function ()
+  lspconfig.bashls.setup({
+	cmd = { "bash_language_server", "start"},
+	filetypes = { "bash", "sh", "zsh" },
+	single_file_support = true
+  })
+end
+
+local docker_config = function ()
+  lspconfig.dockerls.setup {
+	settings = {
+	  docker = {
+		languageserver = {
+		  formatter = {
+			ignoreMultilineInstructions = true,
+		  },
+		},
+	  }
+	}
+  }
+end
+
+local jsonls_config = function ()
+  lspconfig.jsonls.setup({
+	cmd = { "vscode-json-language-server", "--stdio" },
+	filetypes = { "json", "jsonc" },
+	init_options = { provideFormatter = true }
+  })
+end
+
+local markdown_config = function ()
+  lspconfig.marksman.setup({
+	cmd = { "marksman", "server" },
+	filetypes = { "markdown", "markdown.mdx" }
+  })
+end
+
+local js_config = function ()
+  -- To appropriately highlight codefences returned from denols, you will need to augment vim.g.markdown_fenced languages in your init.lua
+  vim.g.markdown_fenced_languages = {
+	"ts=typescript"
+  }
+
+  lspconfig.denols.setup({
+	cmd = { "deno", "lsp" },
+	cmd_env = { NO_COLOR = true },
+	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+	settings = {
+	  deno = {
+		enable = true,
+		suggest = {
+		  imports = {
+			hosts = {
+			  ["https://deno.land"] = true
+			}
+		  }
+		}
+	  }
+	}
+  })
+end
+
+M.config_servers = function ()
+  gopls_config()
+  luals_config()
+  bashls_config()
+  docker_config()
+  jsonls_config()
+  markdown_config()
+  js_config()
+end
+
+return M

@@ -2,17 +2,6 @@ local nvim_cmp_opts = require("plugins.configs.nvim_cmp")
 local luasnip_opts = require("plugins.configs.luasnip")
 
 return {
-  { "williamboman/mason.nvim", config=function ()
-	require('mason').setup({})
-  end },
-  {	"williamboman/mason-lspconfig.nvim",
-	config = function ()
-	  local opts = {
-		ensure_installed = {'gopls', 'dockerls', 'lua_ls', 'bashls'},
-	  }
-	  require('mason-lspconfig').setup(opts)
-	end,
-  },
   { "neovim/nvim-lspconfig",
 	dependencies = {
 	  {
