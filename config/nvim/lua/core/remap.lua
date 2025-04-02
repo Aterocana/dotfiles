@@ -89,6 +89,9 @@ vim.keymap.set("n", "<Leader>st", function ()
   require("neotest").run.stop()
 end, {desc="[ST]op the [T]est"})
 
+-- git cmds
+vim.keymap.set("n", "<Leader>gdif", ":DiffviewOpen <CR>", {desc = "check [G]it [Dif]f view"})
+
 -- Tasks
 vim.keymap.set("n", "<Leader>mk", ":OverseerRun <CR>", {desc="run a task ([M]a[K]e)"})
 vim.keymap.set("n", "<Leader>vmk", ":OverseerToggle <CR>", {desc="toggle task panel [V]iew [M]a[K]e"})

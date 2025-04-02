@@ -150,6 +150,28 @@ local js_config = function ()
   })
 end
 
+local html_css_config = function ()
+  local capabilities = lspconfig_default.capabilities
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  lspconfig.html.setup ({
+	capabilities = capabilities,
+	filetypes = { "html", "templ", "gohtml", "tmpl"}
+  })
+
+  lspconfig.cssls.setup({
+	cmd = { "vscode-css-language-server", "--stdio" },
+	filetypes = { "css", "scss", "less" },
+	init_options = { provideFormatter = true },
+	settings = {
+	  css = { validate = true },
+	  less = { validate = true },
+	  scss = { validate = true }
+	},
+	single_file_support = true
+  })
+end
+
 M.config_servers = function ()
   gopls_config()
   luals_config()
@@ -158,6 +180,11 @@ M.config_servers = function ()
   jsonls_config()
   markdown_config()
   js_config()
+  html_css_config()
+  lspconfig.yamlls.setup({})
+  lspconfig.clangd.setup({})
+  lspconfig.diagnosticls.setup({})
+  lspconfig.autotools_ls.setup({})
 end
 
 return M
