@@ -23,14 +23,10 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Right Window" })
 -- Windows Managing
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>-", ":split<CR>", { desc = "Split horizontally" })
-vim.keymap.set("n", "<leader>wK", "<CMD>windcmd K<CR>", { desc = "Move [w]indow UP" })
-vim.keymap.set("n", "<leader>wJ", "<CMD>windcmd J<CR>", { desc = "Move [w]indow DOWN" })
-vim.keymap.set("n", "<leader>wH", "<CMD>windcmd H<CR>", { desc = "Move [w]indow LEFT" })
-vim.keymap.set("n", "<leader>wL", "<CMD>windcmd L<CR>", { desc = "Move [w]indow RIGHT" })
-vim.keymap.set("n", "<leader>wk", "<CMD>resize +5<CR>", { desc = "Resize [w]indow UP" })
-vim.keymap.set("n", "<leader>wj", "<CMD>resize -5<CR>", { desc = "Resize [w]indow DOWN" })
-vim.keymap.set("n", "<leader>wh", "<CMD>vertical resize +3<CR>", { desc = "Resize [w]indow LEFT" })
-vim.keymap.set("n", "<leader>wl", "<CMD>vertical resize -3<CR>", { desc = "Resize [w]indow RIGHT" })
+vim.keymap.set("n", "<leader>wk", "<CMD>resize +20<CR>", { desc = "Resize [w]indow UP" })
+vim.keymap.set("n", "<leader>wj", "<CMD>resize -20<CR>", { desc = "Resize [w]indow DOWN" })
+vim.keymap.set("n", "<leader>wh", "<CMD>vertical resize +10<CR>", { desc = "Resize [w]indow LEFT" })
+vim.keymap.set("n", "<leader>wl", "<CMD>vertical resize -10<CR>", { desc = "Resize [w]indow RIGHT" })
 
 -- Substitution
 vim.keymap.set("n", "<leader>sub", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "[S]ubstitution on current word"})

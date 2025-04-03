@@ -1,11 +1,5 @@
 return {
   { "akinsho/toggleterm.nvim", version = "*", config = true }, -- terminal embedded int Nvim
-  { "lewis6991/gitsigns.nvim" }, -- git enhancements
-  {
-	'sindrets/diffview.nvim',
-	dependencies = 'nvim-lua/plenary.nvim',
-  },
-  { "tpope/vim-fugitive" },
   { "echasnovski/mini.surround", version = '0.15', config = function ()
 	require("mini.surround").setup()
   end },
