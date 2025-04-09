@@ -8,8 +8,12 @@ local function write_initial_line_custom_shebang()
 # Version:
 
 usage() {
-  usage_string = "usage: $ "
-}]]
+  echo "usage: $0 ..."
+}
+if [[ "$1" = "--help" \]\] || [[ "$1" = "-h" \]\]; then
+	usage
+	exit 0
+fi]]
 
   -- Sets the predefined template string array, split separated by an indent.
   vim.api.nvim_buf_set_lines(0, 0, 0, false, vim.split(shebang_template, "\n"))
