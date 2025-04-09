@@ -1,11 +1,15 @@
-local inlay_hints = true -- set it to preferred default value (true or false)
 local hints = vim.lsp.inlay_hint
-hints.enable(inlay_hints) -- initialize to desire behavior
 
 local M = {}
 
+M.config = function (opts)
+  opts = opts or {inlay_hints = false}
+  M.inlay_hints = opts.inlay_hints
+  hints.enable(M.inlay_hints) -- initialize to desire behavior
+end
+
 M.status_hint = function ()
-  return inlay_hints
+  return M.inlay_hints
 end
 
 M.disable_hint = function (filter)
@@ -13,12 +17,12 @@ M.disable_hint = function (filter)
 end
 
 M.toggle_hint = function (filter)
-  inlay_hints = not inlay_hints
-  hints.enable(inlay_hints, filter)
+  M.inlay_hints = not M.inlay_hints
+  hints.enable(M.inlay_hints, filter)
 end
 
 M.enable_hint = function (filter)
-  hints.enable(inlay_hints, filter)
+  hints.enable(M.inlay_hints, filter)
 end
 
 -- disable inlay hints when enter in Insert mode.

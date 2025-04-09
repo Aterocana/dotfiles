@@ -90,7 +90,7 @@ end
 
 local bashls_config = function ()
   lspconfig.bashls.setup({
-	cmd = { "bash_language_server", "start"},
+	cmd = { "bash-language-server", "start"},
 	filetypes = { "bash", "sh", "zsh" },
 	single_file_support = true
   })
