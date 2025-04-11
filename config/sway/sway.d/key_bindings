@@ -6,14 +6,17 @@ bindsym $mod+Shift+b exec $browser
 bindsym $mod+Shift+Alt+b exec $browser-work
 
 # start clipboard
-bindsym $mod+c exec clipmenu
+bindsym $mod+c exec clipman pick --tool=rofi
+#bindsym $mod+c exec clipmenu
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start your launcher
-bindsym $mod+m exec $menu
-bindsym $mod+d exec $cmd
+bindsym $mod+m exec $HOME/.config/rofi/scripts/launcher_t1
+bindsym $mod+x exec $HOME/.config/rofi/scripts/powermenu_t2
+bindsym $mod+t exec $HOME/.config/sway/cmd/tmux_session.sh
+bindsym $mod+s exec rofi -show ssh
 
 # lock screen
 bindsym $mod+Shift+x exec swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --ring-color bb00cc --key-hl-color 880033
@@ -101,9 +104,9 @@ bindsym $mod+b splith
 bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen

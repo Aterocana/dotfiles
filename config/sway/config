@@ -16,7 +16,7 @@ set $right l
 # Autostart
 input type:keyboard xkb_numlock enabled
 exec --no-startup-id mako &> /tmp/mako.log
-exec clipmenud
+exec wl-paste -t text --watch clipman store --no-persist
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec /usr/bin/syncthing serve
 include ~/.config/sway/sway.d/themes
@@ -26,9 +26,9 @@ set $term kitty -e tmux #--listen-on=unix:/tmp/kitty.sock
 set $browser google-chrome-stable --profile-directory=Default
 set $browser-work google-chrome-stable --profile-directory="Profile 2"
 # Note: it's recommended that you pass the final command to sway
-set $menu wofi
+set $menu rofi -show drun
+set $cmd rofi -show run
 #set $menu nwg-drawer -fm nemo
-set $cmd dmenu_run -i -fn 'monaco-9:bold:pixelsize=14' -nb '#585858' -nf '#FFFFFF' -sf '#000000' -sb '#AEFB62'
 #
 # Workspaces:
 ######grouping workspaces+name####

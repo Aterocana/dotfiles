@@ -27,6 +27,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mv ~/.config/i3status-rust $fname/.config/
 	mv ~/.config/sway $fname/.config/
 	mv ~/.config/mako $fname/.config/
+	mv ~/.config/rofi $fname/.config/
 	mkdir -p $fname/.local
 	mv ~/.local/scripts $fname/.local/
 
@@ -46,6 +47,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r config/i3status-rust ~/.config/
 	cp -r config/sway ~/.config/
 	cp -r config/mako ~/.config/
+	cp -r config/rofi ~/.config/
 	cp -r local/scripts ~/.local/
 
 	echo "$commit">~/.config/dotfile_commit
