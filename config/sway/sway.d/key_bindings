@@ -2,36 +2,30 @@
 bindsym $mod+Return exec $term
 
 # start a browser
-bindsym $mod+Shift+b exec $browser
+bindsym $mod+Shift+b exec $browsescripts/launcher_t1r
 bindsym $mod+Shift+Alt+b exec $browser-work
 
 # start clipboard
-bindsym $mod+c exec clipman pick --tool=rofi
-#bindsym $mod+c exec clipmenu
+bindsym $mod+c exec clipman pick --tool=rofi # pick an entry to paste
+bindsym $mod+Alt+c exec clipman clear --tool=rofi # delete an entry from the clipboard memory
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start your launcher
 bindsym $mod+m exec $HOME/.config/rofi/scripts/launcher_t1
-bindsym $mod+x exec $HOME/.config/rofi/scripts/powermenu_t2
+bindsym $mod++Shift+x exec $HOME/.config/rofi/scripts/powermenu_t1
 bindsym $mod+t exec $HOME/.config/sway/cmd/tmux_session.sh
 bindsym $mod+s exec rofi -show ssh
-
-# lock screen
-bindsym $mod+Shift+x exec swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --ring-color bb00cc --key-hl-color 880033
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
 
 # take a screenshot
-bindsym Print exec $HOME/.config/sway/cmd/screenshot.sh window
+bindsym Print exec $HOME/.config/rofi/applets/bin/screenshot.sh
 bindsym $mod+Shift+Print exec $HOME/.config/sway/cmd/screenshot.sh area
 bindsym Shift+Print exec $HOME/.config/sway/cmd/screenshot.sh
-# bindsym Print exec grim $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-# bindsym $mod+Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-# bindsym Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -163,11 +157,15 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
 
+bindsym XF86AudioPlay exec --no-startup-id ~/bin/massctl play_pause
+bindsym XF86AudioPrev exec --no-startup-id ~/bin/massctl previous_track
+bindsym XF86AudioNext exec --no-startup-id ~/bin/massctl next_track
+
 #brightness control
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # Custom shell
-bindsym Redo exec --no-startup-id /home/mauri/bin/led-scrivania.sh
-bindsym XF86Launch6 exec --no-startup-id /home/mauri/bin/lamp-scrivania.sh
-bindsym XF86Launch8 exec --no-startup-id /home/mauri/bin/play_godisanastronaut.sh
+bindsym Redo exec --no-startup-id ~/bin/led-scrivania.sh
+bindsym XF86Launch6 exec --no-startup-id ~/bin/lamp-scrivania.sh
+bindsym XF86Launch8 exec --no-startup-id ~/bin/play_godisanastronaut.sh

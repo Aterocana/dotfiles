@@ -12,9 +12,9 @@ HIST_STAMPS="mm/dd/yyyy"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-	git 
-	extract 
-	web-search 
+	git
+	extract
+	web-search
 	golang
 	docker
 )
@@ -52,6 +52,7 @@ source $HOME/.zsh/theme.zsh
 source $HOME/.zsh/env.zsh
 source $HOME/.zsh/kubectl_completions.zsh
 source $HOME/.zsh/secrets.zsh
+type hctl >/dev/null 2>&1 && source <(hctl completion zsh)
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

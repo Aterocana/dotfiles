@@ -1,5 +1,6 @@
 # GTK Themes
 
+font pango:inconsolata 10
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
 	gsettings set $gnome-schema gtk-theme 'Arc-Dark'

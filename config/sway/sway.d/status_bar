@@ -6,8 +6,8 @@ bar {
         statusline #ffffff
         #background #00000000
         background #00000033
-        inactive_workspace #585858 #585858 #ebdbb2
-        focused_workspace   #262626 #262626 #98971a
+        inactive_workspace #ebdbb2 #585858 #585858
+        focused_workspace  #98971a #262626 #262626
         active_workspace    #777F8B #777F8B #ecedee
         urgent_workspace    #DEDFE3 #DEDFE3 #767E8A
     }
