@@ -32,16 +32,16 @@ set $cmd rofi -show run
 
 # Workspaces:
 ######grouping workspaces+name####
-set $ws1 "<span color='#98971a'>一</span>"
-set $ws2 "<span color='#fe8019'>二</span>"
-set $ws3 "<span color='#d79921'>三</span>"
-set $ws4 "<span color='#83a598'>四</span>"
-set $ws5 "<span color='#fb4934'>五</span>"
-set $ws6 "<span color='#8ec07c'>六</span>"
-set $ws7 "<span color='#fabd2f'>七</span>"
-set $ws8 "<span color='#d3869b'>八</span>"
-set $ws9 "<span color='#b8bb26'>九</span>"
-set $ws10 "<span color='#689d6a'>十</span>"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 # Note: workspaces can have any name you want, not just numbers.
 # We just use 1-10 as the default.
 #quick_back_and_forth_work_space

@@ -25,9 +25,9 @@ source $ZSH/oh-my-zsh.sh
 #export ARCHFLAGS="-arch x86_64"
 
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nvim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
@@ -45,6 +45,7 @@ esac
 # [[ $- != *i* ]] && return
 # [[ -z "$TMUX" ]] && exec tmux
 
+source $HOME/.zsh/*
 source $HOME/.zsh/aliases.zsh
 source $HOME/.zsh/completion.zsh
 source $HOME/.zsh/functions.zsh

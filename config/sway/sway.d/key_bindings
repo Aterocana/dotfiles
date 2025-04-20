@@ -16,7 +16,7 @@ bindsym $mod+Shift+q kill
 # start your launcher
 bindsym $mod+m exec $HOME/.config/rofi/scripts/launcher.sh
 bindsym $mod+w exec $HOME/.config/rofi/scripts/window_switch.sh
-bindsym $mod+Shift+x exec $HOME/.config/rofi/scripts/powermenu
+bindsym $mod+Shift+x exec $HOME/.config/rofi/scripts/powermenu.sh
 bindsym $mod+t exec $HOME/.config/rofi/scripts/tmux_sessions.sh
 bindsym $mod+s exec rofi -show ssh
 
@@ -25,7 +25,7 @@ bindsym Control+Space exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
 
 # take a screenshot
-bindsym Print exec $HOME/.config/rofi/applets/bin/screenshot.sh
+bindsym Print exec $HOME/.config/rofi/scripts/screenshot.sh
 bindsym $mod+Shift+Print exec $HOME/.config/sway/cmd/screenshot.sh area
 bindsym Shift+Print exec $HOME/.config/sway/cmd/screenshot.sh
 

@@ -28,7 +28,7 @@ local M = {
 	  end,
 	})
 
-	require('plugins.configs.lsp').config_servers()
+	require('plugins.configs.lsp').all_servers_config()
 
 	local luasnip = require('luasnip')
 	cmp.setup({

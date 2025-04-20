@@ -9,11 +9,11 @@ NEW="Create a NEW session"
 rofi_cmd() {
 	rofi \
 		-theme-str "listview {columns: 1; lines: 7;}" \
-		-theme-str 'textbox-prompt-colon {str: "";}' \
+		-theme-str 'textbox-prompt-colon {str: " ";}' \
 		-dmenu \
 		-p " " \
 		-markup-rows \
-		-theme ~/.config/rofi/scripts/style.rasi
+		-theme "$HOME/.config/rofi/styles/style.rasi"
 }
 
 tmux_sessions() {

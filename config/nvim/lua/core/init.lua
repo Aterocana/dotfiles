@@ -6,3 +6,4 @@ require("core.weather") -- little weather plugin written for experimental and ed
 require("core.shebang") -- Shebang command
 require("core.search")
 require("core.inlay_hints").config({inlay_hints = true})
+require("core.syntax_highlight")

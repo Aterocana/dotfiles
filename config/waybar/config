@@ -1,0 +1,149 @@
+{
+	"layer": "top", // Waybar at top layer
+	"position": "top", // Waybar at the bottom of your screen
+	"height": 24, // Waybar height
+	// "width": 1366, // Waybar width
+	// Choose the order of the modules
+	"modules-left": ["custom/power", "custom/tmux", "custom/massprev", "custom/mass", "custom/massnext"],
+	"modules-center": ["sway/workspaces"],
+	"modules-right": ["custom/pacman", "pulseaudio", "network", "cpu", "memory", "battery", "clock","tray"],
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": false,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "<span color='#98971a'>一</span>" ,
+			"2":"<span color='#fe8019'>二</span>" ,
+			"3": "<span color='#d79921'>三</span>",
+			"4":"<span color='#83a598'>四</span>" ,
+			"5":"<span color='#fb4934'>五</span>" ,
+			"6":"<span color='#8ec07c'>六</span>" ,
+			"7":"<span color='#fabd2f'>七</span>" ,
+			"8":"<span color='#d3869b'>八</span>" ,
+			"9":"<span color='#b8bb26'>九</span>" ,
+			"10": "<span color='#689d6a'>十</span>"
+		}
+	},
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>"
+	},
+	"tray": {
+		// "icon-size": 21,
+		"spacing": 10
+	},
+	"clock": {
+		"format-alt": "{:%Y-%m-%d}",
+		"tooltip": true,
+		"tooltip-format": "\n<span size='15pt'>{calendar}</span>",
+		//"tooltip-format": "<tt>{calendar}</tt>",
+		"calendar": {
+			"mode"          : "month",
+			"mode-mon-col"  : 3,
+			"weeks-pos"     : "right",
+			"on-scroll"     : 1,
+			"format": {
+				"months":     "<span color='#98971a'><b>{}</b></span>",
+				"days":       "<span color='#689d6a'><b>{}</b></span>",
+				"weeks":      "<span color='#d79921'><b>W{}</b></span>",
+				"weekdays":   "<span color='#83a598'><b>{}</b></span>",
+				"today":      "<span color='#fe8019'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions":  {
+			"on-click-right": "mode",
+			"on-scroll-up": "tz_up",
+			"on-scroll-down": "tz_down",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
+	},
+	"cpu": {
+		"format": "{usage}% "
+	},
+	"memory": {
+		"format": "{}% "
+	},
+	"battery": {
+		"bat": "BAT0",
+		"states": {
+			// "good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{capacity}% {icon}",
+		// "format-good": "", // An empty format will hide the module
+		// "format-full": "",
+		"format-icons": ["", "", "", "", ""]
+	},
+	"network": {
+		// "interface": "wlp2s0", // (Optional) To force the use of this interface
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+		"format-disconnected": "Disconnected ⚠"
+	},
+	"pulseaudio": {
+		//"scroll-step": 1,
+		"format": "{volume}% {icon}",
+		"format-bluetooth": "{volume}% {icon}",
+		"format-muted": "",
+		"format-icons": {
+			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__hw_Dock__sink" : "🔈",
+			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Line__sink" : "🔊",
+			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Headphones__sink" : "🎧",
+			"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" : "🔈",
+			"bluez_sink.A0_DE_0F_22_76_72.a2dp_sink" : "🎧",
+			"alsa_output.usb-Sony_Interactive_Entertainment_DualSense_Wireless_Controller-00.analog-surround-40" : " ",
+			"alsa_output.pci-0000_00_1f.3.analog-stereo" : " ",
+
+			"headphones": "",
+			"handsfree": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", ""]
+		},
+		"on-click": "pavucontrol"
+	},
+	"pulseaudio/slider": {
+		"min": 0,
+		"max": 100,
+		"orientation": "horizontal"
+	},
+	"custom/power": {
+		"format" : "⏻ ",
+		"tooltip": true,
+		"tooltip-format": "power menu",
+		"on-click": "$HOME/.config/rofi/scripts/powermenu.sh"
+	},
+	"custom/tmux" : {
+		"format": " ",
+		"tooltip": true,
+		"tooltip-format": "tmux sessions",
+		"on-click": "$HOME/.config/rofi/scripts/tmux_sessions.sh"
+	},
+	"custom/pacman": {
+		"format": "{icon}{0}",
+		"return-type": "json",
+		"format-icons": {
+			"pending-updates": " ",
+			"updated": ""
+		},
+		"exec-if": "which waybar-updates",
+		"exec": "waybar-updates"
+	},
+	"custom/massprev": {
+		"format": "󰒮",
+		"on-click": "massctl previous_track"
+	},
+	"custom/massnext": {
+		"format": "󰒭",
+		"on-click": "massctl next_track"
+	},
+	"custom/mass": {
+		"exec": "$HOME/.config/waybar/scripts/massctld && sleep 2 && curl localhost:8124/media_player/studio?format=waybar",
+		"return_type": "json",
+		"signal": 2,
+		"on-click": "massctl play_pause"
+	}
+}

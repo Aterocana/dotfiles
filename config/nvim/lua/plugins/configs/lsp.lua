@@ -86,6 +86,25 @@ local luals_config = function ()
 	  }
 	},
   })
+
+  -- NOTE: monkey patch for LUALS
+  local locations_to_items = vim.lsp.util.locations_to_items
+  vim.lsp.util.locations_to_items = function (locations, offset_encoding)
+	local lines = {}
+	local loc_i = 1
+	for _, loc in ipairs(vim.deepcopy(locations)) do
+	  local uri = loc.uri or loc.targetUri
+	  local range = loc.range or loc.targetSelectionRange
+	  if lines[uri .. range.start.line] then -- already have a location on this line
+		table.remove(locations, loc_i) -- remove from the original list
+	  else
+		loc_i = loc_i + 1
+	  end
+	  lines[uri .. range.start.line] = true
+	end
+
+	return locations_to_items(locations, offset_encoding)
+  end
 end
 
 local bashls_config = function ()
@@ -172,7 +191,7 @@ local html_css_config = function ()
   })
 end
 
-M.config_servers = function ()
+M.all_servers_config = function ()
   gopls_config()
   luals_config()
   bashls_config()
@@ -183,7 +202,7 @@ M.config_servers = function ()
   html_css_config()
   lspconfig.yamlls.setup({})
   lspconfig.clangd.setup({})
-  lspconfig.diagnosticls.setup({})
+  --lspconfig.diagnosticls.setup({})
   lspconfig.autotools_ls.setup({})
 end
 

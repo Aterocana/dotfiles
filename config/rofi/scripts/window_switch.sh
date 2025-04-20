@@ -13,4 +13,4 @@ fi
 
 rofi \
 	-show window \
-	-theme "$HOME/.config/rofi/scripts/launcher.rasi"
+	-theme "$HOME/.config/rofi/styles/launcher.rasi"

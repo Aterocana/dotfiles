@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Author: Aterocana
 # Description: Launch an application or a cmd.
-# Version:
+# Version: 0.1.0
 
 usage() {
-  echo "usage: $0 ..."
+  echo "it displays a launcher"
 }
 if [[ "$1" = "--help" ]] || [[ "$1" = "-h" ]]; then
 	usage
@@ -13,4 +13,4 @@ fi
 
 rofi \
 	-show drun \
-	-theme "$HOME/.config/rofi/scripts/launcher.rasi"
+	-theme "$HOME/.config/rofi/styles/launcher.rasi"

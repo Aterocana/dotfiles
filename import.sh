@@ -28,6 +28,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r ~/.config/sway config/
 	cp -r ~/.config/mako config/
 	cp -r ~/.config/rofi config/
+	cp -r ~/.config/waybar/ config/
 	cp -r ~/.config/tmuxinator config/
 	mkdir -p local
 	cp -r ~/.local/scripts local/

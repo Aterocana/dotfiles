@@ -48,6 +48,9 @@ vim.keymap.set("n", "<leader>h", ":set list!<CR>", { desc = "Toggle [H]idden cha
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<leader>ti', require('core.inlay_hints').toggle_hint, {desc = "[T]oggle [I]nlay_hints"})
+vim.keymap.set('n', '<leader>dt', function ()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, {desc = "[T]oggle [D]iagnostics"})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
