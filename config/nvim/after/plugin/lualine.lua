@@ -36,8 +36,8 @@ require('lualine').setup {
 	  tabline = 1000,
 	  winbar = 1000,
 	},
-	-- theme = "gruvbox",
-	theme = "everforest"
+	theme = "gruvbox-material",
+	--theme = "everforest"
   },
   sections = {
 	lualine_a = {'mode'},
@@ -83,9 +83,16 @@ require('lualine').setup {
 	  },
 	},
 	lualine_x = {
+	  "lsp_status"
 	},
 
 	lualine_y = {
+	  {
+		require("noice").api.statusline.mode.get,
+		cond = require("noice").api.statusline.mode.has,
+		color = { fg = "#98971a" },
+	  }
+
 	},
 	lualine_z = {'location'}
   },

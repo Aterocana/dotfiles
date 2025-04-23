@@ -63,7 +63,7 @@ return {
 		},
 	  })
 	end
-  }, -- syntax highlighter 
+  }, -- syntax highlighter
   --	{
   --		"sphamba/smear-cursor.nvim",
   --
