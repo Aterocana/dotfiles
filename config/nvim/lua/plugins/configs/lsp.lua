@@ -191,6 +191,38 @@ local html_css_config = function ()
   })
 end
 
+local helm_config = function ()
+  lspconfig.helm_ls.setup({
+	settings = {
+	  ['helm-ls'] = {
+		logLevel = "info",
+		valuesFiles = {
+		  mainValuesFile = "values.yaml",
+		  lintOverlayValuesFile = "values.lint.yaml",
+		  additionalValuesFilesGlobPattern = "values*.yaml"
+		},
+		yamlls = {
+		  enabled = true,
+		  enabledForFilesGlob = "*.{yaml,yml}",
+		  diagnosticsLimit = 50,
+		  showDiagnosticsDirectly = false,
+		  path = "yaml-language-server",
+		  config = {
+			schemas = {
+			  kubernetes = "templates/**",
+			},
+			completion = true,
+			hover = true,
+			-- any other config from https://github.com/redhat-developer/yaml-language-server#language-server-settings
+		  }
+		}
+	  }
+	}
+
+  })
+
+end
+
 M.all_servers_config = function ()
   gopls_config()
   luals_config()
@@ -204,6 +236,7 @@ M.all_servers_config = function ()
   lspconfig.clangd.setup({})
   --lspconfig.diagnosticls.setup({})
   lspconfig.autotools_ls.setup({})
+  helm_config()
 end
 
 return M

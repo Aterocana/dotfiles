@@ -45,13 +45,13 @@ esac
 # [[ $- != *i* ]] && return
 # [[ -z "$TMUX" ]] && exec tmux
 
-source $HOME/.zsh/*
 source $HOME/.zsh/aliases.zsh
 source $HOME/.zsh/completion.zsh
 source $HOME/.zsh/functions.zsh
 source $HOME/.zsh/theme.zsh
 source $HOME/.zsh/env.zsh
 source $HOME/.zsh/kubectl_completions.zsh
+source $HOME/.zsh/helm_completions.zsh
 source $HOME/.zsh/secrets.zsh
 type hctl >/dev/null 2>&1 && source <(hctl completion zsh)
 
