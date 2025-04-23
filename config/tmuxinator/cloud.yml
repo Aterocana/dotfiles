@@ -46,11 +46,11 @@ root: ~/
 
 windows:
   - v3:
-    - ~/Documents/Programming/go/dlabs-api-v3
+    - ~/Documents/Programming/go/dlabs/dlabs-api-v3
     - nvim .
   - core:
-    - ~/Documents/Programming/go/dlabscloudcore
+    - ~/Documents/Programming/go/dlabs/dlabscloudcore
     - nvim .
   - mig:
-    - ~/Documents/Programming/go/cloud-migrations
+    - ~/Documents/Programming/go/dlabs/cloud-migrations
     - nvim .

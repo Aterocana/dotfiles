@@ -10,4 +10,8 @@ configuration {
 	window-format:              "{w} · {c} · {t}";
 }
 
+mainbox {
+    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+}
+
 @import "./style.rasi"

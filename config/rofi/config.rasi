@@ -75,7 +75,7 @@ configuration {
 	display-window: "Windows";
 	display-windowcd: "Window CD";
 	display-run: "Run";
-	display-ssh: "SSH";
+	display-ssh: "ssh 󱘖";
 	display-drun: "Apps";
 	display-combi: "Combi";
 	display-keys: "Keys";
@@ -179,4 +179,4 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 }
 
-@theme "gruvbox-dark"
+@import "./styles/style.rasi"
