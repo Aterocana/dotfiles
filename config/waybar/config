@@ -117,7 +117,7 @@
 		"on-click": "$HOME/.config/rofi/scripts/powermenu.sh"
 	},
 	"custom/tmux" : {
-		"format": " ",
+		"format": " ",
 		"tooltip": true,
 		"tooltip-format": "tmux sessions",
 		"on-click": "$HOME/.config/rofi/scripts/tmux_sessions.sh"

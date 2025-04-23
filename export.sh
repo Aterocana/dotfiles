@@ -45,6 +45,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	cp -r config/alacritty ~/.config/
 	cp -r config/dlv ~/.config/
 	cp -r config/i3status-rust ~/.config/
+	cp -r config/waybar ~/.config/
 	cp -r config/sway ~/.config/
 	cp -r config/mako ~/.config/
 	cp -r config/rofi ~/.config/
