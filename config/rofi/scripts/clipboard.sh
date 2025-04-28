@@ -8,12 +8,12 @@ rofi_cmd() {
 		pick)
 			clipman $1 \
 				--tool=CUSTOM \
-				--tool-args='rofi -theme-str "window {width:900px;}" -theme-str "listview {columns: 1; lines: 7;}" -dmenu -p "󰅇 Pick" -markup-rows -theme .config/rofi/styles/clipboard.rasi'
+				--tool-args='rofi -theme-str "window {width:900px;}" -theme-str "listview {columns: 1; lines: 7;}" -dmenu -p "󰅇 Pick" -markup-rows -theme '"${HOME}/.config/rofi/styles/clipboard.rasi"
 			;;
 		clear)
 			clipman $1 \
 				--tool=CUSTOM \
-				--tool-args='rofi -theme-str "window {width:900px;}" -theme-str "listview {columns: 1; lines: 7;}" -dmenu -p "󱘜 Clear" -markup-rows -theme .config/rofi/styles/clipboard.rasi'
+				--tool-args='rofi -theme-str "window {width:900px;}" -theme-str "listview {columns: 1; lines: 7;}" -dmenu -p "󱘜 Clear" -markup-rows -theme '"$HOME/.config/rofi/styles/clipboard.rasi"
 			;;
 		*)
 			echo "invalid option $1"

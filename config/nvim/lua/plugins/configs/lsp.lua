@@ -220,7 +220,22 @@ local helm_config = function ()
 	}
 
   })
+end
 
+local protobuffer_config = function ()
+  local configs = require("lspconfig.configs")
+  local util = require("lspconfig.util")
+
+  configs.protobuf_language_server = {
+	default_config = {
+	  cmd = { 'protobuf-language-server' },
+	  filetypes = { "proto" },
+	  root_dir = util.root_pattern('.git'),
+	  single_file_support = true,
+	}
+  }
+
+  lspconfig.protobuf_language_server.setup({})
 end
 
 M.all_servers_config = function ()
@@ -233,10 +248,11 @@ M.all_servers_config = function ()
   js_config()
   html_css_config()
   lspconfig.yamlls.setup({})
-  lspconfig.clangd.setup({})
+  --lspconfig.clangd.setup({})
   --lspconfig.diagnosticls.setup({})
   lspconfig.autotools_ls.setup({})
   helm_config()
+  protobuffer_config()
 end
 
 return M

@@ -1,8 +1,8 @@
 return {
   { "akinsho/toggleterm.nvim", version = "*", config = true }, -- terminal embedded int Nvim
-  { "echasnovski/mini.surround", version = '0.15', config = function ()
-	require("mini.surround").setup()
-  end },
+  --{ "echasnovski/mini.surround", version = '0.15', config = function ()
+  --  require("mini.surround").setup()
+  --end },
   { "tpope/vim-repeat" }, -- improve . operator to repeat operations
   { "kevinhwang91/nvim-ufo", dependencies = {"kevinhwang91/promise-async"} }, -- helper for folding chunk of code
   { "mbbill/undotree" }, -- it gives an undotree to revert or navigate through changes

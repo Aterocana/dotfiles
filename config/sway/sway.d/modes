@@ -1,0 +1,33 @@
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # ditto, with arrow keys
+    bindsym Left resize shrink width 50px
+    bindsym Down resize grow height 50px
+    bindsym Up resize shrink height 50px
+    bindsym Right resize grow width 50px
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "media" {
+	bindsym $mod+p exec --no-startup-id ~/bin/massctl play_pause
+	bindsym $mod+Right exec --no-startup-id ~/bin/massctl previous_track
+	bindsym $mod+Left exec --no-startup-id ~/bin/massctl next_track
+
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}

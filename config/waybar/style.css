@@ -11,6 +11,20 @@ window#waybar {
     color: #262626;
 }
 
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+
+tooltip label {
+  color: white;
+}
+
+.modules-left, .modules-center, .modules-right {
+	/*background-color: rgba(255, 255, 255, 0.1);*/
+	border-radius: 4px;
+}
+
 #window {
     font-weight: bold;
     font-family: "Hack Nerd Font";
@@ -25,17 +39,19 @@ window#waybar {
     padding: 0 5px;
     background: transparent;
     color: #262626;
-    border-top: 2px solid transparent;
+    /*border-top: 2px solid transparent;*/
+	transition: ease-out 0.5s;
+	border-radius: 3px;
 }
 
 #workspaces button.focused {
-    color: #98971a;
-    border-top: 2px solid #fe8019;
+    border-top: 3px solid #b8bb26;
+	color: #b8bb26;
 }
 
 #mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
+    background: transparent;
+    border-top: 3px solid #b8bb26;
 }
 
 #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
@@ -55,6 +71,7 @@ window#waybar {
 }
 
 #battery.charging {
+	color: #98971a;
 }
 
 @keyframes blink {
@@ -96,6 +113,12 @@ window#waybar {
 	padding: 4px;
 	font-size: 15px;
 	color: #689d6a;
+}
+
+#custom-clipboard {
+	padding: 4px;
+	font-size: 15px;
+	color: #d79921;
 }
 
 #pulseaudio {

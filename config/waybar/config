@@ -1,27 +1,38 @@
 {
-	"layer": "top", // Waybar at top layer
-	"position": "top", // Waybar at the bottom of your screen
-	"height": 24, // Waybar height
-	// "width": 1366, // Waybar width
-	// Choose the order of the modules
-	"modules-left": ["custom/power", "custom/tmux", "custom/massprev", "custom/mass", "custom/massnext"],
-	"modules-center": ["sway/workspaces"],
+	"layer": "top",
+	"position": "top",
+	"mode": "dock",
+	"height": 24,
+
+	"modules-left": ["custom/power", "custom/tmux", "custom/clipboard"],
+	"modules-center": ["sway/mode", "sway/workspaces"],
 	"modules-right": ["custom/pacman", "pulseaudio", "network", "cpu", "memory", "battery", "clock","tray"],
+
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": false,
 		"format": "{icon}",
 		"format-icons": {
-			"1": "<span color='#98971a'>一</span>" ,
-			"2":"<span color='#fe8019'>二</span>" ,
-			"3": "<span color='#d79921'>三</span>",
-			"4":"<span color='#83a598'>四</span>" ,
-			"5":"<span color='#fb4934'>五</span>" ,
-			"6":"<span color='#8ec07c'>六</span>" ,
-			"7":"<span color='#fabd2f'>七</span>" ,
-			"8":"<span color='#d3869b'>八</span>" ,
-			"9":"<span color='#b8bb26'>九</span>" ,
-			"10": "<span color='#689d6a'>十</span>"
+			//"1": "<span color='#98971a'>一</span>" ,
+			//"2":"<span color='#fe8019'>二</span>" ,
+			//"3": "<span color='#d79921'>三</span>",
+			//"4":"<span color='#83a598'>四</span>" ,
+			//"5":"<span color='#fb4934'>五</span>" ,
+			//"6":"<span color='#8ec07c'>六</span>" ,
+			//"7":"<span color='#fabd2f'>七</span>" ,
+			//"8":"<span color='#d3869b'>八</span>" ,
+			//"9":"<span color='#b8bb26'>九</span>" ,
+			//"10": "<span color='#689d6a'>十</span>"
+			"1": "一" ,
+			"2":"二" ,
+			"3": "三",
+			"4":"四" ,
+			"5":"五" ,
+			"6":"六" ,
+			"7":"七" ,
+			"8":"八" ,
+			"9":"九" ,
+			"10": "十"
 		}
 	},
 	"sway/mode": {
@@ -58,10 +69,12 @@
 		}
 	},
 	"cpu": {
-		"format": "{usage}% "
+		"format": "{usage}% ",
+		"on-click": "kitty -- btop"
 	},
 	"memory": {
-		"format": "{}% "
+		"format": "{}% ",
+		"on-click": "kitty -- btop"
 	},
 	"battery": {
 		"bat": "BAT0",
@@ -121,6 +134,14 @@
 		"tooltip": true,
 		"tooltip-format": "tmux sessions",
 		"on-click": "$HOME/.config/rofi/scripts/tmux_sessions.sh"
+	},
+	"custom/clipboard" : {
+		"format": " ",
+		"tooltip": true,
+		"tooltip-format": "clipboard management",
+		"on-click": "$HOME/.config/rofi/scripts/clipboard.sh pick",
+		"on-click-middle": "$HOME/.config/rofi/scripts/clipboard.sh clear",
+		"on-triple-click-middle": "clipman clear -a"
 	},
 	"custom/pacman": {
 		"format": "{icon}{0}",
