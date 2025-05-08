@@ -4,9 +4,9 @@
 	"mode": "dock",
 	"height": 24,
 
-	"modules-left": ["custom/power", "custom/tmux", "custom/clipboard"],
+	"modules-left": ["custom/power", "custom/tmux", "custom/clipboard", "custom/mass", "custom/sunbattery"],
 	"modules-center": ["sway/mode", "sway/workspaces"],
-	"modules-right": ["custom/pacman", "pulseaudio", "network", "cpu", "memory", "battery", "clock","tray"],
+	"modules-right": [ "pulseaudio", "network", "cpu", "memory", "battery", "clock","tray" ],
 
 	"sway/workspaces": {
 		"disable-scroll": true,
@@ -153,6 +153,10 @@
 		"exec-if": "which waybar-updates",
 		"exec": "waybar-updates"
 	},
+	"custom/date": {
+		"exec": "date",
+		"signal": 2
+	},
 	"custom/massprev": {
 		"format": "󰒮",
 		"on-click": "massctl previous_track"
@@ -162,9 +166,16 @@
 		"on-click": "massctl next_track"
 	},
 	"custom/mass": {
-		"exec": "$HOME/.config/waybar/scripts/massctld && sleep 2 && curl localhost:8124/media_player/studio?format=waybar",
-		"return_type": "json",
+		"exec": "$HOME/Documents/Programming/go/02-tools/hassctl/bin/hacli status media_player.studio | jq --unbuffered --compact-output",
+		"format": "{}",
+		"return-type": "json",
 		"signal": 2,
 		"on-click": "massctl play_pause"
+	},
+	"custom/sunbattery": {
+		"exec": "$HOME/Documents/Programming/go/02-tools/hassctl/bin/hacli status sensor.battery_1_soc | jq --unbuffered --compact-output",
+		"format": " {}%",
+		"return-type": "json",
+		"signal": 2
 	}
 }

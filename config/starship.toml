@@ -1,0 +1,112 @@
+add_newline = false
+
+format = """
+$username$hostname$directory $git_branch$git_state$git_status $character
+"""
+
+right_format = '''
+$cmd_duration $golang$python$docker_context$kubernetes$lua$nodejs$rust$c$cpp
+'''
+
+continuation_prompt = '❯❯ '
+
+# 💻 Prompt character
+[character]
+success_symbol = "[](green)"
+error_symbol = "[✗](bold red)"
+vicmd_symbol = "[V](blue)"
+
+[cmd_duration]
+min_time = 500
+format = '''
+[elapsed $duration](bold yellow)
+'''
+
+# ➤ Current directory
+[directory]
+format='[$path]($style)[$read_only]($read_only_style)'
+style = "bold green"
+read_only = " "
+read_only_style = "bold red"
+truncation_length = 128
+truncation_symbol = "…/"
+
+[directory.substitutions]
+'~/Documents/Programming' = '/repos'
+'/repos/go/dlabs' = '/work'
+
+# ✔️ Git branch e stato
+[git_branch]
+format = '[\[$symbol$branch]($style)'
+symbol = "[󰊢](red) "
+style = "bold green"
+
+[git_status]
+format = '[$all_status$ahead_behind\]]($style)'
+style = "bold green"
+#untracked = "[* ${count}](red)"
+untracked = "[*](red)"
+conflicted = " ⚔️ "
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇕⇡${ahead_count}⇣${behind_count}"
+stashed = " 📦"
+modified = " 📝${count}"
+staged = " ➕${count}"
+renamed = " 🔀${count}"
+deleted = " 🗑️${count}"
+
+# 🐍 Python
+[python]
+format = '\[[$symbol$virtualenv]($style)\]'
+symbol = " "
+
+# 🐹 Go
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+style = "cyan"
+
+# 🐳 Docker context
+[docker_context]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+symbol = "🐳 "
+style = "blue bold"
+
+# ☸️ Kubernetes
+[kubernetes]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+symbol = "☸️  "
+style = "purple bold"
+
+[lua]
+format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[nodejs]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+[rust]
+symbol = "🦀 "
+
+[username]
+style_user = "bold dimmed green"
+style_root = "bold dimmed red"
+show_always = false
+format = '[$user](bold green)'
+
+# Shows the hostname
+[hostname]
+format = '[@](yellow bold)[$hostname](green):'
+ssh_only = true
+
+[os]
+format = '\[$symbol\]'
+style = "bold blue"
+disabled = false
+
+[os.symbols]
+Arch = '[󰣇](bold blue)'
+Ubuntu = '[](bold orange)'
+Debian = '[](bold red)'

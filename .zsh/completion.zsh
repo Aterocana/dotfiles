@@ -1,8 +1,16 @@
-# add in zsh-completions
-fpath=(/opt/boxen/homebrew/share/zsh-completions $fpath)
-
 autoload -U compinit && compinit
 zmodload -i zsh/complist
+
+# history setup
+setopt SHARE_HISTORY
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# autocompletion using arrow keys (based on history)
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
 
 # man zshcontrib
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '

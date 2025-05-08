@@ -41,12 +41,12 @@ M = {
 	-- list of named colors where we try to extract the guifg from the
 	-- list of highlight groups or use the hex color if hl not found as a fallback
 	colors = {
-	  error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-	  warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-	  info = { "DiagnosticInfo", "#2563EB" },
-	  hint = { "DiagnosticHint", "#10B981" },
-	  default = { "Identifier", "#7C3AED" },
-	  test = { "Identifier", "#FF00FF" }
+	  error = { "DiagnosticError", "ErrorMsg", "#cc241d" },
+	  warning = { "DiagnosticWarn", "WarningMsg", "#d79921" },
+	  info = { "DiagnosticInfo", "#458588" },
+	  hint = { "DiagnosticHint", "#98971a" },
+	  default = { "Identifier", "#8ec07c" },
+	  test = { "Identifier", "#b16286" }
 	},
 	search = {
 	  command = "rg",

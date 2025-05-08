@@ -5,7 +5,7 @@ blur_passes 1
 corner_radius 5
 
 shadows enable
-shadow_blur_radius 20
+shadow_blur_radius 10
 
 #default_dim_inactive 1.0
 titlebar_separator enable
@@ -16,6 +16,7 @@ default_floating_border  normal
 #:::::i3_ gaps::::::::::::::
 set $default_gaps_inner 4
 set $default_gaps_outer 4
+
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 smart_gaps on
@@ -28,34 +29,11 @@ for_window [class="(?i)mpv"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="dialog"] floating enable
-for_window [app_id="lximage-qt"] floating enable
-for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
+for_window [app_id="galculator"] floating enable, border normal, move position cursor
+for_window [app_id="gnome-calculator"] floating enable, border normal, move position cursor
 for_window [title="File Transfer*"] floating enable
-for_window [class="fpakman"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
+for_window [title="Document Scanner"] floating enable border normal
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.

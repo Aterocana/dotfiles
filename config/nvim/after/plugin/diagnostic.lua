@@ -1,6 +1,6 @@
 vim.diagnostic.config({
   virtual_text = {
-	current_line = false,
+	current_line = true,
 	severity = {
 	  max = vim.diagnostic.severity.WARN,
 	}
