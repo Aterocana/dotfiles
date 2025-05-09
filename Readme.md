@@ -23,6 +23,7 @@ They are handled by [GNU Stow](https://www.gnu.org/software/stow/).
 git clone https://github.com/Aterocana/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
+```
 
 ## 🔧 Requirements
 
