@@ -5,7 +5,7 @@ zmodload -i zsh/complist
 setopt SHARE_HISTORY
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
-HISTSIZE=999
+HISTSIZE=5000
 setopt HIST_EXPIRE_DUPS_FIRST
 
 # autocompletion using arrow keys (based on history)
