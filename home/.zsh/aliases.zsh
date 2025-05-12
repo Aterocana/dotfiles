@@ -11,6 +11,7 @@ alias clean-cache='sudo pacman -Scc'
 alias mux='tmuxinator'
 alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
 alias unzip='extract'
+alias cd='z'
 alias ls='eza --git --icons=always --color=always --group-directories-first'
 #alias ls='ls --color=always --group-directories-first'
 alias ll='ls -lh'
