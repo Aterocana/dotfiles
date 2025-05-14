@@ -26,8 +26,8 @@ bindsym Control+Shift+Space exec makoctl dismiss --all
 
 # take a screenshot
 bindsym Print exec $HOME/.config/rofi/scripts/screenshot.sh
-bindsym $mod+Shift+Print exec $HOME/.config/sway/cmd/screenshot.sh area
-bindsym Shift+Print exec $HOME/.config/sway/cmd/screenshot.sh
+bindsym $mod+Shift+Print exec $HOME/.config/rofi/scripts/screenshot.sh area
+bindsym Shift+Print exec $HOME/.config/rofi/scripts/screenshot.sh window
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
