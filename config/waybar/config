@@ -166,14 +166,14 @@
 		"on-click": "massctl next_track"
 	},
 	"custom/mass": {
-		"exec": "$HOME/Documents/Programming/go/02-tools/hassctl/bin/hacli status media_player.studio | jq --unbuffered --compact-output",
+		"exec": "$HOME/bin/hacli status media_player.studio | jq --unbuffered --compact-output",
 		"format": "{}",
 		"return-type": "json",
 		"signal": 2,
 		"on-click": "massctl play_pause"
 	},
 	"custom/sunbattery": {
-		"exec": "$HOME/Documents/Programming/go/02-tools/hassctl/bin/hacli status sensor.battery_1_soc | jq --unbuffered --compact-output",
+		"exec": "$HOME/bin/hacli status sensor.battery_1_soc | jq --unbuffered --compact-output",
 		"format": " {}%",
 		"return-type": "json",
 		"signal": 2
