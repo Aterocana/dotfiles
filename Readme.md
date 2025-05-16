@@ -32,8 +32,9 @@ cd ~/dotfiles
 * swayfx, swayfx-debug, swaylock-blur-git, swaylock-effects, swaybg-git, wlroots, wlrobs-hg, xdg-desktop-portal-wlr.
 * wl-clipboard, clipman, rofi-wayland.
 * zsh, zsh-autocomplete, zsh-autosuggestions, zsh-completions, zsh-syntax-highlighting, starship, fzf-tab-git.
-* stow
+* stow.
 * nerd-fonts (group), ttf-nerd-fonts-symbols, ttf-nerd-fonts-symbols-mono.
+* tesseract.
 
 🧩 Future improvements
 
