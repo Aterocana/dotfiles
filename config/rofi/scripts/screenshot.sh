@@ -12,7 +12,7 @@ prompt='Screenshot'
 mesg="DIR: `xdg-user-dir PICTURES`/screenshots"
 
 list_col='1'
-list_row='6'
+list_row='7'
 win_width='400px'
 
 # Options
@@ -37,7 +37,7 @@ rofi_cmd() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6" | rofi_cmd
+	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6\n$option_7" | rofi_cmd
 }
 
 # Screenshot
@@ -144,6 +144,9 @@ run_selection() {
 		$option_6)
 			run_cmd --opt6
 			;;
+		$option_7)
+			run_cmd --opt7
+			;;
 	esac
 }
 
@@ -153,6 +156,9 @@ case "$1" in
 		;;
 	"window")
 		shotwin
+		;;
+	"transcribe")
+		transcribe
 		;;
 	*)
 		run_selection
