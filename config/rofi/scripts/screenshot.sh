@@ -12,16 +12,17 @@ prompt='Screenshot'
 mesg="DIR: `xdg-user-dir PICTURES`/screenshots"
 
 list_col='1'
-list_row='6'
+list_row='7'
 win_width='400px'
 
 # Options
 option_1=" Capture Desktop"
 option_2=" Capture Area"
 option_3=" Capture Window"
-option_4=" Capture in 1s"
-option_5=" Capture in 5s"
-option_6=" Capture in 10s"
+option_4="󱄽 transcribe from screen"
+option_5=" Capture in 1s"
+option_6=" Capture in 5s"
+option_7=" Capture in 10s"
 
 # Rofi CMD
 rofi_cmd() {
@@ -36,7 +37,7 @@ rofi_cmd() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6" | rofi_cmd
+	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6\n$option_7" | rofi_cmd
 }
 
 # Screenshot
@@ -98,6 +99,10 @@ shotarea () {
 	copy_shot
 }
 
+transcribe () {
+	grim -g "$(slurp)" - | tesseract - stdout 2>/dev/null | wl-copy
+}
+
 # Execute Command
 run_cmd() {
 	if [[ "$1" == '--opt1' ]]; then
@@ -107,10 +112,12 @@ run_cmd() {
 	elif [[ "$1" == '--opt3' ]]; then
 		shotwin
 	elif [[ "$1" == '--opt4' ]]; then
-		shot_in_sec '1'
+		transcribe
 	elif [[ "$1" == '--opt5' ]]; then
-		shot_in_sec '5'
+		shot_in_sec '1'
 	elif [[ "$1" == '--opt6' ]]; then
+		shot_in_sec '5'
+	elif [[ "$1" == '--opt7' ]]; then
 		shot_in_sec '10'
 	fi
 }
@@ -137,6 +144,9 @@ run_selection() {
 		$option_6)
 			run_cmd --opt6
 			;;
+		$option_7)
+			run_cmd --opt7
+			;;
 	esac
 }
 
@@ -146,6 +156,9 @@ case "$1" in
 		;;
 	"window")
 		shotwin
+		;;
+	"transcribe")
+		transcribe
 		;;
 	*)
 		run_selection

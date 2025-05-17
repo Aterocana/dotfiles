@@ -29,6 +29,9 @@ bindsym Print exec $HOME/.config/rofi/scripts/screenshot.sh
 bindsym $mod+Shift+Print exec $HOME/.config/rofi/scripts/screenshot.sh area
 bindsym Shift+Print exec $HOME/.config/rofi/scripts/screenshot.sh window
 
+# transcribe text from selected area
+bindsym $mod+Shift+t exec $HOME/.config/rofi/scripts/screenshot.sh transcribe
+
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
 # Despite the name, also works for non-floating windows.
