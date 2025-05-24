@@ -1,3 +1,4 @@
+export BAT_THEME="gruvbox-dark"
 # GO
 export PATH=$PATH:/usr/lib/go/bin:$HOME/go/bin
 export GOBIN=$HOME/go/bin
