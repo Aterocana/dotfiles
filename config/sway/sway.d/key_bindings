@@ -136,13 +136,13 @@ bindsym $mod+Shift+m mode "media"
 
 #:::::::::Volume:::::::::::::
 
-bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+bindsym XF86AudioMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
-bindsym XF86AudioPlay exec --no-startup-id ~/bin/massctl play_pause
-bindsym XF86AudioPrev exec --no-startup-id ~/bin/massctl previous_track
-bindsym XF86AudioNext exec --no-startup-id ~/bin/massctl next_track
+bindsym XF86AudioPlay exec --no-startup-id ~/bin/hacli media_player media_player.studio play_pause
+bindsym XF86AudioPrev exec --no-startup-id ~/bin/hacli media_player media_player.studio previous_track
+bindsym XF86AudioNext exec --no-startup-id ~/bin/hacli media_player media_player.studio next_track
 
 #brightness control
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
