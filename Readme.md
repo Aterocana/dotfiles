@@ -33,7 +33,7 @@ cd ~/dotfiles
 * wl-clipboard, clipman, rofi-wayland.
 * zsh, zsh-autocomplete, zsh-autosuggestions, zsh-completions, zsh-syntax-highlighting, starship, fzf, fzf-tab-git.
 * stow.
-* nerd-fonts (group), ttf-nerd-fonts-symbols, ttf-nerd-fonts-symbols-mono, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, noto-fonts-extra.
+* nerd-fonts (group), ttf-nerd-fonts-symbols, ttf-nerd-fonts-symbols-mono, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, noto-fonts-extra, gruvbox-gtk-theme-git
 * tesseract.
 * ripgrep, tree-sitter, lua51.
 
