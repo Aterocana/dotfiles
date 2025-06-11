@@ -2,11 +2,11 @@
 	"layer": "top",
 	"position": "top",
 	"mode": "dock",
-	"height": 24,
+	"height": 26,
 
 	"modules-left": ["custom/power", "custom/tmux", "custom/clipboard", "custom/mass", "custom/sunbattery"],
 	"modules-center": ["sway/mode", "sway/workspaces"],
-	"modules-right": [ "pulseaudio", "network", "cpu", "memory", "battery", "clock","tray" ],
+	"modules-right": [ "pulseaudio", "network", "cpu", "memory", "temperature", "clock","tray" ],
 
 	"sway/workspaces": {
 		"disable-scroll": true,
@@ -76,6 +76,13 @@
 		"format": "{}% ",
 		"on-click": "kitty -- btop"
 	},
+	"temperature": {
+	// "thermal-zone": 2,
+	// "hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
+	// "critical-threshold": 80,
+	// "format-critical": "{temperatureC}°C ",
+		"format": "{temperatureC}°C "
+	},
 	"battery": {
 		"bat": "BAT0",
 		"states": {
@@ -139,8 +146,8 @@
 		"tooltip": true,
 		"tooltip-format": "clipboard management",
 		"on-click": "$HOME/.config/rofi/scripts/clipboard.sh pick",
-		"on-click-middle": "$HOME/.config/rofi/scripts/clipboard.sh clear",
-		"on-triple-click-middle": "clipman clear -a"
+		"on-click-right": "$HOME/.config/rofi/scripts/clipboard.sh clear",
+		"on-double-click-middle": "clipman clear -a"
 	},
 	"custom/pacman": {
 		"format": "{icon}{0}",
