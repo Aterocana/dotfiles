@@ -30,6 +30,9 @@ return {
 	end
   },
   {
+	"github/copilot.vim"
+  },
+  {
 	"chentoast/marks.nvim",
 	event = "VeryLazy",
 	config = function ()
