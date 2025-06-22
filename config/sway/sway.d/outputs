@@ -7,3 +7,6 @@ output * bg /home/mauri/Pictures/00-wallpapers/howling-wolf.png fill
 output "Sharp Corporation 0x143E Unknown" pos 3640 0 scale 2
 output "LG Electronics LG HDR 4K 0x0000CEEF" pos 1080 0 scale 1.5
 output "Dell Inc. DELL U2417H 5K9YD85HAG0L" pos 0 0 scale 1 transform 270
+
+workspace 1 output "Dell Inc. DELL U2417H 5K9YD85HAG0L"
+workspace 2 output "LG Electronics LG HDR 4K 0x0000CEEF"
