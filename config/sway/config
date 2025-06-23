@@ -57,6 +57,5 @@ include ~/.config/sway/sway.d/windows
 include ~/.config/sway/sway.d/modes
 include ~/.config/sway/sway.d/key_bindings
 include ~/.config/sway/sway.d/status_bar
-include ~/.config/sway/sway.d/ssh_keys
 
 include /etc/sway/config.d/*
