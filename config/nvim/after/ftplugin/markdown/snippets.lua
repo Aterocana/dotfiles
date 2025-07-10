@@ -14,7 +14,7 @@ local function create_code_block(tag)
 end
 
 local desired_languages_code_blocks = {
-  "go", "bash", "toml", "lua", "c", "cpp", "csv", "dockerfile"
+  "go", "bash", "toml", "lua", "c", "cpp", "csv", "dockerfile", "yaml"
 }
 
 local snippets = {}
