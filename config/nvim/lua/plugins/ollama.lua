@@ -1,6 +1,7 @@
 -- Custom configuration (defaults shown)
 return {
   'jacob411/Ollama-Copilot',
+  enabled = false,
   opts = {
 	model_name = "starcoder2:15b",
 	ollama_url = "http://localhost:11434", -- URL for Ollama server, Leave blank to use default local instance.
