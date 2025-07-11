@@ -1,3 +1,19 @@
+-- absolute numer in INSERT mode, relative in other modes
+vim.api.nvim_create_augroup("LineNumbersToggle", { clear = true })
+
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+  group = "LineNumbersToggle",
+  callback = function ()
+	vim.opt.relativenumber = false
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+  callback = function ()
+	vim.opt.relativenumber = true
+  end,
+})
+
 -- function which assign vim autocommand `command` when a buffer (matching provided `pattern`) is written,
 -- writing output in `output_bufnr`.
 local attach_to_buffer = function(output_bufnr, pattern, command)

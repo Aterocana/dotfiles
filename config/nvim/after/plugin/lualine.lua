@@ -36,8 +36,8 @@ require('lualine').setup {
 	  tabline = 1000,
 	  winbar = 1000,
 	},
-	theme = "gruvbox-material",
-	--theme = "everforest"
+	-- theme = "gruvbox-material",
+	theme = "everforest"
   },
   sections = {
 	lualine_a = {'mode'},
@@ -70,9 +70,9 @@ require('lualine').setup {
 		-- 2: Absolute path
 		-- 3: Absolute path, with tilde as the home directory
 		-- 4: Filename and parent dir, with tilde as the home directory
-		path = 3,
+		path = 1,
 
-		shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+		shorting_target = 20,    -- Shortens path to leave 40 spaces in the window
 		-- for other components. (terrible name, any suggestions?)
 		symbols = {
 		  modified = '[+]',      -- Text to show when the file is modified.
@@ -83,14 +83,15 @@ require('lualine').setup {
 	  },
 	},
 	lualine_x = {
-	  "lsp_status"
+	  "lsp_status",
 	},
 
 	lualine_y = {
 	  {
-		require("noice").api.statusline.mode.get,
-		cond = require("noice").api.statusline.mode.has,
-		color = { fg = "#98971a" },
+		require("yaml_nvim").get_yaml_key_and_value ,
+		-- require("noice").api.statusline.mode.get,
+		-- cond = require("noice").api.statusline.mode.has,
+		-- color = { fg = "#98971a" },
 	  }
 
 	},

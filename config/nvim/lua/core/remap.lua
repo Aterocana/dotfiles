@@ -100,3 +100,14 @@ vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the 
 vim.keymap.set("v", "<SPACE>jug", ":'<,'>!jq -c<CR>", {desc = "[J]SON [UG]lify (minify) the selection"})
 vim.keymap.set("v", "<SPACE>jes", ":'<,'>!jq -c<CR>gv !jq -R<CR>", {desc = "[J]SON [ES]scape the file (it first minifies it)"})
 vim.keymap.set("v", "<SPACE>jun", ":'<,'>!jq -r<CR>", {desc = "[J]SON [UN]escape the selection"})
+
+vim.keymap.set("n", "<leader>C", function ()
+  vim.ui.input({}, function(c)
+	if c and c~="" then
+	  vim.cmd("noswapfile vnew")
+	  vim.bo.buftype = "nofile"
+	  vim.bo.bufhidden = "wipe"
+	  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.fn.systemlist(c))
+	end
+  end)
+end, {desc = "run a command and send its output to a scratch buffer"})
