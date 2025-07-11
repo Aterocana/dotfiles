@@ -90,6 +90,14 @@ format = "[$symbol($version )]($style)"
 [rust]
 symbol = "🦀 "
 
+[c]
+symbol = " "
+format = "[$symbol($version)]($style)"
+
+[cpp]
+symbol = " "
+format = "[$symbol($version)]($style)"
+
 [username]
 style_user = "bold dimmed green"
 style_root = "bold dimmed red"
