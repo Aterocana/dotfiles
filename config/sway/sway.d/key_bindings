@@ -149,6 +149,6 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # Custom shell
-bindsym Redo exec --no-startup-id ~/bin/led-scrivania.sh
-bindsym XF86Launch6 exec --no-startup-id ~/bin/lamp-scrivania.sh
-bindsym XF86Launch8 exec --no-startup-id ~/bin/play_godisanastronaut.sh
+bindsym XF86Launch5  exec --no-startup-id ~/bin/hacli lights light.lampada_studio toggle
+bindsym XF86Launch7 exec --no-startup-id ~/bin/hacli lights light.led_scrivania_studio toggle
+bindsym XF86Launch9 exec --no-startup-id ~/bin/hacli lights switch.plug_lampada_studio toggle
