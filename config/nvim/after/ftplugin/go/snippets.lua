@@ -149,39 +149,39 @@ end
 
 ls.add_snippets("go", {
   -- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
-  s({trig="feh", name="Function Error Handling", snippetType="autosnippet", desc = "Go Function with Error Handling", wordTrgi=true}, {
-	i(1, { "val" }),
-	t ", ",
-	i(2, { "err" }),
-	t " := ",
-	i(3, { "f" }),
-	t "(",
-	i(4),
-	t ")",
-	t { "", "if " },
-	same(2),
-	t { " != nil {", "\treturn " },
-	d(5, go_ret_vals, { 2, 3 }),
-	t { "", "}" },
-	i(0),
-  }),
-  s({trig="iferr", name="Error Handling", snippetType="autosnippet", desc = "Go Error Handling", wordTrgi=true}, {
-	--  t "if ",
-	--  i(1, { "err"}),
-	--  t {" != nil; {", "\treturn "},
-	--  go_error({
-	--  'index': 1,
-	--  'err_name': same(1),
-	--  'func_name': "error",
-	--	}),
-
-
-
-	t { "if err != nil {", "\treturn " },
-	d(1, go_ret_vals, { 1, 2 }),
-	t { "", "}" },
-	i(0),
-  }),
+  --  s({trig="feh", name="Function Error Handling", snippetType="autosnippet", desc = "Go Function with Error Handling", wordTrgi=true}, {
+  -- i(1, { "val" }),
+  -- t ", ",
+  -- i(2, { "err" }),
+  -- t " := ",
+  -- i(3, { "f" }),
+  -- t "(",
+  -- i(4),
+  -- t ")",
+  -- t { "", "if " },
+  -- same(2),
+  -- t { " != nil {", "\treturn " },
+  -- d(5, go_ret_vals, { 2, 3 }),
+  -- t { "", "}" },
+  -- i(0),
+  --  }),
+  --  s({trig="iferr", name="Error Handling", snippetType="autosnippet", desc = "Go Error Handling", wordTrgi=true}, {
+  -- --  t "if ",
+  -- --  i(1, { "err"}),
+  -- --  t {" != nil; {", "\treturn "},
+  -- --  go_error({
+  -- --  'index': 1,
+  -- --  'err_name': same(1),
+  -- --  'func_name': "error",
+  -- --	}),
+  --
+  --
+  --
+  -- t { "if err != nil {", "\treturn " },
+  -- d(1, go_ret_vals, { 1, 2 }),
+  -- t { "", "}" },
+  -- i(0),
+  --  }),
   s(
 	{trig="ifsrv", name="API V3 Error Handling", snippetType="autosnippet", desc="API V3 Error Handling", wordTrig=true},
 	{
