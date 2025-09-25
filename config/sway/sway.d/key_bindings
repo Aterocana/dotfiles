@@ -2,7 +2,7 @@
 bindsym $mod+Return exec $term
 
 # start a browser
-bindsym $mod+Shift+b exec $browsescripts/launcher_t1r
+bindsym $mod+Shift+b exec $browser
 bindsym $mod+Shift+Alt+b exec $browser-work
 
 # start clipboard
@@ -150,5 +150,5 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # Custom shell
 bindsym XF86Launch5  exec --no-startup-id ~/bin/hacli lights light.lampada_studio toggle
-bindsym XF86Launch7 exec --no-startup-id ~/bin/hacli lights light.led_scrivania_studio toggle
+bindsym XF86Launch7 exec --no-startup-id ~/bin/hacli lights light.scrivania_strip_led_main toggle
 bindsym XF86Launch9 exec --no-startup-id ~/bin/hacli lights switch.plug_lampada_studio toggle
