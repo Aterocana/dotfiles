@@ -24,6 +24,7 @@ alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^
 alias vim='nvim'
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
 alias big="du -a -BM | sort -n -r | head -n 10"
+alias ungron="gron --ungron"
 
 # Services
 alias k="kubectl"

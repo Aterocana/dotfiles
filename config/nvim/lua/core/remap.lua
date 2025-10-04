@@ -48,16 +48,12 @@ vim.keymap.set("n", "<leader>h", ":set list!<CR>", { desc = "Toggle [H]idden cha
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<leader>ti', require('core.inlay_hints').toggle_hint, {desc = "[T]oggle [I]nlay_hints"})
-vim.keymap.set('n', '<leader>dt', function ()
+vim.keymap.set('n', '<leader>td', function ()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, {desc = "[T]oggle [D]iagnostics"})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-vim.keymap.set('n', '<leader>rt', function ()
-  require("neotest").run.run({ suite = false, strategy = "dap"})
-end, { desc = "[R]un [T]est"})
 
 -- Navigate definitions in new buffers
 vim.keymap.set("n", "gD", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", { desc = 'Go To Definition in a new Tab'})
@@ -89,7 +85,8 @@ vim.keymap.set("n", "<Leader>st", function ()
 end, {desc="[ST]op the [T]est"})
 
 -- git cmds
-vim.keymap.set("n", "<Leader>gdif", ":DiffviewOpen <CR>", {desc = "check [G]it [Dif]f view"})
+vim.keymap.set("n", "<Leader><Leader>do", ":DiffviewOpen <CR>", {desc = "Git [D]iff view [O]pen"})
+vim.keymap.set("n", "<Leader><Leader>dc", ":DiffviewClose <CR>", {desc = "Git [D]iff view [C]lose"})
 
 -- JSON Visual Mode
 vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the selection"})

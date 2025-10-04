@@ -1,11 +1,11 @@
 add_newline = false
 
 format = """
-$username$hostname$directory $git_branch$git_state$git_status $character
+$username$hostname$directory $git_branch$git_state$git_status$kubernetes $character
 """
 
 right_format = '''
-$cmd_duration $golang$python$docker_context$kubernetes$lua$nodejs$rust$c$cpp
+$cmd_duration $golang$python$docker_context$lua$nodejs$rust$c$cpp
 '''
 
 continuation_prompt = '❯❯ '
@@ -75,9 +75,15 @@ style = "blue bold"
 
 # ☸️ Kubernetes
 [kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]'
+disabled = false
+format = '[ $context \($namespace\)]($style)'
 symbol = "☸️  "
-style = "purple bold"
+style = "green bold"
+
+[[kubernetes.contexts]]
+context_pattern = "^production$"
+context_alias = "production"
+style = "blue"
 
 [lua]
 format = '\[[$symbol($version)]($style)\]'

@@ -22,6 +22,9 @@ gaps outer $default_gaps_outer
 smart_gaps on
 bindsym $mod+Shift+s sticky toggle
 
+for_window [workspace="1"] split h
+for_window [workspace="2"] split v
+
 # enable floating mode for all Specified windows
 #for_window [class="(?i)urxvt"] floating enable
 for_window [class="(?i)mpv"] floating enable
@@ -33,6 +36,7 @@ for_window [app_id="org.gnome.Calculator"] floating enable, move position cursor
 for_window [title="File Transfer*"] floating enable
 for_window [class="GParted"] floating enable border normal
 for_window [title="Document Scanner"] floating enable border normal
+# for_window [app_id="keymapp"] floating enable
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
