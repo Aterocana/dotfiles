@@ -6,12 +6,14 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
   callback = function ()
 	vim.opt.relativenumber = false
   end,
+  desc = "set absolute line numbers when entering Insert mode",
 })
 
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   callback = function ()
 	vim.opt.relativenumber = true
   end,
+  desc = "set relative line numbers when leaving Insert mode",
 })
 
 -- function which assign vim autocommand `command` when a buffer (matching provided `pattern`) is written,

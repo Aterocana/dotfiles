@@ -80,20 +80,13 @@ vim.keymap.set("n", "<Leader>db", function ()
   require("neotest").run.run({strategy="dap"})
 end, {desc="run nearest [T]est in [D]e[B]ug mode"})
 
-vim.keymap.set("n", "<Leader>at", function ()
-  require("neotest").run.attach()
-end, {desc="[AT]tach to the [T]est"})
-
 vim.keymap.set("n", "<Leader>st", function ()
   require("neotest").run.stop()
 end, {desc="[ST]op the [T]est"})
 
 -- git cmds
-vim.keymap.set("n", "<Leader>gdif", ":DiffviewOpen <CR>", {desc = "check [G]it [Dif]f view"})
+vim.keymap.set("n", "<Leader>dif", ":DiffviewOpen <CR>", {desc = "check Git [Dif]f view"})
 
--- Tasks
-vim.keymap.set("n", "<Leader>mk", ":OverseerRun <CR>", {desc="run a task ([M]a[K]e)"})
-vim.keymap.set("n", "<Leader>vmk", ":OverseerToggle <CR>", {desc="toggle task panel [V]iew [M]a[K]e"})
 
 -- JSON Visual Mode
 vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the selection"})
