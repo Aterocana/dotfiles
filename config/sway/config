@@ -13,12 +13,17 @@ set $down j
 set $up k
 set $right l
 
+# i3_ gaps
+set $default_gaps_inner 4
+set $default_gaps_outer 4
+
 # Autostart
 input type:keyboard xkb_numlock enabled
 exec --no-startup-id mako &> /tmp/mako.log
 exec wl-paste -t text --watch clipman store --no-persist
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec /usr/bin/syncthing serve
+exec_always sway-reflex -window_size 500x300 -default_gaps $default_gaps_outer
 include /home/mauri/.config/sway/sway.d/themes
 
 # Favourite applications

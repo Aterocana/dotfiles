@@ -13,9 +13,6 @@ titlebar_separator enable
 for_window [class="^.*"] border pixel 0
 default_border pixel 1
 default_floating_border  normal
-#:::::i3_ gaps::::::::::::::
-set $default_gaps_inner 4
-set $default_gaps_outer 4
 
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
