@@ -89,9 +89,9 @@ require('lualine').setup {
 	lualine_y = {
 	  {
 		-- require("yaml_nvim").get_yaml_key_and_value ,
-		-- require("noice").api.statusline.mode.get,
-		-- cond = require("noice").api.statusline.mode.has,
-		-- color = { fg = "#98971a" },
+		require("noice").api.statusline.mode.get,
+		cond = require("noice").api.statusline.mode.has,
+		color = { fg = "#98971a" },
 	  }
 
 	},

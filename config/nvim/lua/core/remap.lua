@@ -87,7 +87,6 @@ end, {desc="[ST]op the [T]est"})
 -- git cmds
 vim.keymap.set("n", "<Leader>dif", ":DiffviewOpen <CR>", {desc = "check Git [Dif]f view"})
 
-
 -- JSON Visual Mode
 vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the selection"})
 vim.keymap.set("v", "<SPACE>jug", ":'<,'>!jq -c<CR>", {desc = "[J]SON [UG]lify (minify) the selection"})

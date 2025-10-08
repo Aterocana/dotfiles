@@ -10,7 +10,6 @@ alias clean-cache='sudo pacman -Scc'
 # Utilities
 alias mux='tmuxinator'
 alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
-# alias unzip='extract'
 alias cd='z'
 alias ls='eza --git --icons=always --color=always --group-directories-first'
 #alias ls='ls --color=always --group-directories-first'
@@ -25,8 +24,7 @@ alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^
 alias vim='nvim'
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
 alias big="du -a -BM | sort -n -r | head -n 10"
-alias k="kubectl"
-alias mk="minikube"
 
 # Services
-alias vpn='sudo openfortivpn -c /home/mauri/Documents/VPN/forticlient < /home/mauri/Documents/VPN/pwd'
+alias k="kubectl"
+alias mk="minikube"

@@ -42,5 +42,17 @@ require('go').setup({
 	-- The color of the hints
 	highlight = "Comment",
   },
+  golangci_lint = {
+	default = 'standard', -- set to one of { 'standard', 'fast', 'all', 'none' }
+	-- disable = {'errcheck', 'staticcheck'}, -- linters to disable empty by default
+	-- enable = {'govet', 'ineffassign','revive', 'gosimple'}, -- linters to enable; empty by default
+	config = nil,        -- set to a config file path
+	no_config = false,   -- true: golangci-lint --no-config
+	-- disable = {},     -- linters to disable empty by default, e.g. {'errcheck', 'staticcheck'}
+	-- enable = {},      -- linters to enable; empty by default, set to e.g. {'govet', 'ineffassign','revive', 'gosimple'}
+	-- enable_only = {}, -- linters to enable only; empty by default, set to e.g. {'govet', 'ineffassign','revive', 'gosimple'}
+	severity = vim.diagnostic.severity.INFO, -- severity level of the diagnostics
+  },
+  diagnostic = false, -- using nvim default
 })
 
