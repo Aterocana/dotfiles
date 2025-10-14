@@ -29,3 +29,8 @@ alias ungron="gron --ungron"
 # Services
 alias k="kubectl"
 alias mk="minikube"
+alias kns="kubens"
+alias kctx="kubectx"
+
+#logs from all pods in namespace selected with kubectx
+alias klogs="kubectl get pods -o name | fzf | xargs -I{} kubectl logs -f {}"
