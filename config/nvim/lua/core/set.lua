@@ -46,3 +46,4 @@ vim.opt.listchars = {
 vim.g.have_nerd_font = true
 vim.opt.cursorline = true
 vim.opt.conceallevel = 1
+vim.opt.winborder = 'rounded'

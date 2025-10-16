@@ -34,9 +34,11 @@ vim.keymap.set("n", "<leader>sub", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left
 -- open Lazy Packet Manager UI
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Open [L]azyNVim Manager"})
 
--- (visual mode) paste selection in system clipboard
+-- interact with system clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "[Y]ank into system clipboard"})
-vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[Y]ank into system clipboard"})
+vim.keymap.set({"n", "x"}, "<leader>yy", '"+yy', { desc = "[Y]ank line into system clipboard"})
+vim.keymap.set({"n", "x"}, "<leader>p", '"+p', { desc = "[P]aste from system clipboard after current position"})
+vim.keymap.set({"n", "x"}, "<leader>P", '"+P', { desc = "[P]aste from system clipboard before current position"})
 
 -- toggle debugger
 vim.keymap.set("n", "<leader>db", '<CMD>DBUIToggle<CR>', {desc = "Toggle [D]e[B]ug view"})
