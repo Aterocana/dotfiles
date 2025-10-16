@@ -1,10 +1,22 @@
 return {
   {
-	'windwp/nvim-autopairs',
-	event = "InsertEnter",
-	config = true
-	-- use opts = {} for passing setup options
-	-- this is equalent to setup({}) function
+	"saghen/blink.cmp",
+	version = '1.*',
+	opts_extend = {
+	  "sources.completion.enabled_providers",
+	  "sources.compat",
+	  "sources.default",
+	},
+	dependencies = {
+	  {
+		"saghen/blink.compat",
+		optional = true,
+		opts = {},
+		version = not vim.g.lazyvim_blink_main and "*",
+	  },
+	},
+	event = { "InsertEnter", "CmdlineEnter" },
+	opts = require('plugins.configs.cmp').opts,
   },
   { -- a semantic navigator for current buffer
 	'stevearc/aerial.nvim',
@@ -20,5 +32,5 @@ return {
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
 	build = "make install_jsregexp",
-  }
+  },
 }
