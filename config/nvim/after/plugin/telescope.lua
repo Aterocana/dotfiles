@@ -15,7 +15,7 @@ telescope.load_extension("git_file_history")
 local builtin = require('telescope.builtin')
 
 -- search for files
-vim.keymap.set('n', '<leader>ph', builtin.help_tags, {desc = "find files in workspace"})
+vim.keymap.set('n', '<leader>ph', builtin.help_tags, {desc = "help in workspace"})
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {desc = "find files in workspace"})
 vim.keymap.set("n", "<leader>buf", ":Telescope buffers<CR>", { desc = "Open buffers" })
 

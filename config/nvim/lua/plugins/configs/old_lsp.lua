@@ -88,7 +88,6 @@ local luals_config = function ()
   })
 
   -- NOTE: monkey patch for LUALS
-  local locations_to_items = vim.lsp.util.locations_to_items
   vim.lsp.util.locations_to_items = function (locations, offset_encoding)
 	local lines = {}
 	local loc_i = 1
@@ -103,7 +102,7 @@ local luals_config = function ()
 	  lines[uri .. range.start.line] = true
 	end
 
-	return locations_to_items(locations, offset_encoding)
+	return vim.lsp.util.locations_to_items(locations, offset_encoding)
   end
 end
 

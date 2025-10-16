@@ -9,35 +9,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 })
 
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+  group = "LineNumbersToggle",
   callback = function ()
 	vim.opt.relativenumber = true
   end,
 })
-
--- function which assign vim autocommand `command` when a buffer (matching provided `pattern`) is written,
--- writing output in `output_bufnr`.
-local attach_to_buffer = function(output_bufnr, pattern, command)
-  -- assign autocommand to "BufWritePost" event
-  vim.api.nvim_create_autocmd("BufWritePost", {
-	-- create an auto group which assign autocommand to.
-	group = vim.api.nvim_create_augroup("core_autocmds", {}),
-	pattern = pattern,
-	callback = function ()
-	  local append_data = function (_, data)
-		if data then
-		  vim.api.nvim_buf_set_lines(output_bufnr, -1, -1, false, data)
-		end
-	  end
-
-	  vim.api.nvim_buf_set_lines(output_bufnr, 0, -1, false, { "output:" })
-	  vim.fn.jobstart(command, {
-		stdout_buffered = true,
-		on_stdout = append_data,
-		on_stdett = append_data,
-	  })
-	end
-  })
-end
 
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '',
