@@ -9,10 +9,11 @@ return {
 	},
 	dependencies = {
 	  {
-		"saghen/blink.compat",
-		optional = true,
-		opts = {},
-		version = not vim.g.lazyvim_blink_main and "*",
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
 	  },
 	},
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -25,12 +26,5 @@ return {
 	  "nvim-treesitter/nvim-treesitter",
 	  "nvim-tree/nvim-web-devicons"
 	},
-  },
-  {
-	"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp",
   },
 }

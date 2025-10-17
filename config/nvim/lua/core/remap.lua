@@ -92,3 +92,13 @@ vim.keymap.set("n", "<leader>C", function ()
 	end
   end)
 end, {desc = "run a command and send its output to a scratch buffer"})
+
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "<leader>di", "<cmd>Telescope diagnostics<cr>")
+vim.keymap.set("n", "<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>")
+vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help)
+-- se vuoi, manual trigger per completamento
+vim.keymap.set("i", "<C-Space>", vim.lsp.buf.completion)
