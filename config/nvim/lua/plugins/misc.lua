@@ -11,11 +11,6 @@ return {
 	  require("dressing").setup()
 	end
   },
-  {	"stevearc/overseer.nvim",
-	config = function ()
-	  require("overseer").setup()
-	end
-  },
   {
 	'echasnovski/mini.hipatterns',
 	version = '*',
