@@ -1,4 +1,4 @@
-vim.lsp.config.bashls = {
+return {
   cmd = { "bash-language-server", "start" },
   filetypes = { "bash", "sh", "zsh" },
   root_markers = { ".git", vim.uv.cwd() },

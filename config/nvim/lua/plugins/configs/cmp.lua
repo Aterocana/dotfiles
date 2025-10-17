@@ -40,16 +40,26 @@ M.opts = {
   },
   keymap = {
 	preset = "none",
-	["<C-j>"] = { "select_next", "fallback" },
-	["<C-k>"] = { "select_prev", "fallback" },
-	["<Enter>"] = { "accept", "fallback" },
+	['<c-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+	['<c-e>'] = { 'hide', 'fallback' },
+	['<enter>'] = { 'select_and_accept', 'fallback' },
+	['<c-y>'] = { 'select_and_accept', 'fallback' },
 
+	['<c-k>'] = { 'select_prev', 'fallback' },
+	['<c-j>'] = { 'select_next', 'fallback' },
+	['<c-p>'] = { 'select_prev', 'fallback_to_mappings' },
+	['<c-n>'] = { 'select_next', 'fallback_to_mappings' },
+
+	['<c-b>'] = { 'scroll_documentation_up', 'fallback' },
+	['<c-f>'] = { 'scroll_documentation_down', 'fallback' },
+
+	['<tab>'] = { 'snippet_forward', 'fallback' },
+	['<s-tab>'] = { 'snippet_backward', 'fallback' },
+
+	['<c-s>'] = { 'show_signature', 'hide_signature', 'fallback' },
   },
   snippets = {
 	preset = "luasnip",
-	expand = function (snippet, _)
-	  require("luasnip").lsp_expand(snippet.body)
-	end
   },
 }
 

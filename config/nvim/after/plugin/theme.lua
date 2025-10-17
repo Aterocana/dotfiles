@@ -55,6 +55,18 @@ function Theme(theme, darkness)
   darkness = darkness or "dark"
   vim.cmd.colorscheme(theme)
   vim.o.background = darkness
+
+  -- set popup menu transparency
+  vim.api.nvim_set_hl(0, "Pmenu", { bg = "#282828", blend = 20 })
+  vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#98971a", fg = "#282828", blend = 20 })
+  vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "#282828" })
+  vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#98971a" })
+
+  vim.api.nvim_set_hl(0, "CmdlinePmenu", { bg = "#282828", blend = 20 })
+  vim.api.nvim_set_hl(0, "CmdlinePmenuSel", { bg ="#98971a", fg = "#282828", blend = 20 })
+  vim.api.nvim_set_hl(0, "CmdlinePmenuSbar", { bg = "#282828" })
+  vim.api.nvim_set_hl(0, "CmdlinePmenuThumb", { bg ="#98971a"   })
+
   require("notify").setup({
 	background_colour = "#000000",
   })

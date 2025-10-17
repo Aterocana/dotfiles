@@ -3,7 +3,6 @@ return {
 	"ray-x/go.nvim",
 	dependencies = {
 	  {"ray-x/guihua.lua", run="cd lua/fzy && make"},
-	  {"neovim/nvim-lspconfig"},
 	  {"nvim-treesitter/nvim-treesitter"},
 	},
 	events = {"CmdlineEnter"},
