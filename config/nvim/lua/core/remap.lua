@@ -34,9 +34,11 @@ vim.keymap.set("n", "<leader>sub", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left
 -- open Lazy Packet Manager UI
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Open [L]azyNVim Manager"})
 
--- (visual mode) paste selection in system clipboard
+-- interact with system clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "[Y]ank into system clipboard"})
-vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[Y]ank into system clipboard"})
+vim.keymap.set({"n", "x"}, "<leader>yy", '"+yy', { desc = "[Y]ank line into system clipboard"})
+-- vim.keymap.set({"n", "x"}, "<leader>p", '"+p', { desc = "[P]aste from system clipboard after current position"})
+-- vim.keymap.set({"n", "x"}, "<leader>P", '"+P', { desc = "[P]aste from system clipboard before current position"})
 
 -- toggle debugger
 vim.keymap.set("n", "<leader>db", '<CMD>DBUIToggle<CR>', {desc = "Toggle [D]e[B]ug view"})
@@ -48,20 +50,6 @@ vim.keymap.set("n", "<leader>h", ":set list!<CR>", { desc = "Toggle [H]idden cha
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<leader>ti', require('core.inlay_hints').toggle_hint, {desc = "[T]oggle [I]nlay_hints"})
-vim.keymap.set('n', '<leader>dt', function ()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, {desc = "[T]oggle [D]iagnostics"})
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-vim.keymap.set('n', '<leader>rt', function ()
-  require("neotest").run.run({ suite = false, strategy = "dap"})
-end, { desc = "[R]un [T]est"})
-
--- Navigate definitions in new buffers
-vim.keymap.set("n", "gD", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", { desc = 'Go To Definition in a new Tab'})
-vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", { desc = 'Go To Definition in a new Tab'})
 
 -- Terminal
 local exitTerm = function ()
@@ -85,7 +73,8 @@ vim.keymap.set("n", "<Leader>st", function ()
 end, {desc="[ST]op the [T]est"})
 
 -- git cmds
-vim.keymap.set("n", "<Leader>dif", ":DiffviewOpen <CR>", {desc = "check Git [Dif]f view"})
+vim.keymap.set("n", "<Leader><Leader>do", ":DiffviewOpen <CR>", {desc = "Git [D]iff view [O]pen"})
+vim.keymap.set("n", "<Leader><Leader>dc", ":DiffviewClose <CR>", {desc = "Git [D]iff view [C]lose"})
 
 -- JSON Visual Mode
 vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the selection"})

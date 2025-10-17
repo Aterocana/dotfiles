@@ -3,7 +3,6 @@ bindsym $mod+Return exec $term
 
 # start a browser
 bindsym $mod+Shift+b exec $browser
-bindsym $mod+Shift+Alt+b exec $browser-work
 
 # start clipboard
 #bindsym $mod+c exec clipman pick --tool=rofi

@@ -13,7 +13,7 @@ set $down j
 set $up k
 set $right l
 
-# i3_ gaps
+#:::::i3_ gaps::::::::::::::
 set $default_gaps_inner 4
 set $default_gaps_outer 4
 
@@ -22,14 +22,14 @@ input type:keyboard xkb_numlock enabled
 exec --no-startup-id mako &> /tmp/mako.log
 exec wl-paste -t text --watch clipman store --no-persist
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec /usr/bin/syncthing serve
-exec_always sway-reflex -window_size 500x300 -default_gaps $default_gaps_outer
+
+exec_always /home/mauri/go/bin/sway-reflex -window_size 500x300 -default_gaps $default_gaps_outer
+
 include /home/mauri/.config/sway/sway.d/themes
 
 # Favourite applications
 set $term kitty -e tmux #--listen-on=unix:/tmp/kitty.sock
-set $browser google-chrome-stable --profile-directory="Profile 1"
-set $browser-work google-chrome-stable --profile-directory="Profile 2"
+set $browser google-chrome-stable --profile-directory="Default"
 # Note: it's recommended that you pass the final command to sway
 set $menu rofi -show drun
 set $cmd rofi -show run

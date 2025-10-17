@@ -6,4 +6,5 @@ require("core.shebang") -- Shebang command
 require("core.search")
 require("core.inlay_hints").config({inlay_hints = true})
 require("core.syntax_highlight")
-require("core.diagnostic") -- LSP configuration
+require("core.lsp")
+require("core.diagnostic")
