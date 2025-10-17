@@ -52,3 +52,4 @@ ls.add_snippets("go", {
 	}
   )
 })
+
