@@ -1,14 +1,14 @@
 return {
-  { "akinsho/toggleterm.nvim", version = "*", config = true }, -- terminal embedded int Nvim
+  {
+	"akinsho/toggleterm.nvim",
+	version = "*",
+	opts = {
+	  start_in_insert = true,
+	},
+  },
   { "tpope/vim-repeat" }, -- improve . operator to repeat operations
   { "kevinhwang91/nvim-ufo", dependencies = {"kevinhwang91/promise-async"} }, -- helper for folding chunk of code
   { "mbbill/undotree" }, -- it gives an undotree to revert or navigate through changes
-  {	"stevearc/dressing.nvim",
-	enabled = false,
-	config = function ()
-	  require("dressing").setup()
-	end
-  },
   {
 	'echasnovski/mini.hipatterns',
 	version = '*',

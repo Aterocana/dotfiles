@@ -47,3 +47,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	vim.highlight.on_yank({timeout=300})
   end
 })
+
+vim.api.nvim_create_autocmd("TermLeave", {
+  desc = "Reload buffers when leaving terminal",
+  pattern = "*",
+  callback = function()
+	vim.cmd.checktime()
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "TermEnter", "BufWinEnter" }, {
+  desc = "Enter insert mode automatically when entering a terminal",
+  pattern = "term://*",
+  callback = function()
+	if vim.bo.buftype == "terminal" and vim.fn.mode() == "n" then
+	  -- if it's a non-active terminal do nothing
+	  if vim.fn.win_gettype() ~= "" then return end
+	  vim.cmd("startinsert")
+	end
+  end,
+})
+

@@ -56,7 +56,17 @@ local exitTerm = function ()
   vim.cmd(":ToggleTerm");
 end
 vim.keymap.set({"t", "n", "i", "v"}, "<M-t>", exitTerm, {desc = "Toggle Terminal"})
--- vim.keymap.set("t", "<C-C>", "<C-\\><C-N>", { desc = "exit from term mode"})
+-- Allow exiting insert mode in terminal by hitting <ESC>
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+-- Feed ESC in terminal mode using <C-\>
+vim.keymap.set("t", "<C-\\>", function()
+  vim.api.nvim_feedkeys(
+	vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+	"n",
+	false
+  )
+end)
 vim.keymap.set("n", "<leader>build", "<CMD>TermExec cmd='make build'<CR>", {desc = "run `make build` cmd in the terminal"})
 
 -- Tests
@@ -99,6 +109,6 @@ vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
 vim.keymap.set("n", "<leader>di", "<cmd>Telescope diagnostics<cr>")
 vim.keymap.set("n", "<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>")
-vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help)
--- se vuoi, manual trigger per completamento
+
 vim.keymap.set("i", "<C-Space>", vim.lsp.buf.completion)
+vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help)
