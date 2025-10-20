@@ -10,7 +10,6 @@ return {
 	dependencies = { "echasnovski/mini.icons" },
   },
   { "christoomey/vim-tmux-navigator" },
-  -- Using lazy.nvim
   { "ellisonleao/gruvbox.nvim", priority = 1000 },
   {
 	"folke/noice.nvim",

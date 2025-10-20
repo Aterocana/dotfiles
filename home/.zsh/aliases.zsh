@@ -12,19 +12,18 @@ alias mux='tmuxinator'
 alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
 alias cd='z'
 alias ls='eza --git --icons=always --color=always --group-directories-first'
-#alias ls='ls --color=always --group-directories-first'
 alias ll='ls -lh'
 alias la='ls -ah'
 alias l='ll'
 alias lh='ll -ah'
 alias cat='bat'
 alias proc='ps -aux | grep'
-#alias tree="eza -T"
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias vim='nvim'
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
 alias big="du -a -BM | sort -n -r | head -n 10"
 alias ungron="gron --ungron"
+alias fkill="ps aux | fzf | awk '{print $2}' | xargs -I {} kill -9 {}"
 
 # Services
 alias k="kubectl"
