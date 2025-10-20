@@ -7,6 +7,8 @@ local function write_initial_line_custom_shebang()
 # Description:
 # Version:
 
+set -euo pipefail
+
 usage() {
   echo "usage: $0 ..."
 }
