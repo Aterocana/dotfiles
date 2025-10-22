@@ -13,6 +13,7 @@ vim.keymap.set("v", ">", ">gv", {desc= "indent selection to the right"})
 -- Normal mode: scroll down or up half of the page and apply zz (center vertically on cursor)
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<Leader>m", ":Telescope marks<CR>", { desc = "show marks" })
 
 -- Navigate through windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Left Window" })
