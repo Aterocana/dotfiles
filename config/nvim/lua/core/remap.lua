@@ -37,12 +37,7 @@ vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Open [L]azyNVim Manager
 
 -- interact with system clipboard
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "[Y]ank into system clipboard"})
-vim.keymap.set({"n", "x"}, "<leader>yy", '"+yy', { desc = "[Y]ank line into system clipboard"})
--- vim.keymap.set({"n", "x"}, "<leader>p", '"+p', { desc = "[P]aste from system clipboard after current position"})
--- vim.keymap.set({"n", "x"}, "<leader>P", '"+P', { desc = "[P]aste from system clipboard before current position"})
-
--- toggle debugger
-vim.keymap.set("n", "<leader>db", '<CMD>DBUIToggle<CR>', {desc = "Toggle [D]e[B]ug view"})
+vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "[Y]ank line into system clipboard"})
 
 -- toggle hidden characters
 vim.keymap.set("n", "<leader>h", ":set list!<CR>", { desc = "Toggle [H]idden characters visibility" })
@@ -57,18 +52,6 @@ local exitTerm = function ()
   vim.cmd(":ToggleTerm");
 end
 vim.keymap.set({"t", "n", "i", "v"}, "<M-t>", exitTerm, {desc = "Toggle Terminal"})
--- Allow exiting insert mode in terminal by hitting <ESC>
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-
--- Feed ESC in terminal mode using <C-\>
-vim.keymap.set("t", "<C-\\>", function()
-  vim.api.nvim_feedkeys(
-	vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
-	"n",
-	false
-  )
-end)
-vim.keymap.set("n", "<leader>build", "<CMD>TermExec cmd='make build'<CR>", {desc = "run `make build` cmd in the terminal"})
 
 -- Tests
 vim.keymap.set("n", "<Leader>tt", function ()
@@ -78,10 +61,6 @@ end , {desc="run nearest [T]es[T]"})
 vim.keymap.set("n", "<Leader>db", function ()
   require("neotest").run.run({strategy="dap"})
 end, {desc="run nearest [T]est in [D]e[B]ug mode"})
-
-vim.keymap.set("n", "<Leader>st", function ()
-  require("neotest").run.stop()
-end, {desc="[ST]op the [T]est"})
 
 -- git cmds
 vim.keymap.set("n", "<Leader><Leader>do", ":DiffviewOpen <CR>", {desc = "Git [D]iff view [O]pen"})
