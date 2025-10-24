@@ -1,6 +1,8 @@
+vim.g.mapleader = " "
+
+require("core.lazy") -- load lazy
 require("core.remap") -- keybindings
 require("core.lsp")
-require("core.lazy") -- load lazy
 require("core.set") -- settings
 require("core.autocmd") -- auto commands
 require("core.weather") -- little weather plugin written for experimental and educational purposes

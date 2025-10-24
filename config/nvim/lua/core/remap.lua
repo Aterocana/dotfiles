@@ -1,5 +1,15 @@
-vim.g.mapleader = " "
+--true Navigation and Searching
+local pick = require("mini.pick")
+local corepick = require("core.pick")
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Oil, { desc = "Open file manager in current directory" })
+vim.keymap.set("n", "<leader>pf", pick.builtin.files, { desc = "Search for files" })
+vim.keymap.set('n', '<C-g>', corepick.live_grep, { desc = 'Live grep (search file contents)' })
+vim.keymap.set("n", "<leader>di", corepick.pick_diagnostics, { desc = "Search LSP diagnostics" })
+vim.keymap.set("n", "<leader>buf", pick.builtin.buffers, { desc = "Search for open buffers" })
+vim.keymap.set("n", "<leader>ph", pick.builtin.help, { desc = "Search help tags" })
+
+-- Undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndotree buffer" })
 
 -- Visual mode: use J and K to move selected portion down or up.
@@ -13,7 +23,7 @@ vim.keymap.set("v", ">", ">gv", {desc= "indent selection to the right"})
 -- Normal mode: scroll down or up half of the page and apply zz (center vertically on cursor)
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<Leader>m", ":Telescope marks<CR>", { desc = "show marks" })
+-- vim.keymap.set("n", "<Leader>m", ":Telescope marks<CR>", { desc = "show marks" })
 
 -- Navigate through windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Left Window" })
@@ -54,13 +64,13 @@ end
 vim.keymap.set({"t", "n", "i", "v"}, "<M-t>", exitTerm, {desc = "Toggle Terminal"})
 
 -- Tests
-vim.keymap.set("n", "<Leader>tt", function ()
-  require("neotest").run.run()
-end , {desc="run nearest [T]es[T]"})
+vim.keymap.set("n", "<Leader>tt", require("neotest").run.run, {desc="run nearest [T]es[T]"})
 
 vim.keymap.set("n", "<Leader>db", function ()
   require("neotest").run.run({strategy="dap"})
 end, {desc="run nearest [T]est in [D]e[B]ug mode"})
+
+vim.keymap.set("n", "<Leader>ts", "<cmd>Neotest summary<cr>", {desc="Toggle [T]est [S]mmary"})
 
 -- git cmds
 vim.keymap.set("n", "<Leader><Leader>do", ":DiffviewOpen <CR>", {desc = "Git [D]iff view [O]pen"})
@@ -87,8 +97,8 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
-vim.keymap.set("n", "<leader>di", "<cmd>Telescope diagnostics<cr>")
-vim.keymap.set("n", "<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>")
+-- vim.keymap.set("n", "<leader>di", "<cmd>Telescope diagnostics<cr>")
+-- vim.keymap.set("n", "<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>")
 
 -- se vuoi, manual trigger per completamento
 vim.keymap.set("i", "<C-Space>", vim.lsp.buf.completion)

@@ -27,8 +27,6 @@ return {
 	ft = { "yaml" }, -- optional
 	dependencies = {
 	  "nvim-treesitter/nvim-treesitter",
-	  "nvim-telescope/telescope.nvim", -- optional
-	  "ibhagwan/fzf-lua" -- optional
 	},
 	config = function ()
 	  require('yaml_nvim').setup({ ft = { "yaml" } })
@@ -37,7 +35,6 @@ return {
 
   {
 	'MeanderingProgrammer/render-markdown.nvim',
-	dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
 	config = function ()
 	  require('render-markdown').setup({
 		completions = { lsp = { enabled = true } },
