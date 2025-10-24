@@ -1,4 +1,3 @@
-require("telescope").load_extension("goimpl")
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -13,7 +12,7 @@ require('go').setup({
   tag_options = 'json=omitempty',
   comment_placeholder = "complete here",
   dap_debug_gui = true,
-  luasnip = true,
+  luasnip = false, -- TODO: if using treesitter main branch it doesn't work
   lsp_inlay_hints = {
 	enable = true,
 	-- hint style, set to 'eol' for end-of-line hints, 'inlay' for inline hints

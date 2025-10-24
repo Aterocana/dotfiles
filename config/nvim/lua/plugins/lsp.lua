@@ -23,7 +23,6 @@ return {
 	'stevearc/aerial.nvim',
 	config = require("plugins.configs.aerial").setup,
 	dependencies = {
-	  "nvim-treesitter/nvim-treesitter",
 	  "nvim-tree/nvim-web-devicons"
 	},
   },

@@ -9,6 +9,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
   desc = "set absolute line numbers when entering Insert mode",
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '*.go' },
+  callback = function() vim.treesitter.start() end,
+})
+
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   group = "LineNumbersToggle",
   callback = function ()
