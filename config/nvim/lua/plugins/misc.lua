@@ -30,6 +30,10 @@ return {
 	config = function ()
 	  require('render-markdown').setup({
 		completions = { lsp = { enabled = true } },
+		preview = {
+		  filetypes = { "markdown", "codecompanion" },
+		  ignore_buftypes = {},
+		},
 	  })
 
 	end
