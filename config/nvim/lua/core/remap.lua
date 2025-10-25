@@ -100,6 +100,8 @@ vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
 -- vim.keymap.set("n", "<leader>di", "<cmd>Telescope diagnostics<cr>")
 -- vim.keymap.set("n", "<leader>ws", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>")
 
--- se vuoi, manual trigger per completamento
-vim.keymap.set("i", "<C-Space>", vim.lsp.buf.completion)
 vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help)
+
+-- code companion
+vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<cr>", { desc = "Open [C]ode [C]ompanion [C]hat"})
+vim.keymap.set("n", "<leader>cca", "<cmd>CodeCompanionAction<cr>", { desc = "Open [C]ode [C]ompanion [A]ction"})
