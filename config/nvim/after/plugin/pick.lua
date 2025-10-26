@@ -1,0 +1,6 @@
+vim.keymap.set("n", "<leader>pf", require("mini.pick").builtin.files, { desc = "Search for files" })
+vim.keymap.set('n', '<C-g>', require("core.pick").live_grep, { desc = 'Live grep (search file contents)' })
+vim.keymap.set("n", "<leader>di", require("core.pick").pick_diagnostics, { desc = "Search LSP diagnostics" })
+vim.keymap.set("n", "<leader>buf", require("mini.pick").builtin.buffers, { desc = "Search for open buffers" })
+vim.keymap.set("n", "<leader>ph", require("mini.pick").builtin.help, { desc = "Search help tags" })
+vim.keymap.set("n", "<leader>pkm", require("core.pick").pick_keymappings, { desc = "List all key mapping" })

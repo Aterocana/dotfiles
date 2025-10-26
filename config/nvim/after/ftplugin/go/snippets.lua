@@ -9,6 +9,18 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 ls.add_snippets("go", {
   s(
+	{trig="iferr", name="error handling", snippetType="autosnippet", desc="Default Error handling", wordTrig=true,},
+	{
+	  t("if err != nil {"),
+	  t({"", "\treturn "}),
+	  c(1, {
+		t("err"),
+		t("fmt.Errorf(\"%w: \", err)")
+	  }),
+	  t({"", "}"})
+	}
+  ),
+  s(
 	{trig="ifsrv", name="API V3 Error Handling", snippetType="autosnippet", desc="API V3 Error Handling", wordTrig=true},
 	{
 	  t({"if err != nil {", ""}),
@@ -44,11 +56,11 @@ ls.add_snippets("go", {
 	{ trig = "timefmt", name = "time.Time placeholder format", snippetType = "snippet", desc = "Insert the time.Time.Format placeholder format"},
 	{
 	  c( 1,
-		{
-		  t("\"2006-01-02T15:04:05Z07:00\""),
-		  t("\"Mon Jan 02 15:04:05 MST 2006\"")
-		}
-	  )
-	}
-  )
+	  {
+		t("\"2006-01-02T15:04:05Z07:00\""),
+		t("\"Mon Jan 02 15:04:05 MST 2006\"")
+	  }
+	)
+  }
+)
 })

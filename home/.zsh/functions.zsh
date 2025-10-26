@@ -61,3 +61,8 @@ zle     -N             sesh-sessions
 bindkey -M emacs '\ef' sesh-sessions
 bindkey -M vicmd '\ef' sesh-sessions
 bindkey -M viins '\ef' sesh-sessions
+
+mkcd () {
+  \mkdir -p "$1"
+  cd "$1"
+}

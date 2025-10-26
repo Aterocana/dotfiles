@@ -4,6 +4,7 @@ vim.lsp.enable({
   "autotools",
   "docker",
   "helm",
+  "yaml",
   "protobuffer",
   "clangd",
   "markdown",

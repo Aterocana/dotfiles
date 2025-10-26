@@ -1,13 +1,5 @@
 --true Navigation and Searching
-local pick = require("mini.pick")
-local corepick = require("core.pick")
-
 vim.keymap.set("n", "<leader>pv", vim.cmd.Oil, { desc = "Open file manager in current directory" })
-vim.keymap.set("n", "<leader>pf", pick.builtin.files, { desc = "Search for files" })
-vim.keymap.set('n', '<C-g>', corepick.live_grep, { desc = 'Live grep (search file contents)' })
-vim.keymap.set("n", "<leader>di", corepick.pick_diagnostics, { desc = "Search LSP diagnostics" })
-vim.keymap.set("n", "<leader>buf", pick.builtin.buffers, { desc = "Search for open buffers" })
-vim.keymap.set("n", "<leader>ph", pick.builtin.help, { desc = "Search help tags" })
 
 -- Undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndotree buffer" })
@@ -19,17 +11,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "Move selected portion up"}
 -- Visual mode: indent selection right or left
 vim.keymap.set("v", "<", "<gv", {desc= "indent selection to the left"})
 vim.keymap.set("v", ">", ">gv", {desc= "indent selection to the right"})
-
--- Normal mode: scroll down or up half of the page and apply zz (center vertically on cursor)
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- vim.keymap.set("n", "<Leader>m", ":Telescope marks<CR>", { desc = "show marks" })
-
--- Navigate through windows
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Left Window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Down Window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Up Window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Right Window" })
 
 -- Windows Managing
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Split vertically" })
@@ -64,7 +45,9 @@ end
 vim.keymap.set({"t", "n", "i", "v"}, "<M-t>", exitTerm, {desc = "Toggle Terminal"})
 
 -- Tests
-vim.keymap.set("n", "<Leader>tt", require("neotest").run.run, {desc="run nearest [T]es[T]"})
+vim.keymap.set("n", "<Leader>tt", function()
+  require("neotest").run.run()
+end, {desc="run nearest [T]es[T]"})
 
 vim.keymap.set("n", "<Leader>db", function ()
   require("neotest").run.run({strategy="dap"})
