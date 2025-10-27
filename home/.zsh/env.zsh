@@ -1,3 +1,4 @@
+export EDITOR="nvim"
 export BAT_THEME="gruvbox-dark"
 # GO
 export PATH=$PATH:/usr/lib/go/bin:$HOME/go/bin
@@ -13,3 +14,4 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
