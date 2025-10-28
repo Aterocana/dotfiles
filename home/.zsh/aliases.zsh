@@ -48,4 +48,4 @@ alias kns="kubens"
 alias kctx="kubectx"
 
 #logs from all pods in namespace selected with kubectx
-alias klogs="kubectl get pods -o name | fzf | xargs -I{} kubectl logs -f {}"
+alias klogs="kubectl get pods | tail -n +2 | fzf | awk {'print \$1'} | xargs -I{} kubectl logs -f {}"

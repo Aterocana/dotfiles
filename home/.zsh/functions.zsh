@@ -36,9 +36,10 @@ snippets=(
   vim ~/.config/nvim/
 )
 
-expand-snippet() {
+function expand-snippet() {
   modify-current-argument '${snippets[${ARG}]}'
 }
+
 zle -N expand-snippet
 
 bindkey "\ej" expand-snippet
@@ -62,7 +63,11 @@ bindkey -M emacs '\ef' sesh-sessions
 bindkey -M vicmd '\ef' sesh-sessions
 bindkey -M viins '\ef' sesh-sessions
 
-mkcd () {
+function mkcd () {
   \mkdir -p "$1"
   cd "$1"
+}
+
+function b64 () {
+	echo $1 | base64
 }
