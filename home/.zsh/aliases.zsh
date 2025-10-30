@@ -34,18 +34,9 @@ alias cat='bat'
 alias proc='ps -aux | grep'
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias vim='nvim'
+alias big="du -a -BM | sort -n -r | head -n 10"
 
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
-alias big="du -a -BM | sort -n -r | head -n 10"
 alias ungron="gron --ungron"
 
 alias fkill="ps aux | fzf | awk '{print $2}' | xargs -I {} kill -9 {}"
-
-# Services
-alias k="kubectl"
-alias mk="minikube"
-alias kns="kubens"
-alias kctx="kubectx"
-
-#logs from all pods in namespace selected with kubectx
-alias klogs="kubectl get pods | tail -n +2 | fzf | awk {'print \$1'} | xargs -I{} kubectl logs -f {}"
