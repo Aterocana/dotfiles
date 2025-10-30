@@ -64,7 +64,7 @@ bindkey -M vicmd '\ef' sesh-sessions
 bindkey -M viins '\ef' sesh-sessions
 
 function mkcd () {
-  \mkdir -p "$1"
+  mkdir -p "$1"
   cd "$1"
 }
 

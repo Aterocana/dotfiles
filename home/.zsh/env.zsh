@@ -12,6 +12,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --bind ctrl-j:down,ctrl-k:up --height 40%'
+
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
