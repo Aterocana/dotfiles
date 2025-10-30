@@ -1,5 +1,4 @@
 return {
-  cmd = { "autotools_language_server" },
+  cmd = { "autotools-language-server" },
   filetypes = { "config", "automake", "make" },
-  root_markers = { "git" },
 }
