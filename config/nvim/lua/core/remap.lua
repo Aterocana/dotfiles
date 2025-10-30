@@ -58,6 +58,8 @@ vim.keymap.set("n", "<Leader>ts", "<cmd>Neotest summary<cr>", {desc="Toggle [T]e
 -- git cmds
 vim.keymap.set("n", "<Leader><Leader>do", ":DiffviewOpen <CR>", {desc = "Git [D]iff view [O]pen"})
 vim.keymap.set("n", "<Leader><Leader>dc", ":DiffviewClose <CR>", {desc = "Git [D]iff view [C]lose"})
+-- vim.keymap.set("n", "<Leader>u", ":Atone toggle<CR>", { desc = "Toggle Undo Tree" })
+vim.keymap.set("n", "<Leader>u", ":Atone toggle <CR> :Atone focus<CR>", { desc = "Toggle Undo Tree" })
 
 -- JSON Visual Mode
 vim.keymap.set("v", "<SPACE>jb", ":'<,'>!jq<CR>", {desc = "[J]SON [B]eatify the selection"})

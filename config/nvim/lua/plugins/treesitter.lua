@@ -5,7 +5,22 @@ return 	{
 	branch = "main",
 	build = ":TSUpdate",
 	dependencies = {
-	  {"nvim-treesitter/nvim-treesitter-textobjects", branch = "main"},
+	  {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		opts = {
+		  select = {
+			enable = true,
+			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+			selection_modes = {
+			  ['@parameter.outer'] = 'v', -- charwise
+			  ['@function.outer'] = 'V', -- linewise
+			  --['@function.outer'] = '<c-v>', -- blockwise
+			  ['@class.outer'] = '<c-v>', -- blockwise
+			},
+		  },
+		},
+	  },
 	  {
 		"nvim-treesitter/nvim-treesitter-context",
 		opts = { enabled = true, mode = "topline", line_numbers = true },
@@ -20,13 +35,6 @@ return 	{
 	opts = {
 	  highlight = {
 		enable = true,
-		--disable = function(lang, buf)
-		--  local max_filesize = 100 * 1024 -- 100 KB
-		--  local ok, stats = pcall(vim.fs_stat, vim.api.nvim_buf_get_name(buf))
-		--  if ok and stats and stats.size > max_filesize then
-		--	return true
-		--  end
-		--end,
 		additional_vim_regex_highlighting = false,
 	  },
 	  incremental_selection = {
