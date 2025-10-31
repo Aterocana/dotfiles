@@ -3,9 +3,9 @@ local M = {}
 M.opts = {
   strategies = {
 	-- Change the default chat adapter
-	chat = { adapter = 'codellama' },
-	inline = { adapter = 'codellama' },
-	cmd = { adapter = 'codellama' },
+	-- chat = { adapter = 'codellama' },
+	-- inline = { adapter = 'codellama' },
+	-- cmd = { adapter = 'codellama' },
   },
   adapters = {
 	http = {

@@ -4,6 +4,9 @@ local function branch_name_fmt(branch)
 	return ""
   end
   local branch_type, name = string.match(branch, "^(%w+)_(%w+)")
+  if name == nil then
+	 branch_type, name = string.match(branch, "^(%w+)%/(%w+)")
+  end
   if name then -- branch name is ${branch_type}_${name}
 	if branch_type == "feature" then
 	  branch_type = "󰊕 "

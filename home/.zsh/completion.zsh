@@ -96,3 +96,4 @@ zstyle ':filter-select' extended-search no # see below
 # ZSH Autocomplete Plugin
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
+source <(doctl completion zsh)
