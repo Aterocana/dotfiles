@@ -1,5 +1,12 @@
 return {
   {
+	'windwp/nvim-autopairs',
+	event = "InsertEnter",
+	config = true
+	-- use opts = {} for passing setup options
+	-- this is equivalent to setup({}) function
+  },
+  {
 	"akinsho/toggleterm.nvim",
 	version = "*",
 	opts = {
@@ -80,7 +87,6 @@ return {
 	  require('yaml_nvim').setup({ ft = { "yaml" } })
 	end
   },
-
   {
 	'MeanderingProgrammer/render-markdown.nvim',
 	config = function ()
