@@ -67,6 +67,27 @@ M.pick_diagnostics = function()
   })
 end
 
+local function make_filter(patterns)
+  return function(path)
+    for _, pattern in ipairs(patterns) do
+      if path:match(pattern) then
+        return false
+      end
+    end
+    return true
+  end
+end
+
+M.pick_files_filters = function(patterns, cwd)
+  patterns = patterns or {}
+  return function()
+	pick.builtin.files({
+	  cwd = cwd or vim.loop.cwd(),
+	  filter = make_filter(patterns),
+	})
+  end
+end
+
 M.pick_keymappings = function()
   -- Get all key mappings in the current buffer
   local keymaps = vim.api.nvim_get_keymap("n")
@@ -90,6 +111,19 @@ M.pick_keymappings = function()
 	  apply = function(item)
 		-- Nothing to do here
 	  end,
+	},
+  })
+end
+
+M.custom = function()
+  pick.start({
+	source = {
+	  items = {
+		{text = "Option 1"},
+		{text = "Option 2"},
+		{text = "Option 3"},
+	  },
+	  name = 'Custom Options',
 	},
   })
 end
