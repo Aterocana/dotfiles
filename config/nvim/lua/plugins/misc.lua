@@ -7,6 +7,10 @@ return {
 	-- this is equivalent to setup({}) function
   },
   {
+	"tpope/vim-sleuth",
+	event = "VeryLazy",
+  },
+  {
 	"akinsho/toggleterm.nvim",
 	version = "*",
 	opts = {
