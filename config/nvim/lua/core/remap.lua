@@ -12,6 +12,21 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "Move selected portion up"}
 vim.keymap.set("v", "<", "<gv", {desc= "indent selection to the left"})
 vim.keymap.set("v", ">", ">gv", {desc= "indent selection to the right"})
 
+-- Editing words
+vim.keymap.set("n", "<leader>,", "<cmd>norm A,<CR>", { desc = "Append comma" })
+vim.keymap.set("n", "<leader>;", "<cmd>norm A;<CR>", { desc = "Append semicolon" })
+
+-- Wrap text
+vim.keymap.set("v", '<leader>"', [[c"<c-r>""<esc>]], { desc = 'Wrap text in quotes ""' })
+vim.keymap.set("n", '<leader>"', [[ciw"<c-r>""<esc>]], { desc = 'Wrap text in quotes ""' })
+vim.keymap.set("v", "<leader>(", [[c(<c-r>")<esc>]], { desc = "Wrap text in brackets ()" })
+vim.keymap.set("n", "<leader>(", [[ciw(<c-r>")<esc>]], { desc = "Wrap text in brackets ()" })
+vim.keymap.set("v", "<leader>{", [[c{<c-r>"}<esc>]], { desc = "Wrap text in curly braces {}" })
+vim.keymap.set("n", "<leader>{", [[ciw{<c-r>"}<esc>]], { desc = "Wrap text in curly braces {}" })
+vim.keymap.set("v", "<leader>[", [[c[<c-r>"]<esc>]], { desc = "Wrap text in square braces []" })
+vim.keymap.set("n", "<leader>[", [[ciw[<c-r>"]<esc>]], { desc = "Wrap text in square braces []" })
+vim.keymap.set("v", "<leader>`", [[c`<c-r>``<esc>]], { desc = "Wrap text in backticks ``" })
+
 -- Windows Managing
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>-", ":split<CR>", { desc = "Split horizontally" })
