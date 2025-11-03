@@ -1,5 +1,9 @@
 return {
   {
+	"tpope/vim-sleuth",
+	event = "VeryLazy",
+  },
+  {
 	"akinsho/toggleterm.nvim",
 	version = "*",
 	opts = {
