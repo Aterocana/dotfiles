@@ -1,5 +1,6 @@
 # start a terminal
-bindsym $mod+Return exec $term
+# bindsym $mod+Return exec $term
+bindsym $mod+Return exec $HOME/.config/rofi/scripts/tmux_sessions.sh
 
 # start a browser
 bindsym $mod+Shift+b exec $browser
