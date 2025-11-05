@@ -39,3 +39,6 @@ require('gitsigns').setup {
   },
 }
 
+vim.keymap.set("n", "<Leader>gdo", ":DiffviewOpen <CR>", {desc = "[G]it [D]iff view [O]pen"})
+vim.keymap.set("n", "<Leader>gdc", ":DiffviewClose <CR>", {desc = "[G]it [D]iff view [C]lose"})
+vim.keymap.set("n", "<leader>gg", ":Flogsplit<CR>", { desc = "[G]it [G]raph" })

@@ -5,4 +5,12 @@ return {
 	dependencies = 'nvim-lua/plenary.nvim',
   },
   { "tpope/vim-fugitive" },
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+  },
 }
