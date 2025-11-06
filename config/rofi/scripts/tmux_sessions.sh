@@ -5,6 +5,7 @@
 
 TERM=kitty
 NEW="Create a NEW session"
+NEW_NAMED="Create a NEW named session"
 NOTIFY=notify-send
 
 rofi_cmd() {
@@ -32,13 +33,19 @@ rofi_prompt() {
 
 run_rofi() {
 	local tsessions=$(tmux_sessions)
-	local session=$( echo -e "$NEW\n$tsessions" | rofi_cmd)
+	local session=$( echo -e "$NEW\n$NEW_NAMED\n$tsessions" | rofi_cmd)
 
 	if [[ x"$NEW" = x"${session}" ]]; then
+		$TERM -e tmux new-session &
+		$NOTIFY "tmux" "new session"
+		exit 0
+	fi
+
+	if [[ x"$NEW_NAMED" = x"${session}" ]]; then
 		local name=$( rofi_prompt )
 		if [[ -z "$name" ]]; then
-			$NOTIFY "tmux" "No session name provided"
-			exit 0
+			$NOTIFY "tmux" "name not provided"
+			exit 1
 		fi
 		$TERM -e tmux new-session -s "$name" &
 		$NOTIFY "tmux" "created session $name"
