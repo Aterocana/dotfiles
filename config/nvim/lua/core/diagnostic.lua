@@ -12,12 +12,12 @@ vim.diagnostic.config({
   severity_sort = true,
   float = {
     focusable = false,
-    style  = "minimal",
-    border = "single",
-    source = "always",
-    header = "",
-    prefix = "",
-    suffix = "",
+    style     = "minimal",
+    border    = "single",
+    source    = "always",
+    header    = "",
+    prefix    = "",
+    suffix    = "",
   },
   virtual_text = {
     current_line = true,
