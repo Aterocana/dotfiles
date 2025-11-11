@@ -1,0 +1,148 @@
+:root {
+  /* === Gruvbox Core Colors === */
+  --gruv-bg0: #282828;
+  --gruv-bg1: #3c3836;
+  --gruv-bg2: #504945;
+  --gruv-bg3: #665c54;
+  --gruv-fg0: #ebdbb2;
+  --gruv-fg1: #d5c4a1;
+  --gruv-red: #fb4934;
+  --gruv-green: #b8bb26;
+  --gruv-yellow: #fabd2f;
+  --gruv-blue: #83a598;
+  --gruv-purple: #d3869b;
+  --gruv-aqua: #8ec07c;
+  --gruv-orange: #fe8019;
+
+  /* === General Notification Theme === */
+  --cc-bg: rgba(40, 40, 40, 0.8);
+  --noti-border-color: rgba(235, 219, 178, 0.1);
+  --noti-bg: 60, 56, 54;
+  --noti-bg-alpha: 0.9;
+  --noti-bg-darker: rgb(50, 48, 47);
+  --noti-bg-hover: rgb(80, 73, 69);
+  --noti-bg-focus: rgba(102, 92, 84, 0.6);
+  --noti-close-bg: rgba(102, 92, 84, 0.5);
+  --noti-close-bg-hover: rgba(250, 189, 47, 0.3);
+  --text-color: var(--gruv-fg0);
+  --text-color-disabled: var(--gruv-bg3);
+  --bg-selected: var(--gruv-blue);
+  --border: 1px solid var(--noti-border-color);
+  --border-radius: 10px;
+  --notification-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  --font-size-body: 15px;
+  --font-size-summary: 16px;
+  --hover-transition: background 0.15s ease-in-out;
+}
+
+/* === Fallback colors === */
+@define-color cc-bg rgba(40, 40, 40, 0.8);
+@define-color noti-border-color rgba(235, 219, 178, 0.1);
+@define-color noti-bg rgba(60, 56, 54, 0.9);
+@define-color noti-bg-darker rgb(50, 48, 47);
+@define-color noti-bg-hover rgb(80, 73, 69);
+@define-color noti-bg-focus rgba(102, 92, 84, 0.6);
+@define-color text-color rgb(235, 219, 178);
+@define-color bg-selected rgb(131, 165, 152);
+
+/* === General adjustments === */
+.notification-row .notification-background .notification {
+  border-radius: var(--border-radius);
+  border: var(--border);
+  background: rgba(var(--noti-bg), var(--noti-bg-alpha));
+  transition: var(--hover-transition);
+  box-shadow: var(--notification-shadow);
+}
+
+.notification-row .notification-background .notification:hover {
+  background: var(--noti-bg-hover);
+}
+
+.notification-row .notification-background .notification.critical {
+  border-color: var(--gruv-red);
+  box-shadow: 0 0 8px rgba(251, 73, 52, 0.4);
+}
+
+.notification-row .notification-background .notification.low {
+  border-color: var(--gruv-aqua);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .summary {
+  color: var(--text-color);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .body {
+  color: var(--gruv-fg1);
+}
+
+/* Close button with Gruvbox accent */
+.close-button {
+  background: var(--noti-close-bg);
+  color: var(--gruv-fg0);
+}
+
+.close-button:hover {
+  background: var(--noti-close-bg-hover);
+}
+
+/* === Control Center === */
+.control-center {
+  background: var(--cc-bg);
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+  border: var(--border);
+}
+
+.control-center .control-center-list .notification {
+  box-shadow: var(--notification-shadow);
+  border-color: var(--gruv-bg3);
+}
+
+.control-center .control-center-list .notification:hover {
+  background: var(--noti-bg-hover);
+}
+
+/* === MPRIS Widget === */
+:root {
+  --mpris-album-art-overlay: rgba(40, 40, 40, 0.6);
+  --mpris-button-hover: rgba(250, 189, 47, 0.25);
+  --mpris-album-art-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+}
+
+.widget-mpris .widget-mpris-player {
+  border: 1px solid var(--gruv-bg3);
+  box-shadow: var(--mpris-album-art-shadow);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay button:hover {
+  background: var(--mpris-button-hover);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
+  color: var(--gruv-yellow);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+  color: var(--gruv-fg1);
+}
+
+/* === Misc Widgets === */
+.widget {
+  background: rgba(60, 56, 54, 0.85);
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+  border: var(--border);
+}
+
+.widget-dnd label {
+  color: var(--text-color);
+}
+
+.widget-dnd switch slider {
+  background: var(--gruv-aqua);
+}
+
+.widget-buttons-grid flowboxchild>button.toggle:checked {
+  background: var(--gruv-blue);
+  color: var(--gruv-bg0);
+}

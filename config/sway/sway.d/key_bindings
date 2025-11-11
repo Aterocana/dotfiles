@@ -21,8 +21,9 @@ bindsym $mod+t exec $HOME/.config/rofi/scripts/tmux_sessions.sh
 bindsym $mod+s exec rofi -show ssh
 
 # Notifications
-bindsym Control+Space exec makoctl dismiss
-bindsym Control+Shift+Space exec makoctl dismiss --all
+# bindsym Control+Space exec makoctl dismiss
+# bindsym Control+Shift+Space exec makoctl dismiss --all
+bindsym $mod+Shift+n exec swaync-client -t -sw
 
 # take a screenshot
 bindsym Print exec $HOME/.config/rofi/scripts/screenshot.sh

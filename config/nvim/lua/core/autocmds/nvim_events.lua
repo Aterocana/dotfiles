@@ -4,7 +4,12 @@ local nvim_events = vim.api.nvim_create_augroup("NvimLifecycleNotify", {})
 vim.api.nvim_create_autocmd("VimEnter", {
   group = nvim_events,
   callback = function()
-    vim.fn.jobstart({ "notify-send", "🟢 Neovim started" })
+    vim.system({ "notify-send", "🟢 Neovim started" }, { text = true }, function(obj)
+      -- print(obj.code)
+      -- print(obj.signal)
+      -- print(obj.stdout)
+      -- print(obj.stderr)
+    end)
   end,
 })
 
@@ -12,7 +17,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_autocmd("VimLeavePre", {
   group = nvim_events,
   callback = function()
-    vim.fn.jobstart({ "notify-send", "🔴 Neovim closing" })
+    vim.system({ "notify-send", "🔴 Neovim closing" }, { text = true }, function(obj)
+      -- print(obj.code)
+      -- print(obj.signal)
+      -- print(obj.stdout)
+      -- print(obj.stderr)
+    end)
   end,
 })
 
@@ -20,7 +30,12 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 vim.api.nvim_create_autocmd("FocusGained", {
   group = nvim_events,
   callback = function()
-    vim.fn.jobstart({ "notify-send", "🔵 Neovim focused" })
+    vim.system({ "notify-send", "🔵 Neovim focused" }, { text = true }, function(obj)
+      -- print(obj.code)
+      -- print(obj.signal)
+      -- print(obj.stdout)
+      -- print(obj.stderr)
+    end)
   end,
 })
 
@@ -28,6 +43,11 @@ vim.api.nvim_create_autocmd("FocusGained", {
 vim.api.nvim_create_autocmd("FocusLost", {
   group = nvim_events,
   callback = function()
-    vim.fn.jobstart({ "notify-send", "⚫ Neovim unfocused" })
+    vim.system({ "notify-send", "⚫ Neovim unfocused" }, { text = true }, function(obj)
+      -- print(obj.code)
+      -- print(obj.signal)
+      -- print(obj.stdout)
+      -- print(obj.stderr)
+    end)
   end,
 })

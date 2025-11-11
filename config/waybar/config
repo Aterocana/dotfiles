@@ -3,11 +3,27 @@
 	"position": "top",
 	"mode": "dock",
 	"height": 26,
-
-	"modules-left": ["custom/power", "custom/tmux", "custom/clipboard", "custom/mass", "custom/sunbattery"],
-	"modules-center": ["sway/mode", "sway/workspaces"],
-	"modules-right": [ "pulseaudio", "network", "cpu", "memory", "temperature", "clock","tray" ],
-
+	"modules-left": [
+		"custom/power",
+		"custom/tmux",
+		"custom/clipboard",
+		"custom/mass",
+		"custom/sunbattery",
+		"custom/notification"
+	],
+	"modules-center": [
+		"sway/mode",
+		"sway/workspaces"
+	],
+	"modules-right": [
+		"pulseaudio",
+		"network",
+		"cpu",
+		"memory",
+		"temperature",
+		"clock",
+		"tray"
+	],
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": false,
@@ -23,15 +39,15 @@
 			//"8":"<span color='#d3869b'>八</span>" ,
 			//"9":"<span color='#b8bb26'>九</span>" ,
 			//"10": "<span color='#689d6a'>十</span>"
-			"1": "一" ,
-			"2":"二" ,
+			"1": "一",
+			"2": "二",
 			"3": "三",
-			"4":"四" ,
-			"5":"五" ,
-			"6":"六" ,
-			"7":"七" ,
-			"8":"八" ,
-			"9":"九" ,
+			"4": "四",
+			"5": "五",
+			"6": "六",
+			"7": "七",
+			"8": "八",
+			"9": "九",
 			"10": "十"
 		}
 	},
@@ -48,19 +64,19 @@
 		"tooltip-format": "\n<span size='15pt'>{calendar}</span>",
 		//"tooltip-format": "<tt>{calendar}</tt>",
 		"calendar": {
-			"mode"          : "month",
-			"mode-mon-col"  : 3,
-			"weeks-pos"     : "right",
-			"on-scroll"     : 1,
+			"mode": "month",
+			"mode-mon-col": 3,
+			"weeks-pos": "right",
+			"on-scroll": 1,
 			"format": {
-				"months":     "<span color='#98971a'><b>{}</b></span>",
-				"days":       "<span color='#689d6a'><b>{}</b></span>",
-				"weeks":      "<span color='#d79921'><b>W{}</b></span>",
-				"weekdays":   "<span color='#83a598'><b>{}</b></span>",
-				"today":      "<span color='#fe8019'><b><u>{}</u></b></span>"
+				"months": "<span color='#98971a'><b>{}</b></span>",
+				"days": "<span color='#689d6a'><b>{}</b></span>",
+				"weeks": "<span color='#d79921'><b>W{}</b></span>",
+				"weekdays": "<span color='#83a598'><b>{}</b></span>",
+				"today": "<span color='#fe8019'><b><u>{}</u></b></span>"
 			}
 		},
-		"actions":  {
+		"actions": {
 			"on-click-right": "mode",
 			"on-scroll-up": "tz_up",
 			"on-scroll-down": "tz_down",
@@ -77,10 +93,10 @@
 		"on-click": "kitty -- btop"
 	},
 	"temperature": {
-	// "thermal-zone": 2,
-	// "hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
-	// "critical-threshold": 80,
-	// "format-critical": "{temperatureC}°C ",
+		// "thermal-zone": 2,
+		// "hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
+		// "critical-threshold": 80,
+		// "format-critical": "{temperatureC}°C ",
 		"format": "{temperatureC}°C "
 	},
 	"battery": {
@@ -93,7 +109,13 @@
 		"format": "{capacity}% {icon}",
 		// "format-good": "", // An empty format will hide the module
 		// "format-full": "",
-		"format-icons": ["", "", "", "", ""]
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
 	},
 	"network": {
 		"format-wifi": " ({signalStrength}%)",
@@ -106,21 +128,23 @@
 		"format-bluetooth": "{icon} {volume}%",
 		"format-muted": "󰝟",
 		"format-icons": {
-			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__hw_Dock__sink" : "",
-			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Line__sink" : "󰴸",
-			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Headphones__sink" : "",
-			"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" : "󰓃",
-			"bluez_sink.A0_DE_0F_22_76_72.a2dp_sink" : "",
-			"alsa_output.usb-Sony_Interactive_Entertainment_DualSense_Wireless_Controller-00.analog-surround-40" : " ",
-			"alsa_output.pci-0000_00_1f.3.analog-stereo" : " ",
-
+			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__hw_Dock__sink": "",
+			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Line__sink": "󰴸",
+			"alsa_output.usb-Generic_USB_Audio_200901010001-00.HiFi__Headphones__sink": "",
+			"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink": "󰓃",
+			"bluez_sink.A0_DE_0F_22_76_72.a2dp_sink": "",
+			"alsa_output.usb-Sony_Interactive_Entertainment_DualSense_Wireless_Controller-00.analog-surround-40": " ",
+			"alsa_output.pci-0000_00_1f.3.analog-stereo": " ",
 			"headphones": "",
 			"handsfree": "",
 			"headset": "",
 			"phone": "",
 			"portable": "",
 			"car": "",
-			"default": ["", ""]
+			"default": [
+				"",
+				""
+			]
 		},
 		"on-click": "pavucontrol"
 	},
@@ -130,18 +154,18 @@
 		"orientation": "horizontal"
 	},
 	"custom/power": {
-		"format" : "⏻ ",
+		"format": "⏻ ",
 		"tooltip": true,
 		"tooltip-format": "power menu",
 		"on-click": "$HOME/.config/rofi/scripts/powermenu.sh"
 	},
-	"custom/tmux" : {
+	"custom/tmux": {
 		"format": " ",
 		"tooltip": true,
 		"tooltip-format": "tmux sessions",
 		"on-click": "$HOME/.config/rofi/scripts/tmux_sessions.sh"
 	},
-	"custom/clipboard" : {
+	"custom/clipboard": {
 		"format": " ",
 		"tooltip": true,
 		"tooltip-format": "clipboard management",
@@ -183,5 +207,25 @@
 		"format": " {}%",
 		"return-type": "json",
 		"signal": 2
+	},
+	"custom/notification": {
+		"tooltip": true,
+		"format": "<span>{icon}</span>",
+		"format-icons": {
+			"notification": "󱅫",
+			"none": "󰂜",
+			"dnd-notification": "󰂠",
+			"dnd-none": "󰪓",
+			"inhibited-notification": "󰂛",
+			"inhibited-none": "󰪑",
+			"dnd-inhibited-notification": "󰂛",
+			"dnd-inhibited-none": "󰪑"
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true
 	}
 }

@@ -19,7 +19,8 @@ set $default_gaps_outer 4
 
 # Autostart
 input type:keyboard xkb_numlock enabled
-exec --no-startup-id mako &> /tmp/mako.log
+# exec --no-startup-id mako &> /tmp/mako.log
+exec swaync
 exec wl-paste -t text --watch clipman store --no-persist
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 

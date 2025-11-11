@@ -1,34 +1,37 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "Hack Nerd Font";
-    font-size: 12px;
-    min-height: 0;
+	border: none;
+	border-radius: 0;
+	font-family: "Hack Nerd Font";
+	font-size: 12px;
+	min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
-    color: #262626;
+	background: transparent;
+	color: #262626;
 }
 
 tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.5);
+	background: rgba(43, 48, 59, 0.5);
+	border: 1px solid rgba(100, 114, 125, 0.5);
 }
 
 tooltip label {
-  color: white;
+	color: white;
 }
 
-.modules-left, .modules-center, .modules-right {
+.modules-left,
+.modules-center,
+.modules-right {
 	/*background-color: rgba(255, 255, 255, 0.1);*/
 	border-radius: 4px;
 }
 
 #window {
-    font-weight: bold;
-    font-family: "Hack Nerd Font";
+	font-weight: bold;
+	font-family: "Hack Nerd Font";
 }
+
 /*
 #workspaces {
     padding: 0 5px;
@@ -36,38 +39,45 @@ tooltip label {
 */
 
 #workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: #262626;
-    /*border-top: 2px solid transparent;*/
+	padding: 0 5px;
+	background: transparent;
+	color: #262626;
+	/*border-top: 2px solid transparent;*/
 	transition: ease-out 0.5s;
 	border-radius: 3px;
 }
 
 #workspaces button.focused {
-    border-top: 3px solid #b8bb26;
+	border-top: 3px solid #b8bb26;
 	color: #b8bb26;
 }
 
 #mode {
-    background: transparent;
-    border-top: 3px solid #b8bb26;
+	background: transparent;
+	border-top: 3px solid #b8bb26;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
-    padding: 0 3px;
-    margin: 0 2px;
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#custom-spotify,
+#tray,
+#mode {
+	padding: 0 3px;
+	margin: 0 2px;
 }
 
 #clock {
-    font-weight: bold;
+	font-weight: bold;
 }
 
-#battery {
-}
+#battery {}
 
 #battery icon {
-    color: red;
+	color: red;
 }
 
 #battery.charging {
@@ -75,32 +85,29 @@ tooltip label {
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
+	to {
+		background-color: #ffffff;
+		color: black;
+	}
 }
 
 #battery.warning:not(.charging) {
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+	color: white;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
 
-#cpu {
-}
+#cpu {}
 
-#memory {
-}
+#memory {}
 
-#network {
-}
+#network {}
 
 #network.disconnected {
-    background: #FB4934;
+	background: #FB4934;
 }
 
 #custom-power {
@@ -121,18 +128,15 @@ tooltip label {
 	color: #d79921;
 }
 
-#pulseaudio {
-}
+#pulseaudio {}
 
-#pulseaudio.muted {
-}
+#pulseaudio.muted {}
 
 #custom-spotify {
-    color: rgb(102, 220, 105);
+	color: rgb(102, 220, 105);
 }
 
-#tray {
-}
+#tray {}
 
 @keyframes blink-update {
 	to {
@@ -146,31 +150,37 @@ tooltip label {
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 }
+
 #custom-pacman.pending-updates {
 	animation-name: blink-update;
 	animation-duration: 3s;
 }
+
 #pulseaudio-slider slider {
-    min-height: 0px;
-    min-width: 0px;
-    opacity: 0;
-    background-image: none;
-    border: none;
-    box-shadow: none;
-}
-#pulseaudio-slider trough {
-    min-height: 10px;
-    min-width: 80px;
-    border-radius: 5px;
-    background-color: black;
-}
-#pulseaudio-slider highlight {
-    min-width: 10px;
-    border-radius: 5px;
-    background-color: green;
+	min-height: 0px;
+	min-width: 0px;
+	opacity: 0;
+	background-image: none;
+	border: none;
+	box-shadow: none;
 }
 
-#custom-mass, #custom-massprev, #custom-massnext {
+#pulseaudio-slider trough {
+	min-height: 10px;
+	min-width: 80px;
+	border-radius: 5px;
+	background-color: black;
+}
+
+#pulseaudio-slider highlight {
+	min-width: 10px;
+	border-radius: 5px;
+	background-color: green;
+}
+
+#custom-mass,
+#custom-massprev,
+#custom-massnext {
 	padding-left: 5px;
 	padding-right: 5px;
 	color: #fe8019;
@@ -180,4 +190,11 @@ tooltip label {
 	padding-left: 5px;
 	padding-right: 5px;
 	color: #d79921;
+}
+
+#custom-notification {
+	font-size: 16px;
+	padding-left: 5px;
+	padding-right: 5px;
+	color: #98971a;
 }
