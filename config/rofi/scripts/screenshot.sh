@@ -51,7 +51,7 @@ fi
 
 # notify and view screenshot
 notify_view() {
-	notify-send -i "${dir}/${file}" "Screenshot save as ${file}"
+	notify-send -t 2000 -i "${dir}/${file}" "Screenshot save as ${file}"
 	echo "Screenshot save as ${file}"
 }
 

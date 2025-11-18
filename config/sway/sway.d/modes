@@ -23,9 +23,9 @@ mode "resize" {
 }
 
 mode "media" {
-	bindsym $mod+p exec --no-startup-id ~/bin/massctl play_pause
-	bindsym $mod+Right exec --no-startup-id ~/bin/massctl previous_track
-	bindsym $mod+Left exec --no-startup-id ~/bin/massctl next_track
+	bindsym $mod+p exec --no-startup-id ~/bin/hacli media_player media_player.studio play_pause
+	bindsym $mod+Right exec --no-startup-id ~/bin/hacli media_player media_player.studio previous_track
+	bindsym $mod+Left exec --no-startup-id ~/bin/hacli media_player media_player.studio next_track
 
 
 	bindsym Return mode "default"

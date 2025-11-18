@@ -6,7 +6,7 @@
 TERM=kitty
 NEW="Create a NEW session"
 NEW_NAMED="Create a NEW named session"
-NOTIFY=notify-send
+NOTIFY=notify-send -i 2000
 
 rofi_cmd() {
 	rofi \
