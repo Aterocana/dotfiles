@@ -1,12 +1,11 @@
 # start a terminal
-# bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec $term
 bindsym $mod+Return exec $HOME/.config/rofi/scripts/tmux_sessions.sh
 
 # start a browser
 bindsym $mod+Shift+b exec $browser
 
 # start clipboard
-#bindsym $mod+c exec clipman pick --tool=rofi
 bindsym $mod+c exec $HOME/.config/rofi/scripts/clipboard.sh pick # pick an entry to paste
 bindsym $mod+Alt+c exec $HOME/.config/rofi/scripts/clipboard.sh clear # delete an entry from the clipboard memory
 
@@ -21,8 +20,7 @@ bindsym $mod+t exec $HOME/.config/rofi/scripts/tmux_sessions.sh
 bindsym $mod+s exec rofi -show ssh
 
 # Notifications
-# bindsym Control+Space exec makoctl dismiss
-# bindsym Control+Shift+Space exec makoctl dismiss --all
+bindsym Control+Shift+Space exec swaync-client -C
 bindsym $mod+Shift+n exec swaync-client -t -sw
 
 # take a screenshot
@@ -144,12 +142,3 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioPlay exec --no-startup-id ~/bin/hacli media_player media_player.studio play_pause
 bindsym XF86AudioPrev exec --no-startup-id ~/bin/hacli media_player media_player.studio previous_track
 bindsym XF86AudioNext exec --no-startup-id ~/bin/hacli media_player media_player.studio next_track
-
-#brightness control
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
-
-# Custom shell
-bindsym XF86Launch5  exec --no-startup-id ~/bin/hacli lights light.lampada_studio toggle
-bindsym XF86Launch7 exec --no-startup-id ~/bin/hacli lights light.scrivania_strip_led_main toggle
-bindsym XF86Launch9 exec --no-startup-id ~/bin/hacli lights switch.plug_lampada_studio toggle
