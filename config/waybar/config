@@ -12,8 +12,9 @@
 		"custom/notification"
 	],
 	"modules-center": [
-		"sway/mode",
-		"sway/workspaces"
+		"hyprland/workspaces"
+		// "sway/mode",
+		// "sway/workspaces"
 	],
 	"modules-right": [
 		"pulseaudio",
@@ -24,6 +25,10 @@
 		"clock",
 		"tray"
 	],
+	"hyprland/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": false
+	},
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": false,
@@ -79,9 +84,7 @@
 		"actions": {
 			"on-click-right": "mode",
 			"on-scroll-up": "tz_up",
-			"on-scroll-down": "tz_down",
-			"on-scroll-up": "shift_up",
-			"on-scroll-down": "shift_down"
+			"on-scroll-down": "tz_down"
 		}
 	},
 	"cpu": {
