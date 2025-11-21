@@ -10,24 +10,32 @@ return {
   -- ".luarc.jsonc" file. Files that share a root directory will reuse
   -- the connection to the same LSP server.
   -- Nested lists indicate equal priority, see |vim.lsp.Config|.
-  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+  root_markers = {
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.stylua.toml',
+    '.git',
+  },
 
   -- Specific settings to send to the server. The schema for this is
   -- defined by the server. For example the schema for lua-language-server
   -- can be found here https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json
   settings = {
-	Lua = {
-	  runtime = {
-		version = 'LuaJIT',
-	  },
-	  diagnostics = {
-		-- Get the language server to recognize the `vim` global
-		globals = { 'vim' },
-	  },
-	  -- Do not send telemetry data containing a randomized but unique identifier
-	  telemetry = {
-		enable = false,
-	  },
-	}
+    Lua = {
+      workspace = {
+	library = vim.api.nvim_get_runtime_file("", true),
+      },
+      runtime = {
+	version = 'LuaJIT',
+      },
+      diagnostics = {
+	-- Get the language server to recognize the `vim` global
+	globals = { 'vim' },
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+	enable = false,
+      },
+    }
   }
 }
