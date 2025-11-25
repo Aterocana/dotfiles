@@ -4,8 +4,8 @@ position = "Top"
 app_launcher_cmd = "rofi -show drun"
 
 [modules]
-left = [ [ "appLauncher", "Updates", "Workspaces" ] ]
-center = [ ["WindowTitle"], ["Tray", "Notification"] ]
+left = [ [ "appLauncher", "Updates" ], ["sunbattery", "Tray", "Notification"] ]
+center = [ ["Workspaces" ]  ]
 right = [ "SystemInfo", [ "Clock", "Privacy", "Settings" ] ]
 
 [updates]
