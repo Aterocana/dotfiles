@@ -54,10 +54,24 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+local yank = vim.api.nvim_create_augroup('yank', { clear = true })
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  group = yank,
   callback = function()
     vim.highlight.on_yank({ timeout = 300 })
   end
+})
+
+-- yankring
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = yank,
+  callback = function()
+    if vim.v.event.operator == 'y' then
+      for i = 9, 1, -1 do -- Shift all numbered registers.
+        vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+      end
+    end
+  end,
 })

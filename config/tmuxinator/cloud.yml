@@ -45,12 +45,12 @@ root: ~/
 # attach: false
 
 windows:
-  - v3:
-    - cd ~/Documents/Programming/go/dlabs/dlabs-api-v3
-    - nvim .
-  - core:
-    - cd ~/Documents/Programming/go/dlabs/dlabscloudcore
-    - nvim .
-  - mig:
-    - cd ~/Documents/Programming/go/dlabs/cloud-migrations
-    - nvim .
+    - v3:
+          - cd ~/Documents/Programming/go/dlabs/dlabs-api-v3
+          - nvim .
+    - core:
+          - cd ~/Documents/Programming/go/dlabs/dlabscloudcore
+          - nvim .
+    - mig:
+          - cd ~/Documents/Programming/go/dlabs/cloud-migrations
+          - nvim .
