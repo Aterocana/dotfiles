@@ -27,7 +27,25 @@ rofi_prompt() {
     -theme-str 'entry { placeholder: "session-name"; }'
 }
 
-# ---------- SESSION LIST ----------
+abbreviate_path() {
+  local full_path="$1"
+  local n=2  # Number of trailing components to show
+  local short_path
+  short_path="$(echo "$full_path" | sed "s|^$HOME|~|")"
+  IFS='/' read -ra parts <<< "$short_path"
+  local count="${#parts[@]}"
+  if [[ "$short_path" == "~" ]]; then
+    echo "~"
+  elif (( count > n + 1 )); then
+    local last_parts=("${parts[@]: -n}")
+    local joined
+    printf -v joined "/%s" "${last_parts[@]}"
+    echo "...${joined}"
+  else
+    echo "$short_path"
+  fi
+}
+
 list_sessions() {
   sesh list --json | jq -r '
     map(
@@ -56,8 +74,8 @@ list_sessions() {
         map(select(.Src == "zoxide"))
       )
     | .[]
-    | "\(.Name)|\(.Src)|\(.Attached)|\(.score)"
-  ' | while IFS='|' read -r name src attached score; do
+    | "\(.Name)|\(.Src)|\(.Attached)|\(.score)|\(.Path // "")"
+    ' | while IFS='|' read -r name src attached score path; do
 
     case "$src" in
       tmux)
@@ -70,6 +88,7 @@ list_sessions() {
         ;;
       zoxide)
         icon=""
+        name="$(abbreviate_path "$path")"
         ;;
     esac
 

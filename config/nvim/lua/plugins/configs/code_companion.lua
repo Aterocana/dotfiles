@@ -61,7 +61,8 @@ M.code_companion = {
 	  vim.fn.getcwd() .. "../../../prompts",
 	}
       }
-    }
+    },
+    rules = {},
   }
 }
 
