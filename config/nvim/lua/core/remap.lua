@@ -107,7 +107,7 @@ vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>",
 vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help)
 
 -- code companion
-vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", {
+vim.keymap.set({ "n", "v" }, "<Leader>ca", "<cmd>CodeCompanionActions<cr>", {
   noremap = true,
   silent = true,
   desc = "Code Companion [A]ction menu"
