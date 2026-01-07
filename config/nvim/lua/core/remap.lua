@@ -104,5 +104,23 @@ vim.keymap.set("n", "gT", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>",
 vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help)
 
 -- code companion
-vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<cr>", { desc = "Open [C]ode [C]ompanion [C]hat"})
-vim.keymap.set("n", "<leader>cca", "<cmd>CodeCompanionAction<cr>", { desc = "Open [C]ode [C]ompanion [A]ction"})
+vim.keymap.set({ "n", "v" }, "<Leader>ca", "<cmd>CodeCompanionActions<cr>", {
+  noremap = true,
+  silent = true,
+  desc = "Code Companion [A]ction menu"
+})
+
+vim.keymap.set({ "n", "v" }, "<Leader>a", "<cmd>CodeCompanionChat Toggle<cr>", {
+  noremap = true,
+  silent = true,
+  desc = "Code Companion Chat Toggle",
+})
+
+vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", {
+  noremap = true,
+  silent = true,
+  desc = "Code Companion Add to chat"
+})
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
