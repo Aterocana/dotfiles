@@ -1,60 +1,160 @@
 #!/usr/bin/env bash
 # Author: Aterocana
 # Description: tmux session selector based on rofi
-# Version: 0.1.0
+# Version: 0.2.0
+
+set -euo pipefail
 
 TERM=kitty
-NEW="Create a NEW session"
-NEW_NAMED="Create a NEW named session"
-NOTIFY=notify-send -i 2000
+ROFI_THEME="$HOME/.config/rofi/styles/style.rasi"
+NOTIFY="notify-send -t 2000"
+
+NEW="+ New session"
 
 rofi_cmd() {
-	rofi \
-		-theme-str "listview {columns: 1; lines: 7;}" \
-		-theme-str 'textbox-prompt-colon {str: " ";}' \
-		-dmenu \
-		-p " " \
-		-markup-rows \
-		-theme "$HOME/.config/rofi/styles/style.rasi"
-	}
-
-tmux_sessions() {
-	tmux list-session -F '#S'
+  rofi \
+    -dmenu \
+    -markup-rows \
+    -p " tmux" \
+    -theme "$ROFI_THEME"
 }
 
-# Prompt to ask for a new session name
 rofi_prompt() {
-	rofi \
-		-dmenu \
-		-p " name:" \
-		-theme-str 'entry { placeholder: "session-name"; }' \
-		-theme "$HOME/.config/rofi/styles/style.rasi"
-	}
-
-run_rofi() {
-	local tsessions=$(tmux_sessions)
-	local session=$( echo -e "$NEW\n$NEW_NAMED\n$tsessions" | rofi_cmd)
-
-	if [[ x"$NEW" = x"${session}" ]]; then
-		$TERM -e tmux new-session &
-		$NOTIFY "tmux" "new session"
-		exit 0
-	fi
-
-	if [[ x"$NEW_NAMED" = x"${session}" ]]; then
-		local name=$( rofi_prompt )
-		if [[ -z "$name" ]]; then
-			$NOTIFY "tmux" "name not provided"
-			exit 1
-		fi
-		$TERM -e tmux new-session -s "$name" &
-		$NOTIFY "tmux" "created session $name"
-	elif [[ -z "${session}" ]]; then
-		echo "Cancel"
-	else
-		$TERM -e tmux attach -t "${session}" &
-		$NOTIFY "tmux" "attached to session $session"
-	fi
+  rofi \
+    -dmenu \
+    -p " name:" \
+    -theme "$ROFI_THEME" \
+    -theme-str 'entry { placeholder: "session-name"; }'
 }
 
-run_rofi
+abbreviate_path() {
+  local full_path="$1"
+  local n=2  # Number of trailing components to show
+  local short_path
+  short_path="$(echo "$full_path" | sed "s|^$HOME|~|")"
+  IFS='/' read -ra parts <<< "$short_path"
+  local count="${#parts[@]}"
+  if [[ "$short_path" == "~" ]]; then
+    echo "~"
+  elif (( count > n + 1 )); then
+    local last_parts=("${parts[@]: -n}")
+    local joined
+    printf -v joined "/%s" "${last_parts[@]}"
+    echo "...${joined}"
+  else
+    echo "$short_path"
+  fi
+}
+
+list_sessions() {
+  sesh list --json | jq -r '
+    map(
+      . + {
+        prio:
+          if .Src == "tmux" and .Attached == 1 then 0
+          elif .Src == "tmuxinator" then 1
+          elif .Src == "tmux" then 2
+          elif .Src == "zoxide" then 3
+          else 9
+          end,
+        score: (.Score // 0)
+      }
+    )
+    | sort_by(
+        .prio,
+        (if .Src == "zoxide" then -.score else 0 end),
+        .Name
+      )
+    | (
+        map(select(.Src == "tmux" or .Src == "tmuxinator"))
+        | unique_by(.Name)
+      )
+      +
+      (
+        map(select(.Src == "zoxide"))
+      )
+    | .[]
+    | "\(.Name)|\(.Src)|\(.Attached)|\(.score)|\(.Path // "")"
+    ' | while IFS='|' read -r name src attached score path; do
+
+    case "$src" in
+      tmux)
+        # icon="●"
+        icon=""
+        [[ "$attached" != "1" ]] && icon=""
+        ;;
+      tmuxinator)
+        icon=""
+        ;;
+      zoxide)
+        icon=""
+        name="$(abbreviate_path "$path")"
+        ;;
+    esac
+
+    # echo "$icon|$src|$name"
+    echo "$icon $name"
+  done
+}
+
+run() {
+  local choice retv src session name
+
+  choice=$(
+    {
+      echo "$NEW"
+      list_sessions
+    } | rofi_cmd
+  )
+  retv=$?
+
+  IFS=' ' read -r icon session <<<"$choice"
+  echo "return value: $retv, choice: $icon $session"
+
+  [[ -z "$choice" ]] && exit 0
+
+  case "$retv" in
+    0) # Return
+      echo "Return"
+      case "$choice" in
+        "$NEW")
+          name=$(rofi_prompt)
+          [[ -z "$name" ]] && exit 1
+          $TERM -e tmux new-session -s "$name" &
+          $NOTIFY "tmux" "created session $name"
+          ;;
+        *)
+          $TERM -e sesh connect "$session" &
+          $NOTIFY "tmux" "attached to $icon $session"
+          ;;
+      esac
+      ;;
+
+    -1) # Ctrl+Return: force attach/create
+      echo "Ctrl + Return"
+      case "$choice" in
+        "$NEW")
+          $TERM -e tmux new-session &
+          $NOTIFY "tmux" "new session"
+          ;;
+        *)
+          $TERM -e tmux new-session -A -s "$session" &
+          $NOTIFY "tmux" "forced attach/create $icon $session"
+          ;;
+      esac
+      ;;
+
+    -2) # Ctrl+Shift+Return: recreate
+      echo "Ctrl + Shift + Return"
+      tmux kill-session -t "$session" 2>/dev/null || true
+      $TERM -e tmux new-session -s "$session" &
+      $NOTIFY "tmux" "recreated $icon $session"
+      ;;
+
+    *)
+      exit 0
+      ;;
+  esac
+}
+
+run
