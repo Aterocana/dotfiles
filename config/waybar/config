@@ -12,9 +12,8 @@
 		"custom/notification"
 	],
 	"modules-center": [
-		"hyprland/workspaces"
-		// "sway/mode",
-		// "sway/workspaces"
+		"sway/workspaces",
+		"sway/mode"
 	],
 	"modules-right": [
 		"pulseaudio",

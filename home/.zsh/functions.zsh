@@ -71,3 +71,12 @@ function mkcd () {
 function b64 () {
 	echo $1 | base64
 }
+
+function ls_sort() {
+  local folder="."
+  if [[ -e $1 ]]; then
+    folder="$1"
+  fi
+
+  \ls --full-time --time-style=+%Y%M%d%H%m%s "$folder" | sort -r -n -k6
+}

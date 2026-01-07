@@ -39,4 +39,4 @@ alias big="du -a -BM | sort -n -r | head -n 10"
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
 alias ungron="gron --ungron"
 
-alias fkill="ps aux | tail -n +2 | fzf-tmux -p | awk '{print $2}' | xargs -I {} kill -9 {}"
+alias fkill="ps aux | tail -n +2 | fzf-tmux -p | awk '{print \$2}' | xargs -I {} kill -9 {}"
