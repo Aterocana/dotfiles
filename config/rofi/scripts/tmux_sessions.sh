@@ -5,7 +5,19 @@
 
 set -euo pipefail
 
-TERM=kitty
+# Pre-flight checks
+check_deps() {
+  for cmd in "$@"; do
+    if ! command -v "$cmd" &>/dev/null; then
+      notify-send -u critical "Error" "$cmd not installed"
+      exit 1
+    fi
+  done
+}
+
+check_deps rofi tmux sesh jq
+
+TERMINAL="${TERMINAL:-kitty}"
 ROFI_THEME="$HOME/.config/rofi/styles/style.rasi"
 NOTIFY="notify-send -t 2000"
 
@@ -125,16 +137,16 @@ run() {
         "$NEW"*)
           name=$(rofi_prompt)
           [[ -z "$name" ]] && exit 1
-          $TERM -e tmux new-session -s "$name" &
+          $TERMINAL -e tmux new-session -s "$name" &
           $NOTIFY "tmux" "created session $name"
           ;;
         *)
           # Use real_value for zoxide, session name otherwise
           if [[ -n "$real_value" && "$real_value" != "$session" ]]; then
-            $TERM -e sesh connect "$real_value" &
+            $TERMINAL -e sesh connect "$real_value" &
             $NOTIFY "tmux" "attached to $display"
           else
-            $TERM -e sesh connect "$session" &
+            $TERMINAL -e sesh connect "$session" &
             $NOTIFY "tmux" "attached to $display"
           fi
           ;;
@@ -143,18 +155,18 @@ run() {
     -1) # Ctrl+Return: force attach/create
       case "$choice" in
         "$NEW"*)
-          $TERM -e tmux new-session &
+          $TERMINAL -e tmux new-session &
           $NOTIFY "tmux" "new session"
           ;;
         *)
-          $TERM -e tmux new-session -A -s "$session" &
+          $TERMINAL -e tmux new-session -A -s "$session" &
           $NOTIFY "tmux" "forced attach/create $display"
           ;;
       esac
       ;;
     -2) # Ctrl+Shift+Return: recreate
       tmux kill-session -t "$session" 2>/dev/null || true
-      $TERM -e tmux new-session -s "$session" &
+      $TERMINAL -e tmux new-session -s "$session" &
       $NOTIFY "tmux" "recreated $display"
       ;;
     *)
