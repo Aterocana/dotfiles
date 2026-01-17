@@ -79,26 +79,30 @@ list_sessions() {
 
     case "$src" in
       tmux)
-        # icon="●"
         icon=""
         [[ "$attached" != "1" ]] && icon=""
+        display="$name"
+        real="$name"
         ;;
       tmuxinator)
         icon=""
+        display="$name"
+        real="$name"
         ;;
       zoxide)
         icon=""
-        name="$(abbreviate_path "$path")"
+        display="$(abbreviate_path "$path")"
+        real="$path"
         ;;
     esac
 
-    # echo "$icon|$src|$name"
-    echo "$icon $name"
+    # Output: display string<TAB>real value
+    echo -e "$icon $display\t$real"
   done
 }
 
 run() {
-  local choice retv src session name
+  local choice retv display real_value session name
 
   choice=$(
     {
@@ -108,49 +112,51 @@ run() {
   )
   retv=$?
 
-  IFS=' ' read -r icon session <<<"$choice"
-  echo "return value: $retv, choice: $icon $session"
-
   [[ -z "$choice" ]] && exit 0
+
+  # Split on tab to get display and real value
+  IFS=$'\t' read -r display real_value <<<"$choice"
+  # Remove icon from display for session name
+  session="${display#* }"
 
   case "$retv" in
     0) # Return
-      echo "Return"
       case "$choice" in
-        "$NEW")
+        "$NEW"*)
           name=$(rofi_prompt)
           [[ -z "$name" ]] && exit 1
           $TERM -e tmux new-session -s "$name" &
           $NOTIFY "tmux" "created session $name"
           ;;
         *)
-          $TERM -e sesh connect "$session" &
-          $NOTIFY "tmux" "attached to $icon $session"
+          # Use real_value for zoxide, session name otherwise
+          if [[ -n "$real_value" && "$real_value" != "$session" ]]; then
+            $TERM -e sesh connect "$real_value" &
+            $NOTIFY "tmux" "attached to $display"
+          else
+            $TERM -e sesh connect "$session" &
+            $NOTIFY "tmux" "attached to $display"
+          fi
           ;;
       esac
       ;;
-
     -1) # Ctrl+Return: force attach/create
-      echo "Ctrl + Return"
       case "$choice" in
-        "$NEW")
+        "$NEW"*)
           $TERM -e tmux new-session &
           $NOTIFY "tmux" "new session"
           ;;
         *)
           $TERM -e tmux new-session -A -s "$session" &
-          $NOTIFY "tmux" "forced attach/create $icon $session"
+          $NOTIFY "tmux" "forced attach/create $display"
           ;;
       esac
       ;;
-
     -2) # Ctrl+Shift+Return: recreate
-      echo "Ctrl + Shift + Return"
       tmux kill-session -t "$session" 2>/dev/null || true
       $TERM -e tmux new-session -s "$session" &
-      $NOTIFY "tmux" "recreated $icon $session"
+      $NOTIFY "tmux" "recreated $display"
       ;;
-
     *)
       exit 0
       ;;
