@@ -26,7 +26,7 @@ configuration {
 
 	/*---------- SSH settings ----------*/
 	ssh-client: "ssh";
-	ssh-command: "{terminal} -- kitty +kitten ssh {host} [-p {port}]";
+	ssh-command: "foot ssh {host} [-p {port}]";
 	parse-hosts: true;
 	parse-known-hosts: true;
 
