@@ -13,6 +13,8 @@ alias pasta='wl-paste'
 alias mux='tmuxinator'
 alias tmuxa='tmux attach || tmux new-session'
 alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
+alias now="date +%Y%m%d%H%M%S"
+alias webex="env -u WAYLAND_DISPLAY /opt/Webex/bin/CiscoCollabHost"
 
 # directories
 alias cd='z'

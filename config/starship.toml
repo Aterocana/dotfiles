@@ -33,7 +33,7 @@ truncation_symbol = "…/"
 
 [directory.substitutions]
 '~/Documents/Programming' = '/repos'
-'/repos/go/dlabs' = '/work'
+'/repos/go/aruba' = '/work'
 
 # ✔️ Git branch e stato
 [git_branch]

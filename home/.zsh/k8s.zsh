@@ -2,6 +2,7 @@ alias k="kubectl"
 alias mk="minikube"
 alias kns="kubens"
 alias kctx="kubectx"
+alias lq="liqoctl"
 alias klogs="kubectl get pods | tail -n +2 | fzf-tmux -p | awk {'print \$1'} | xargs -I{} kubectl logs -f {}"
 alias dlogs='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" | tail -n +2 | fzf-tmux -p | awk {"print \$1"} | xargs -I{} docker logs --tail 100 -f {}'
 

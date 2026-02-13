@@ -12,6 +12,7 @@ fi
 
 source <(kubectl completion zsh)
 source <(helm completion zsh)
+source <(liqoctl completion zsh)
 source <(fzf --zsh)
 
 type hctl >/dev/null 2>&1 && source <(hctl completion zsh)

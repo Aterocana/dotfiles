@@ -1,3 +1,4 @@
 backups
 config/tmux/plugins
 config/nvim/lazy-lock.json
+**/CLAUDE.md
