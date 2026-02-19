@@ -1,7 +1,7 @@
 # /home/mauri/.config/tmuxinator/liqo.yml
 
-name: liqo
-root: ~/
+name: lep
+root: ~/Documents/Programming/go/aruba/
 
 # Optional tmux socket
 # socket_name: cloud
@@ -51,5 +51,8 @@ windows:
     - lep-agent:
           - cd ~/Documents/Programming/go/aruba/lep-agent
           - nvim .
-    - setup:
-          - cd ~/Documents/Programming/go/aruba/create_cluster
+    - lep-backend:
+          - cd ~/Documents/Programming/go/aruba/lep-backend/
+          - nvim .
+    - root:
+          - cd ~/Documents/Programming/go/aruba

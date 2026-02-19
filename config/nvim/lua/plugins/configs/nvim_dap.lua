@@ -121,18 +121,18 @@ M.config = function()
       max_value_lines = 200,
     },
     -- Only one layout: just the "scopes" (variables) list at the bottom
-    layouts = {
-      {
-	elements = {
-	  { id = "scopes", size = 1.0 }, -- 100% of this panel is scopes
-	},
-	size = 15,                -- height in lines (adjust to taste)
-	position = "bottom",      -- "left", "right", "top", "bottom"
-      },
-    },
-  })
-  listeners(dap, dapui)
-  keymaps(dap, dapui)
-end
+    --    layouts = {
+      --      {
+	-- elements = {
+	  --   { id = "scopes", size = 1.0 }, -- 100% of this panel is scopes
+	  -- },
+	  -- size = 15,                -- height in lines (adjust to taste)
+	  -- position = "bottom",      -- "left", "right", "top", "bottom"
+	  --      },
+	  --    },
+	})
+	listeners(dap, dapui)
+	keymaps(dap, dapui)
+      end
 
-return M
+      return M
