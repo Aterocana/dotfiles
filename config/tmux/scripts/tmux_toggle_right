@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT="$1"
+CMD="$2"
+
+# unique key per project
+KEY="project-pane"
+VALUE="$PROJECT"
+
+# remember where we are so we can return focus after any operation
+ORIGIN=$(tmux display-message -p "#{pane_id}")
+
+# find pane tagged for this project — format strings avoid a per-pane
+# option-lookup loop whose last iteration exits 1 and breaks pipefail
+PANE_ID=$(tmux list-panes -a -F $'#{pane_id}\t'"#{@${KEY}}" \
+  | awk -F'\t' -v val="$VALUE" '$2 == val { print $1; exit }')
+
+if [[ -n "${PANE_ID:-}" ]]; then
+    PANE_WIN=$(tmux display-message -p -t "$PANE_ID" "#{window_id}")
+    CURR_WIN=$(tmux display-message -p "#{window_id}")
+
+    if [[ "$PANE_WIN" == "$CURR_WIN" ]]; then
+        # visible — break out to a background window (truly hidden)
+        tmux break-pane -d -s "$PANE_ID"
+    else
+        # hidden — join back into the current window and focus it
+        tmux join-pane -h -l 80 -s "$PANE_ID"
+        tmux select-pane -t "$PANE_ID"
+        exit 0
+    fi
+    tmux select-pane -t "$ORIGIN"
+    exit 0
+fi
+
+# ---- create pane ----
+tmux split-window -h -l 80
+
+NEW_PANE=$(tmux display-message -p "#{pane_id}")
+
+# tag pane permanently
+tmux set-option -p -t "$NEW_PANE" "@$KEY" "$VALUE"
+
+# start command in project directory
+tmux send-keys -t "$NEW_PANE" "cd '$PROJECT' && $CMD" C-m

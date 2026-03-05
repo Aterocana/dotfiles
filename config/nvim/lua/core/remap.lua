@@ -127,3 +127,18 @@ vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", {
 
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])
+
+local function project_root()
+  local cwd = vim.fn.getcwd()
+
+  local markers = { ".git", "go.mod", "package.json", "pyproject.toml" }
+
+  local root = vim.fs.root(cwd, markers)
+  return root or cwd
+end
+
+vim.keymap.set("n", "<leader>cc", function()
+  local root = project_root()
+  local cmd = "claude"
+  vim.fn.system({ "tmux_toggle_right", root, cmd })
+end, { desc = "Open project root in tmux with claude" })

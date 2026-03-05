@@ -78,16 +78,43 @@ M.code_companion = {
 M.copilot = {
   config = function()
     require('copilot').setup({
-      nes = {
-	enabled = false, -- requires copilot-lsp as a dependency
-	auto_trigger = true,
-	keymap = {
-	  accept_and_goto = false,
-	  accept = false,
-	  dismiss = false,
-	},
-      }
+      suggestion = {
+	enabled = true,
+	auto_trigger = false,
+	accept = false,
+      },
+      panel = {
+	enabled = false,
+      },
+      filetypes = {
+	["*"] = true,
+      },
     })
+
+    vim.keymap.set("i", "<C-a>", function()
+      -- ask copilot to generate a suggestion for the current line
+      require("copilot.suggestion").next()
+    end, { silent = true })
+
+    vim.keymap.set("i", "<C-S-a>", function()
+      require("copilot.suggestion").prev()
+    end, { silent = true })
+
+    vim.keymap.set("i", "<C-y>", function()
+      if require("copilot.suggestion").is_visible() then
+	require("copilot.suggestion").accept()
+      else
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-y", true, false, true), "n", false)
+      end
+    end, { silent = true })
+
+    vim.keymap.set("i", "<C-n>", function()
+      if require("copilot.suggestion").is_visible() then
+	require("copilot.suggestion").dismiss()
+      else
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+      end
+    end, { silent = true })
   end
 }
 

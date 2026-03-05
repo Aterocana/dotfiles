@@ -7,11 +7,11 @@ return {
     },
     cmd = "Copilot",
     event = "InsertEnter",
-    config = require("plugins/configs/code_companion").copilot.config,
+    config = require("plugins/configs/ai").copilot.config,
   },
   {
     "olimorris/codecompanion.nvim",
-    opts = require("plugins/configs/code_companion").code_companion.opts,
+    opts = require("plugins/configs/ai").code_companion.opts,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },

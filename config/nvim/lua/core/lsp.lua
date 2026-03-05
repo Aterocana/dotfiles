@@ -12,6 +12,5 @@ vim.lsp.enable({
   "json",
   "html",
   "css",
-  "deno",
+  "vtsls",
 })
-
