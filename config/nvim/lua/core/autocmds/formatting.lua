@@ -1,4 +1,6 @@
-local format_on_save_grp = vim.api.nvim_create_augroup("LspFormatOnSave", {})
+local format_on_save_grp = vim.api.nvim_create_augroup("LspFormatOnSave", {
+  clear = true, -- avoid duplicating the autocmd if the file is sourced again
+})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "remove whitespace on save",
@@ -20,7 +22,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
     local can_format = false
     for _, client in ipairs(clients) do
-      if client.supports_method("textDocument/formatting") then
+      if client:supports_method("textDocument/formatting") then
         can_format = true
         break
       end
@@ -35,7 +37,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.api.nvim_create_autocmd('BufEnter', {
   desc = "don't auto commenting new lines",
-  pattern = '',
+  pattern = '*',
   command = 'set fo-=c fo-=r fo-=o',
 })
 

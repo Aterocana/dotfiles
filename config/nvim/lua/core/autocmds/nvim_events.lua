@@ -1,4 +1,6 @@
-local nvim_events = vim.api.nvim_create_augroup("NvimLifecycleNotify", {})
+local nvim_events = vim.api.nvim_create_augroup("NvimLifecycleNotify", {
+  clear = true, -- avoid duplicating the autocmd if the file is sourced again
+})
 
 local on_start = function()
   vim.system({ "notify-send", "🟢 Neovim started" }, { text = true }, function(obj)
