@@ -48,11 +48,14 @@ windows:
     - liqo:
           - cd ~/Documents/Programming/go/aruba/liqo
           - nvim .
-    - lep-agent:
+    - agent:
           - cd ~/Documents/Programming/go/aruba/lep-agent
           - nvim .
-    - lep-backend:
+    - backend:
           - cd ~/Documents/Programming/go/aruba/lep-backend/
+          - nvim .
+    - testsuite:
+          - cd ~/Documents/Programming/go/aruba/lep-testsuite/
           - nvim .
     - root:
           - cd ~/Documents/Programming/go/aruba

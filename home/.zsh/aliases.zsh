@@ -16,6 +16,7 @@ alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} ca
 alias now="date +%Y%m%d%H%M%S"
 alias webex="env -u WAYLAND_DISPLAY /opt/Webex/bin/CiscoCollabHost"
 alias watch="watch "
+alias githash="git log --oneline --all | fzf -m --no-sort --preview='git show {1}' | awk '{print \$1}'"
 
 # directories
 alias cd='z'

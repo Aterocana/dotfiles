@@ -16,7 +16,8 @@ function M.fetch(opts)
 
   local results = vim.system({ "curl", "wttr.in/" .. url_encode(location) .. "?format=j1" }):wait()
   if results.code ~= 0 then
-	error("failed to retrieve temperature: ".. (results.stderr or "" ))
+    vim.notify("failed to retrieve temperature: " .. (results.stderr or ""), vim.log.levels.ERROR)
+    return nil
   end
 
   local data = vim.json.decode(results.stdout or "", { array = true, object = true })
@@ -30,6 +31,7 @@ function M.print(opts)
   local location = opts.location or vim.fn.input("Location: ")
 
   local temperature = M.fetch({ location = location })
+  if not temperature then return end
   local cc = temperature.current_condition[1]
   local msg = ("It's currently %s°C %s"):format(
 	cc.temp_C,

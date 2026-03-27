@@ -107,19 +107,53 @@ local function make_filter(patterns)
   return function(path)
     for _, pattern in ipairs(patterns) do
       if path:match(pattern) then
-	return false
+        return false
       end
     end
     return true
   end
 end
 
-M.pick_files_filters = function(patterns, cwd)
-  patterns = patterns or {}
+local project_filters = {
+  { check = function(root) return vim.fn.filereadable(root .. '/go.mod') == 1 end,
+    patterns = { '/vendor/', '^vendor/' } },
+  { check = function(root) return vim.fn.filereadable(root .. '/package.json') == 1 end,
+    patterns = { '/node_modules/', '^node_modules/' } },
+}
+
+M.pick_files_filters = function(extra_patterns, cwd)
   return function()
-    pick.builtin.files({
-      cwd = cwd or vim.loop.cwd(),
-      filter = make_filter(patterns),
+    local root = cwd or vim.uv.cwd()
+    local active_patterns = vim.deepcopy(extra_patterns or {})
+    for _, pf in ipairs(project_filters) do
+      if pf.check(root) then
+        vim.list_extend(active_patterns, pf.patterns)
+      end
+    end
+    local filter = make_filter(active_patterns)
+
+    local cmd
+    if vim.fn.executable('fd') == 1 then
+      cmd = 'fd --type f --hidden --exclude .git . ' .. vim.fn.shellescape(root)
+    else
+      cmd = 'find ' .. vim.fn.shellescape(root) .. ' -type f -not -path "*/.git/*"'
+    end
+
+    local all_files = vim.fn.systemlist(cmd)
+    local filtered = {}
+    for _, f in ipairs(all_files) do
+      local rel = f:gsub('^' .. vim.pesc(root) .. '/?', '')
+      if filter(rel) then
+        table.insert(filtered, rel)
+      end
+    end
+
+    pick.start({
+      source = {
+        items = filtered,
+        name = 'Files',
+        cwd = root,
+      },
     })
   end
 end

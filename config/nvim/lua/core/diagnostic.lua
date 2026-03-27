@@ -14,7 +14,8 @@ vim.diagnostic.config({
     focusable = false,
     style     = "minimal",
     border    = "single",
-    source    = "always",
+    source    = true,
+    if_many   = false,
     header    = "",
     prefix    = "",
     suffix    = "",
@@ -37,7 +38,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
   callback = function()
     local bt = vim.bo.buftype
     if bt == "prompt" then
-      return -- ignora Telescope e simili
+      return
     end
     vim.diagnostic.enable(false)
   end,
