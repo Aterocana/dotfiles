@@ -2,12 +2,7 @@ local M = {}
 
 M.code_companion = {
   opts = {
-    log_level = 'DEBUG',
     interactions = {
-      -- Change the default chat adapter
-      -- chat = { adapter = 'codellama' },
-      -- inline = { adapter = 'codellama' },
-      -- cmd = { adapter = 'codellama' },
       chat = { adapter = 'copilot' },
       inline = {
 	keymaps = {
@@ -48,9 +43,15 @@ M.code_companion = {
       acp = {
 	claude_code = function()
 	  return require("codecompanion.adapters").extend("claude_code", {
-	    env = {
-	      CLAUDE_CODE_OAUTH_TOKEN = "CLAUDE"
-	    }
+	    commands = {
+	      default = { "claude-code-acp" },
+	      yolo = { "claude-code-acp", "--yolo" },
+	    },
+	    handlers = {
+	      auth = function(self)
+		return true
+	      end,
+	    },
 	  })
 	end,
       }
@@ -67,7 +68,7 @@ M.code_companion = {
     prompt_library = {
       markdown = {
 	dirs = {
-	  vim.fn.getcwd() .. "../../../prompts",
+	  vim.fn.stdpath("config") .. "/prompts",
 	}
       }
     },
