@@ -68,6 +68,10 @@ function mkcd () {
   cd "$1"
 }
 
-function b64 () {
-	echo $1 | base64
+function b64_enc () {
+  echo $1 | base64
+}
+
+function b64_dec () {
+  echo $1 | base64 --decode
 }

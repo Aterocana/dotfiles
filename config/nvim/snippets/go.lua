@@ -28,8 +28,7 @@ local function go_zero_value(type_str)
     or type_str:match("^map%[")
     or type_str:match("^chan[ <]")
     or type_str:match("^interface{")
-    or type_str:match("^func%(")
-  then
+    or type_str:match("^func%(") then
     return "nil"
   end
   -- Named / package-qualified struct type
@@ -108,8 +107,8 @@ end
 local function is_generic(type_str)
   -- Has [...] but is not a slice ([]T) or map (map[K]V)
   return type_str:match("%[") ~= nil
-    and not type_str:match("^%[%]")
-    and not type_str:match("^map%[")
+  and not type_str:match("^%[%]")
+  and not type_str:match("^map%[")
 end
 
 local function iferr_handler()
@@ -170,7 +169,14 @@ end
 
 ls.add_snippets("go", {
   s(
-    { trig = "iferr", name = "error handling", snippetType = "autosnippet", desc = "Error handling with inferred return types", wordTrig = true },
+    {
+      trig = "iferr",
+      name = "error handling",
+      snippetType = "autosnippet",
+      desc =
+      "Error handling with inferred return types",
+      wordTrig = true
+    },
     d(1, iferr_handler)
   ),
   s(
@@ -204,7 +210,13 @@ ls.add_snippets("go", {
     }
   ),
   s(
-    { trig = "timefmt", name = "time.Time placeholder format", snippetType = "snippet", desc = "Insert the time.Time.Format placeholder format" },
+    {
+      trig = "timefmt",
+      name = "time.Time placeholder format",
+      snippetType = "snippet",
+      desc =
+      "Insert the time.Time.Format placeholder format"
+    },
     {
       c(1, {
         t("\"2006-01-02T15:04:05Z07:00\""),

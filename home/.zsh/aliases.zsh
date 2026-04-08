@@ -16,7 +16,13 @@ alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} ca
 alias now="date +%Y%m%d%H%M%S"
 alias webex="env -u WAYLAND_DISPLAY /opt/Webex/bin/CiscoCollabHost"
 alias watch="watch "
+
+# git related
 alias githash="git log --oneline --all | fzf -m --no-sort --preview='git show {1}' | awk '{print \$1}'"
+alias gitmost="git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20" # the most changed files over last year.
+alias gitwho="git shortlog -sn --no-merges" # the most prolific commit author.
+alias gitbug="git log -i -E --grep=\"fix|bug|broken\" --name-only --format='' | sort | uniq -c | sort -nr | head -20" # search for the most files with commits containing fix, bug or broken.
+alias gitpace="git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c" # commits per month.
 
 # directories
 alias cd='z'
