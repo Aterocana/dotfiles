@@ -30,7 +30,7 @@ return 	{
   },
   {
 	'MeanderingProgrammer/treesitter-modules.nvim',
-	enabed = false,
+	enabled = false,
 	dependencies = { 'nvim-treesitter/nvim-treesitter' },
 	opts = {
 	  highlight = {

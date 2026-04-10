@@ -2,7 +2,7 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    requires = {
+    dependencies = {
       "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
     },
     cmd = "Copilot",

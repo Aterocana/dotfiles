@@ -1,5 +1,5 @@
 return {
-  cmd = {"helm-ls"},
+  cmd = {"helm_ls"},
   settings = {
 	['helm-ls'] = {
 	  logLevel = "info",

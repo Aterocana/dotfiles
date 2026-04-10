@@ -5,7 +5,7 @@ return {
 	dependencies = {
 	  {"ray-x/guihua.lua", run="cd lua/fzy && make"},
 	},
-	events = {"CmdlineEnter"},
+	event = {"CmdlineEnter"},
 	ft = {"go", "gomod"},
 	build = ':lua require("go.install").update_all_sync()',
   },

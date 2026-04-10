@@ -95,10 +95,7 @@ return {
     config = function()
       require('render-markdown').setup({
 	completions = { lsp = { enabled = true } },
-	preview = {
-	  filetypes = { "markdown", "codecompanion" },
-	  ignore_buftypes = {},
-	},
+	latex = { enabled = false },
       })
     end
   },
@@ -109,13 +106,5 @@ return {
       'echasnovski/mini.pick',
     },
   },
-  {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "VeryLazy",
-    priority = 1000,
-    config = function()
-      require("tiny-inline-diagnostic").setup()
-      vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
-    end,
-  },
+  { "rachartier/tiny-inline-diagnostic.nvim" },
 }

@@ -20,16 +20,22 @@ vim.diagnostic.config({
     prefix    = "",
     suffix    = "",
   },
-  virtual_text = {
-    current_line = true,
-    severity = {
-      max = vim.diagnostic.severity.WARN,
-    }
-  },
+  virtual_text = false, -- tiny-inline-diagnostic handles current-line display
   virtual_lines = {
     severity = {
       min = vim.diagnostic.severity.ERROR,
     }
+  },
+})
+
+-- tiny-inline-diagnostic: show inline only for non-error severities (errors use virtual_lines)
+require("tiny-inline-diagnostic").setup({
+  options = {
+    severity = {
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.INFO,
+      vim.diagnostic.severity.HINT,
+    },
   },
 })
 

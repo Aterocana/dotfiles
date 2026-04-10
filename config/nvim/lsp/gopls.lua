@@ -1,7 +1,7 @@
 return {
   cmd = { 'gopls' },
-  filetypes = { "go", "gotempl", "gowork", "gomod" },
-  root_markers = { "git", "go.mod", "go.work", vim.uv.cwd() },
+  filetypes = { "go", "gomod", "gowork" },
+  root_markers = { "git", "go.mod", "go.work" },
   settings = {
 	gopls = {
 	  usePlaceholders = false,

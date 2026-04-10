@@ -7,5 +7,5 @@ require("core.shebang") -- Shebang command
 require("core.search")
 require("core.inlay_hints").config({ inlay_hints = true })
 require("core.syntax_highlight")
-require("core.diagnostic")
 require("core.lazy") -- load lazy
+require("core.diagnostic") -- must be after lazy: calls plugin setup (tiny-inline-diagnostic)

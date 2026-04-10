@@ -29,7 +29,7 @@ return {
 	config = function ()
 	  require("neotest").setup({
 		adapters = {
-		  require("neotest-golang")({}),
+		  require("neotest-golang")({ env = { CGO_ENABLED = "1" } }),
 		},
 	  })
 	end
