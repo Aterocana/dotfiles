@@ -32,48 +32,59 @@ local listeners = function(dap, dapui)
 end
 
 local keymaps = function(dap, dapui)
+  local project_filetypes = {
+    { marker = 'go.mod',       ft = 'go' },
+    { marker = 'package.json', ft = 'javascript' },
+  }
+
   vim.keymap.set('n', '<F5>', function()
-    require('dap.ext.vscode').json_decode = require 'json5'.parse
-    require("dap.ext.vscode").load_launchjs(".vscode/launch_vim.json", {})
+    local ft = vim.bo.filetype
+    if ft == '' or ft == 'oil' then
+      local cwd = vim.fn.getcwd()
+      for _, p in ipairs(project_filetypes) do
+	if vim.fn.filereadable(cwd .. '/' .. p.marker) == 1 then
+	  vim.b["dap-srcft"] = p.ft
+	  break
+	end
+      end
+    end
     dap.continue()
   end)
-  vim.keymap.set('n', '<F10>', function() require('dap').step_over() end, { desc = "debug: step over" })
-  vim.keymap.set('n', '<F11>', function() require('dap').step_into() end, { desc = "debug: step into" })
-  vim.keymap.set('n', '<F12>', function() require('dap').step_out() end, { desc = "debug: step out" })
+  vim.keymap.set('n', '<F10>', function() dap.step_over() end, { desc = "debug: step over" })
+  vim.keymap.set('n', '<F11>', function() dap.step_into() end, { desc = "debug: step into" })
+  vim.keymap.set('n', '<F12>', function() dap.step_out() end, { desc = "debug: step out" })
 
-  vim.keymap.set('n', '<Leader>B', function() require('dap').toggle_breakpoint() end,
+  vim.keymap.set('n', '<Leader>B', function() dap.toggle_breakpoint() end,
   { desc = "debug: toggle a [B]reakpoint" })
 
   vim.keymap.set('n', '<Leader>lp', function()
-    require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+    dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
   end,
   { desc = "debug: set a breakpoint with a [L]og [P]oint message" })
 
   vim.keymap.set('n', '<Leader>cB', function()
-    require('dap').clear_breakpoints()
+    dap.clear_breakpoints()
   end,
   { desc = "debug: clear all breakpoints" })
 
-  vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, { desc = "debug: repl open" })
-  vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "debug: run last" })
+  vim.keymap.set('n', '<Leader>dr', function() dap.repl.open() end, { desc = "debug: repl open" })
+  vim.keymap.set('n', '<Leader>dl', function() dap.run_last() end, { desc = "debug: run last" })
   vim.keymap.set({ 'n', 'v' }, '<Leader>dw', function()
-    require('dapui').eval(nil, { enter = true })
+    dapui.eval(nil, { enter = true })
   end, { noremap = true, silent = true, desc = "debug: add word under cursor to Watches" })
 
-  vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "debug UI: toggle" })
+  vim.keymap.set('n', '<Leader>du', function() dapui.toggle() end, { desc = "debug UI: toggle" })
   vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
-    require('dap.ui.widgets').hover()
+    dap.ui.widgets.hover()
   end, { desc = "debug UI: widgets" })
   vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
-    require('dap.ui.widgets').preview()
+    dap.ui.widgets.preview()
   end, { desc = "debug UI: widgets" })
   vim.keymap.set('n', '<Leader>df', function()
-    local widgets = require('dap.ui.widgets')
-    widgets.centered_float(widgets.frames)
+    dap.ui.widgets.centered_float(dap.ui.widgets.frames)
   end, { desc = "debug UI: widgets" })
   vim.keymap.set('n', '<Leader>ds', function()
-    local widgets = require('dap.ui.widgets')
-    widgets.centered_float(widgets.scopes)
+    dap.ui.widgets.centered_float(dap.ui.widgets.scopes)
   end, { desc = "debug UI: widgets" })
 end
 
@@ -94,9 +105,34 @@ M.config = function()
       port = "${port}",
       args = {},
       build_flags = "",
+      output_mode = "remote",
     },
   })
+
+  local vscode = require('dap.ext.vscode')
+  vscode.json_decode = require('json5').parse
+
+  local function load_configs(path)
+    local ok, configs = pcall(vscode.getconfigs, path)
+    if not ok then return nil end
+    for _, cfg in ipairs(configs) do
+      if cfg.request == "launch" then
+	cfg.outputMode = cfg.outputMode or "remote"
+      end
+    end
+    return configs
+  end
+
+  -- using dap.000.launch.json to present its entry first, since it's alphabetically ordered first other providers.
+  dap.providers.configs["dap.launch.json"] = nil
+  dap.providers.configs["dap.000.launch.json"] = function()
+    return load_configs(vim.fn.getcwd() .. '/.vscode/launch_vim.json')
+    or load_configs(vim.fn.getcwd() .. '/.vscode/launch.json')
+    or {}
+  end
+
   style()
+  ---@diagnostic disable-next-line: missing-fields
   dapui.setup({
     expand_lines = true,
     controls = {
@@ -114,8 +150,10 @@ M.config = function()
 	terminate = ""
       }
     },
+    ---@diagnostic disable-next-line: missing-fields
     floating = { border = "rounded" },
     -- Set dapui window
+    ---@diagnostic disable-next-line: missing-fields
     render = {
       max_type_length = 60,
       max_value_lines = 200,

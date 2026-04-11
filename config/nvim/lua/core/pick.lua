@@ -5,7 +5,7 @@ M.live_grep = function()
   if vim.fn.isdirectory('.git') == 1 then
     M.live_grep_git()
   else
-    require('mini.pick').builtin.grep_live()
+    require('mini.pick').builtin.grep_live({}, { tool_opts = { '--smart-case' } })
   end
 end
 
@@ -22,7 +22,7 @@ M.live_grep_git = function()
   -- Run live grep, but restrict to git-tracked files
   pick.builtin.grep_live({
     files = git_files,
-  })
+  }, { tool_opts = { '--smart-case' } })
 end
 
 -- Custom picker: list all LSP diagnostics
@@ -67,9 +67,9 @@ pick.start({
     {
       char = '<CR>',
       func = function(item)
-	vim.api.nvim_set_current_buf(item.buf_id)
-	vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
-	vim.cmd('normal! zz')
+        vim.api.nvim_set_current_buf(item.buf_id)
+        vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
+        vim.cmd('normal! zz')
       end,
     },
   },
@@ -88,14 +88,11 @@ pick.start({
       vim.api.nvim_buf_clear_namespace(buf, ctx.preview_ns, 0, -1)
 
       -- Highlight the diagnostic line
-      vim.api.nvim_buf_add_highlight(
-	buf,
-	ctx.preview_ns,
-	"MiniPickPreviewDiag",
-	item.lnum - 1,
-	0,
-	-1
-      )
+      vim.api.nvim_buf_set_extmark(buf, ctx.preview_ns, item.lnum - 1, 0, {
+        end_row = item.lnum,
+        hl_group = "MiniPickPreviewDiag",
+        hl_eol = true,
+      })
     end,
   },
 })
@@ -115,10 +112,14 @@ local function make_filter(patterns)
 end
 
 local project_filters = {
-  { check = function(root) return vim.fn.filereadable(root .. '/go.mod') == 1 end,
-    patterns = { '/vendor/', '^vendor/' } },
-  { check = function(root) return vim.fn.filereadable(root .. '/package.json') == 1 end,
-    patterns = { '/node_modules/', '^node_modules/' } },
+  {
+    check = function(root) return vim.fn.filereadable(root .. '/go.mod') == 1 end,
+    patterns = { '/vendor/', '^vendor/' }
+  },
+  {
+    check = function(root) return vim.fn.filereadable(root .. '/package.json') == 1 end,
+    patterns = { '/node_modules/', '^node_modules/' }
+  },
 }
 
 M.pick_files_filters = function(extra_patterns, cwd)
@@ -179,7 +180,7 @@ M.pick_keymappings = function()
     },
     mappings = {
       apply = function(item)
-	-- Nothing to do here
+        -- Nothing to do here
       end,
     },
   })
@@ -189,9 +190,9 @@ M.custom = function()
   pick.start({
     source = {
       items = {
-	{ text = "Option 1" },
-	{ text = "Option 2" },
-	{ text = "Option 3" },
+        { text = "Option 1" },
+        { text = "Option 2" },
+        { text = "Option 3" },
       },
       name = 'Custom Options',
     },

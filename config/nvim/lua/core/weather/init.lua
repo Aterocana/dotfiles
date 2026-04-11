@@ -3,7 +3,7 @@ local M = {}
 local function url_encode(s)
   s = s:gsub("\n", "\r\n")
   s = s:gsub("([^%w _%%%-%.~])", function(c)
-	return string.format("%%%02X", string.byte(c))
+    return string.format("%%%02X", string.byte(c))
   end)
   s = s:gsub(" ", "+")
   return s
@@ -34,23 +34,22 @@ function M.print(opts)
   if not temperature then return end
   local cc = temperature.current_condition[1]
   local msg = ("It's currently %s°C %s"):format(
-	cc.temp_C,
-	location and ("in " .. location) or "for you"
+    cc.temp_C,
+    location and ("in " .. location) or "for you"
   )
-  vim.api.nvim_out_write("\n" .. msg .. "\n")
-
+  vim.notify(msg)
 end
 
 vim.api.nvim_create_user_command("Temperature", function(opts)
   local location
   if string.len(opts.args) > 0 then
-	location = opts.args
+    location = opts.args
   end
 
   M.print({ location = location })
 end, {
-	nargs = "*",
-	desc = "Check the temperature",
-  })
+nargs = "*",
+desc = "Check the temperature",
+})
 
 return M

@@ -1,14 +1,14 @@
 local M = {
-  setup = function ()
-	require("aerial").setup({
-	  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
-	  on_attach = function(bufnr)
-		-- Jump forwards/backwards with '{' and '}'
-		vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-		vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-	  end,
-	})
-	vim.keymap.set("n", "<leader><leader>a", "<CMD>AerialToggle!<CR>")
+  setup = function()
+    require("aerial").setup()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "AerialAttach",
+      callback = function(args)
+        vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = args.buf })
+        vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = args.buf })
+      end,
+    })
+    vim.keymap.set("n", "<leader><leader>a", "<CMD>AerialToggle!<CR>")
   end
 }
 
