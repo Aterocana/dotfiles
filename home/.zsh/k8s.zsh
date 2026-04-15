@@ -27,6 +27,19 @@ function kdel() {
 }
 
 # kc gets all .yaml files under ~/.kube and its subfolder, present them in a fzf popup and creates a symlink in ~/.kube/config to the selected file.
+# function kc() {
+#   find ~/.kube -type f -name "*.yaml" | fzf-tmux -p | xargs -I{} ln -sf {} ~/.kube/config
+# }
 function kc() {
-  find ~/.kube -type f -name "*.yaml" | fzf-tmux -p | xargs -I{} ln -sf {} ~/.kube/config
+  local files tmp
+  files=$(find ~/.kube -type f -name "*.yaml" | fzf-tmux -p -m)
+
+  [ -z "$files" ] && return
+
+  tmp=$(mktemp).kubeconfig
+
+  KUBECONFIG=$(echo "$files" | paste -sd:) \
+    kubectl config view --flatten > "$tmp"
+
+  export KUBECONFIG="$tmp"
 }

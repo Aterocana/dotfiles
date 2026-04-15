@@ -57,6 +57,10 @@ local keymaps = function(dap, dapui)
   vim.keymap.set('n', '<Leader>B', function() dap.toggle_breakpoint() end,
   { desc = "debug: toggle a [B]reakpoint" })
 
+  vim.keymap.set('n', '<Leader>cb', function()
+    dap.set_breakpoint(vim.fn.input('Condition: '))
+  end, { desc = "debug: set a [c]onditional [b]reakpoint" })
+
   vim.keymap.set('n', '<Leader>lp', function()
     dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
   end,

@@ -17,4 +17,4 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --bind ctrl-j:down,ctrl-k:up --height
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
