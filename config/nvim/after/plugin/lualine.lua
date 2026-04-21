@@ -158,29 +158,34 @@ local function open_buffers()
   return table.concat(parts, "")
 end
 
+local function everforest_gruvbox_green()
+  local t = require('lualine.themes.everforest')
+  t.normal.a = { bg = '#b8bb26', fg = '#282828', gui = 'bold' }
+  return t
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
     -- section_separators = { left = '', right = '' },
     -- component_separators = { left = '', right = '' },
-    -- component_separators = { left = '', right = '' },
-    -- section_separators = { left = '', right = '' },
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+    -- component_separators = { left = '', right = '' },
+    -- section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
     },
     ignore_focus = {},
     always_divide_middle = true,
-    globalstatus = false,
+    globalstatus = true,
     refresh = {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
     },
-    -- theme = "gruvbox-material",
-    theme = "everforest"
+    theme = everforest_gruvbox_green(),
   },
   sections = {
     lualine_a = { 'mode' },

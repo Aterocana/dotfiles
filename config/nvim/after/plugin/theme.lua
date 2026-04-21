@@ -42,11 +42,11 @@ require("noice").setup({
 
   -- you can enable a preset for easier configuration
   presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = true, -- add a border to hover docs and signature help
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = true,        -- add a border to hover docs and signature help
   },
 })
 
@@ -63,9 +63,9 @@ function Theme(theme, darkness)
   vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#98971a" })
 
   vim.api.nvim_set_hl(0, "CmdlinePmenu", { bg = "#282828", blend = 20 })
-  vim.api.nvim_set_hl(0, "CmdlinePmenuSel", { bg ="#98971a", fg = "#282828", blend = 20 })
+  vim.api.nvim_set_hl(0, "CmdlinePmenuSel", { bg = "#98971a", fg = "#282828", blend = 20 })
   vim.api.nvim_set_hl(0, "CmdlinePmenuSbar", { bg = "#282828" })
-  vim.api.nvim_set_hl(0, "CmdlinePmenuThumb", { bg ="#98971a"   })
+  vim.api.nvim_set_hl(0, "CmdlinePmenuThumb", { bg = "#98971a" })
 
   require("notify").setup({
     background_colour = "#000000",
@@ -92,7 +92,7 @@ require("gruvbox").setup({
   invert_signs = false,
   invert_tabline = false,
   invert_intend_guides = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
+  inverse = true,    -- invert background for search, diffs, statuslines and errors
   contrast = "hard", -- can be "hard", "soft" or empty string
   palette_overrides = {},
   overrides = {},
@@ -104,11 +104,28 @@ Theme("gruvbox", "dark")
 local devicons = require 'nvim-web-devicons'
 require('incline').setup {
   render = function(props)
-    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
+    local fullpath = vim.api.nvim_buf_get_name(props.buf)
+    local filename = vim.fn.fnamemodify(fullpath, ':t')
     if filename == '' then
       filename = '[No Name]'
     end
     local ft_icon, ft_color = devicons.get_icon_color(filename)
+
+    if vim.api.nvim_win_get_cursor(props.win)[1] == vim.fn.line('w0', props.win) then
+      return false
+    end
+
+    local display_path = filename
+    if fullpath ~= '' then
+      local dir = vim.fn.fnamemodify(fullpath, ':h')
+      local root = vim.fn.systemlist('git -C ' .. vim.fn.shellescape(dir) .. ' rev-parse --show-toplevel')[1]
+      if root and vim.v.shell_error == 0 then
+	local rel = fullpath:sub(#root + 2)
+	local parts = vim.split(rel, '/', { plain = true })
+	local start = math.max(1, #parts - 2)
+	display_path = table.concat(parts, '/', start, #parts)
+      end
+    end
 
     local function get_git_diff()
       local icons = { removed = ' + ', changed = '  ', added = '  ' }
@@ -147,8 +164,8 @@ require('incline').setup {
     return {
       { get_diagnostic_label() },
       { get_git_diff() },
-      { (ft_icon or '') .. ' ', guifg = ft_color, guibg = 'none' },
-      { filename .. ' ', gui = vim.bo[props.buf].modified and 'bold,italic' or 'bold' },
+      { (ft_icon or '') .. ' ', guifg = ft_color,                                            guibg = 'none' },
+      { display_path .. ' ',    gui = vim.bo[props.buf].modified and 'bold,italic' or 'bold' },
       -- { '┊  ' .. vim.api.nvim_win_get_number(props.win), group = 'DevIconWindows' },
     }
   end,
