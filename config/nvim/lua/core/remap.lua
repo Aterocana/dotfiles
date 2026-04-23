@@ -27,6 +27,10 @@ vim.keymap.set("v", "<leader>[", [[c[<c-r>"]<esc>]], { desc = "Wrap text in squa
 vim.keymap.set("n", "<leader>[", [[ciw[<c-r>"]<esc>]], { desc = "Wrap text in square braces []" })
 vim.keymap.set("v", "<leader>`", [[c`<c-r>``<esc>]], { desc = "Wrap text in backticks ``" })
 
+-- Tab Navigation
+vim.keymap.set("n", "<leader>>", ":tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader><", ":tabprev<CR>", { desc = "Previous tab" })
+
 -- Windows Managing
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>-", ":split<CR>", { desc = "Split horizontally" })
@@ -92,6 +96,8 @@ vim.keymap.set("n", "<leader>C", function()
   end)
 end, { desc = "run a command and send its output to a scratch buffer" })
 
+vim.keymap.set("n", "<leader>ef", "<cmd>EslintFixAll<CR>", { desc = "[E]slint [F]ix all" })
+
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
@@ -140,5 +146,6 @@ end
 vim.keymap.set("n", "<leader>cc", function()
   local root = project_root()
   local cmd = "claude"
+  vim.cmd("CodePreviewInstallClaudeCodeHooks")
   vim.fn.system({ "tmux_toggle_right", root, cmd })
 end, { desc = "Open project root in tmux with claude" })

@@ -13,4 +13,5 @@ vim.lsp.enable({
   "html",
   "css",
   "vtsls",
+  -- "eslint",
 })
