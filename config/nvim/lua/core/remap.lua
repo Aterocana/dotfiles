@@ -71,7 +71,7 @@ end, { desc = "run nearest [T]es[T]" })
 
 vim.keymap.set("n", "<Leader>db", function()
   require("neotest").run.run({ strategy = "dap" })
-end, { desc = "run nearest [T]est in [D]e[B]ug mode" })
+end, { desc = "run neatest [T]est in [D]e[B]ug mode" })
 
 vim.keymap.set("n", "<Leader>ts", "<cmd>Neotest summary<cr>", { desc = "Toggle [T]est [S]mmary" })
 
@@ -145,7 +145,20 @@ end
 
 vim.keymap.set("n", "<leader>cc", function()
   local root = project_root()
+  local project = vim.fs.basename(root)
+  local target_screen = "HDMI-A-1"
   local cmd = "claude"
+  local tmux_open = vim.fn.expand("~/.config/tmux/scripts/tmux_open")
   vim.cmd("CodePreviewInstallClaudeCodeHooks")
-  vim.fn.system({ "tmux_toggle_right", root, cmd })
-end, { desc = "Open project root in tmux with claude" })
+  local output = vim.fn.system({ tmux_open, "-d", root, "-c", cmd, "-s", project .. "_claude", "-m", target_screen })
+  if vim.v.shell_error ~= 0 then
+    vim.notify(output, vim.log.levels.ERROR, { title = "tmux_open" })
+  end
+end, { desc = "Open project root in new tmux session on right monitor" })
+
+-- vim.keymap.set("n", "<leader>cc", function()
+  --   local root = project_root()
+  --   local cmd = "claude"
+  --   vim.cmd("CodePreviewInstallClaudeCodeHooks")
+  --   vim.fn.system({ "tmux_toggle_right", root, cmd })
+  -- end, { desc = "Open project root in tmux with claude" })

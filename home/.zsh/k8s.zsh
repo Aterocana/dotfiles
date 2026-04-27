@@ -26,10 +26,7 @@ function kdel() {
   kubectl get $1 | tail -n +2 | fzf-tmux -p | awk {'print $1'} | xargs -I{} kubectl delete $1 {}
 }
 
-# kc gets all .yaml files under ~/.kube and its subfolder, present them in a fzf popup and creates a symlink in ~/.kube/config to the selected file.
-# function kc() {
-#   find ~/.kube -type f -name "*.yaml" | fzf-tmux -p | xargs -I{} ln -sf {} ~/.kube/config
-# }
+# kc finds all kubeconfig files in ~/.kube, lets you select one or more of them with fzf and then merges the selected kubeconfig files into a single temporary kubeconfig file and sets the KUBECONFIG environment variable to point to that file. This allows you to easily switch between multiple Kubernetes contexts defined in different kubeconfig files.
 function kc() {
   local files tmp
   files=$(find ~/.kube -type f -name "*.yaml" | fzf-tmux -p -m)
