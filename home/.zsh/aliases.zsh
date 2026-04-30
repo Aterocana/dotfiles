@@ -44,6 +44,7 @@ alias cat='bat'
 alias proc='ps -aux | grep'
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias vim='nvim'
+alias v='nvim'
 alias big="du -a -BM | sort -n -r | head -n 10"
 
 alias docker-rm-dangling='docker rmi -f $(docker images -f "dangling=true" -q)'
