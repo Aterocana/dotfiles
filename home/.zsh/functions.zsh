@@ -5,15 +5,20 @@ autoload -U modify-current-argument #necessaria per expand-snippet
 function path() {
   echo $PATH | tr ":" "\n" | \
     awk "{ sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
-           sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
-           sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
-           sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
-           sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
-           print }"
+    sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
+    sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
+    sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
+    sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
+    print }"
 }
 
 function insert_sudo () {
-	zle beginning-of-line; zle -U "sudo "
+  zle beginning-of-line; zle -U "sudo "
+}
+
+function fcd() {
+  local dir
+  dir=$(find . -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
 }
 
 bindkey "^[[1;5C" forward-word
