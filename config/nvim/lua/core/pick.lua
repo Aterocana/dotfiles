@@ -186,6 +186,41 @@ M.pick_keymappings = function()
   })
 end
 
+M.pick_buffers = function()
+  local function buf_items()
+    return vim.tbl_map(function(b)
+      local name = vim.api.nvim_buf_get_name(b)
+      local text = name ~= '' and vim.fn.fnamemodify(name, ':~:.') or ('[No Name] buf=' .. b)
+      return { buf_id = b, text = text }
+    end, vim.tbl_filter(function(b)
+      return vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted
+    end, vim.api.nvim_list_bufs()))
+  end
+
+  pick.start({
+    source = {
+      items = buf_items(),
+      name = 'Buffers',
+      choose = function(item)
+        if item and item.buf_id then
+          vim.api.nvim_set_current_buf(item.buf_id)
+        end
+      end,
+    },
+    mappings = {
+      delete_buf = {
+        char = '<C-d>',
+        func = function()
+          local item = (pick.get_picker_matches() or {}).current
+          if not item or not item.buf_id then return end
+          vim.api.nvim_buf_delete(item.buf_id, { force = false })
+          pick.set_picker_items(buf_items())
+        end,
+      },
+    },
+  })
+end
+
 M.custom = function()
   pick.start({
     source = {

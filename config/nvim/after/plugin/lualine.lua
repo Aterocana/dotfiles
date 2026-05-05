@@ -255,11 +255,3 @@ for i = 1, 9 do
   vim.keymap.set("n", "<leader>c" .. i, function() close_buf(i) end,
   { desc = "Close buffer " .. i })
 end
-
--- keymaps for closing buffers
-vim.keymap.set("n", "<leader>0", function()
-  local buf = _buf_list[10]
-  if buf then vim.api.nvim_set_current_buf(buf) end
-end, { desc = "Go to buffer 10" })
-vim.keymap.set("n", "<leader>c0", function() close_buf(10) end,
-{ desc = "Close buffer 10" })
