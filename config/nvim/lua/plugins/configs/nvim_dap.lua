@@ -33,8 +33,9 @@ end
 
 local keymaps = function(dap, dapui)
   local project_filetypes = {
-    { marker = 'go.mod',       ft = 'go' },
-    { marker = 'package.json', ft = 'javascript' },
+    { marker = 'go.mod',        ft = 'go' },
+    { marker = 'package.json',  ft = 'javascript' },
+    { marker = 'tsconfig.json', ft = 'typescript' },
   }
 
   vim.keymap.set('n', '<F5>', function()
@@ -133,6 +134,42 @@ M.config = function()
     return load_configs(vim.fn.getcwd() .. '/.vscode/launch_vim.json')
     or load_configs(vim.fn.getcwd() .. '/.vscode/launch.json')
     or {}
+  end
+
+  ---@diagnostic disable-next-line: missing-fields
+  require("dap-vscode-js").setup({
+    debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+    adapters = { "pwa-node", "pwa-chrome", "node-terminal" },
+  })
+
+  for _, lang in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+    dap.configurations[lang] = {
+      {
+	type = "pwa-node",
+	request = "launch",
+	name = "Launch file",
+	program = "${file}",
+	cwd = "${workspaceFolder}",
+	sourceMaps = true,
+	resolveSourceMapLocations = { "${workspaceFolder}/**", "!**/node_modules/**" },
+      },
+      {
+	type = "pwa-node",
+	request = "attach",
+	name = "Attach to process",
+	processId = require("dap.utils").pick_process,
+	cwd = "${workspaceFolder}",
+	sourceMaps = true,
+      },
+      {
+	type = "pwa-chrome",
+	request = "launch",
+	name = "Launch Chrome",
+	url = "http://localhost:3000",
+	webRoot = "${workspaceFolder}",
+	sourceMaps = true,
+      },
+    }
   end
 
   style()
