@@ -45,17 +45,11 @@ root: ~/Documents/Programming/go/aruba/
 # attach: false
 
 windows:
-    - liqo:
-          - cd ~/Documents/Programming/go/aruba/liqo
-          - nvim .
     - agent:
-          - cd ~/Documents/Programming/go/aruba/lep-agent
+          - cd ~/Documents/Programming/go/aruba/lep-agent/
           - nvim .
     - backend:
           - cd ~/Documents/Programming/go/aruba/lep-backend/
           - nvim .
-    - testsuite:
-          - cd ~/Documents/Programming/go/aruba/lep-testsuite/
-          - nvim .
     - root:
-          - cd ~/Documents/Programming/go/aruba
+          - cd ~/Documents/Programming/go/aruba/
