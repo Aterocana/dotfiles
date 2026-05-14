@@ -30,6 +30,7 @@ vim.keymap.set("v", "<leader>`", [[c`<c-r>``<esc>]], { desc = "Wrap text in back
 -- Tab Navigation
 vim.keymap.set("n", "<leader>>", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader><", ":tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>ct", ":tabclose<CR>", { desc = "[C]lose current [T]ab" })
 
 -- Windows Managing
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Split vertically" })
@@ -57,6 +58,7 @@ vim.keymap.set("n", "<leader>h", ":set list!<CR>", { desc = "Toggle [H]idden cha
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<leader>ti', require('core.inlay_hints').toggle_hint, { desc = "[T]oggle [I]nlay_hints" })
+vim.keymap.set('n', '<leader>td', require('core.diagnostic').toggle_diagnostic, { desc = "[T]oggle [D]iagnostics" })
 
 -- Terminal
 local exitTerm = function()

@@ -1,4 +1,4 @@
-alias k="kubectl"
+alias k="kubecolor"
 alias mk="minikube"
 alias kns="kubens"
 alias kctx="kubectx"
@@ -40,3 +40,6 @@ function kc() {
 
   export KUBECONFIG="$tmp"
 }
+
+# Make "kubecolor" borrow the same completion logic as "kubectl"
+compdef kubecolor=kubectl

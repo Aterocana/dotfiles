@@ -1,61 +1,98 @@
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN]  = "",
-      [vim.diagnostic.severity.HINT]  = "",
-      [vim.diagnostic.severity.INFO]  = "",
-    },
-  },
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = false,
-    style     = "minimal",
-    border    = "single",
-    source    = true,
-    if_many   = false,
-    header    = "",
-    prefix    = "",
-    suffix    = "",
-  },
-  virtual_text = false, -- tiny-inline-diagnostic handles current-line display
-  virtual_lines = {
-    severity = {
-      min = vim.diagnostic.severity.ERROR,
-    }
-  },
-})
+local diagnostic = vim.diagnostic
 
--- tiny-inline-diagnostic: show inline only for non-error severities (errors use virtual_lines)
-require("tiny-inline-diagnostic").setup({
-  options = {
-    severity = {
-      vim.diagnostic.severity.WARN,
-      vim.diagnostic.severity.INFO,
-      vim.diagnostic.severity.HINT,
-    },
-  },
-})
+local M = {
+  diagnostics = true,
+}
 
--- Disabilita i diagnostic nella riga corrente in insert mode
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-  callback = function()
-    local bt = vim.bo.buftype
-    if bt == "prompt" then
+local function skip_buffer(bufnr)
+  return vim.bo[bufnr].buftype == "prompt"
+end
+
+M.config = function(opts)
+  opts = opts or {}
+
+  if opts.diagnostics ~= nil then
+    M.diagnostics = opts.diagnostics
+  end
+
+  diagnostic.config({
+    signs = {
+      text = {
+        [diagnostic.severity.ERROR] = "",
+        [diagnostic.severity.WARN]  = "",
+        [diagnostic.severity.HINT]  = "",
+        [diagnostic.severity.INFO]  = "",
+      },
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = false,
+      style     = "minimal",
+      border    = "single",
+      source    = true,
+      if_many   = false,
+      header    = "",
+      prefix    = "",
+      suffix    = "",
+    },
+    virtual_text = false, -- tiny-inline-diagnostic handles current-line display
+    virtual_lines = {
+      severity = {
+        min = diagnostic.severity.ERROR,
+      }
+    },
+  })
+
+  -- tiny-inline-diagnostic: show inline only for non-error severities (errors use virtual_lines)
+  require("tiny-inline-diagnostic").setup({
+    options = {
+      severity = {
+        diagnostic.severity.WARN,
+        diagnostic.severity.INFO,
+        diagnostic.severity.HINT,
+      },
+    },
+  })
+
+  diagnostic.enable(M.diagnostics)
+end
+
+M.status_diagnostic = function()
+  return M.diagnostics
+end
+
+M.disable_diagnostic = function(filter)
+  diagnostic.enable(false, filter)
+end
+
+M.toggle_diagnostic = function(filter)
+  M.diagnostics = not M.diagnostics
+  diagnostic.enable(M.diagnostics, filter)
+end
+
+M.enable_diagnostic = function(filter)
+  diagnostic.enable(M.diagnostics, filter)
+end
+
+-- Disable diagnostics in Insert mode.
+-- When Insert mode is left, display diagnostics according to the module state.
+vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
+  group = vim.api.nvim_create_augroup("DiagnosticsToggle", { clear = true }),
+  callback = function(args)
+    if skip_buffer(args.buf) then
       return
     end
-    vim.diagnostic.enable(false)
+
+    local filter = { bufnr = args.buf }
+    if args.event == "InsertEnter" then
+      M.disable_diagnostic(filter)
+      return
+    end
+
+    M.enable_diagnostic(filter)
   end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-  callback = function()
-    local bt = vim.bo.buftype
-    if bt == "prompt" then
-      return
-    end
-    vim.diagnostic.enable(true)
-  end,
-})
+return M

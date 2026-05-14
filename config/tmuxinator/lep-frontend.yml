@@ -1,7 +1,7 @@
 name: lep-frontend
-root: ~/Documents/Programming/go/aruba/lep-frontend/
+root: ~/Documents/Programming/go/aruba/repo/lep-frontend/
 
 windows:
     - code:
-          - cd ~/Documents/Programming/go/aruba/lep-frontend/
+          - cd ~/Documents/Programming/go/aruba/repo/lep-frontend/
           - nvim .

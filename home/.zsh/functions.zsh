@@ -29,6 +29,11 @@ bindkey "^[[3~" delete-char
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
 # CTRL+J ESPANDE I PERCORSI INDICATI IN SNIPPETS
 typeset -A snippets
 
