@@ -10,7 +10,7 @@ hl.config({
     sensitivity = 0,
 
     touchpad = {
-      natural_scroll = false,
+      natural_scroll = true,
     },
   },
 })
@@ -24,4 +24,12 @@ hl.gesture({
 hl.device({
   name = "epic-mouse-v1",
   sensitivity = -0.5,
+})
+
+hl.gesture({
+  fingers = 2,
+  direction = "pinch",
+  action = "cursorZoom",
+  zoom_level = 2,
+  mode = "live",
 })

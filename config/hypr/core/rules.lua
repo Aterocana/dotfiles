@@ -39,10 +39,7 @@ hl.window_rule({
 })
 
 -- hl.config({
---   xwayland = {
---     force_zero_scaling = true,
---   },
--- })
-
-hl.env("GDK_SCALE", "1")
-hl.env("XCURSOR_SIZE", "36")
+  --   xwayland = {
+    --     force_zero_scaling = true,
+    --   },
+    -- })

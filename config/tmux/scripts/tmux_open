@@ -53,6 +53,16 @@ quote_cmd() {
     printf '%q ' "$@"
 }
 
+lua_quote() {
+    local value="$1"
+    value="${value//\\/\\\\}"
+    value="${value//\"/\\\"}"
+    value="${value//$'\n'/\\n}"
+    value="${value//$'\r'/\\r}"
+    value="${value//$'\t'/\\t}"
+    printf '"%s"' "$value"
+}
+
 regex_escape() {
     printf '%s' "$1" | sed -e 's/[][(){}.^$+*?|\\-]/\\&/g'
 }
@@ -92,10 +102,11 @@ hypr_workspace_for_monitor() {
 
 focus_hypr_window() {
     local title_regex="$1"
+    local window_selector="title:$title_regex"
 
     (
         for _ in $(seq 1 20); do
-            if hyprctl dispatch focuswindow "title:$title_regex" >/dev/null 2>&1; then
+            if hyprctl dispatch "hl.dsp.focus({ window = $(lua_quote "$window_selector") })" >/dev/null 2>&1; then
                 exit 0
             fi
             sleep 0.1
@@ -128,9 +139,9 @@ if command -v hyprctl &>/dev/null; then
     if ensure_hypr_env; then
         TARGET_WORKSPACE="$(hypr_workspace_for_monitor "$MONITOR" || true)"
         if [[ -n "$TARGET_WORKSPACE" ]]; then
-            hyprctl dispatch exec "[workspace $TARGET_WORKSPACE] $TERM_CMD"
+            hyprctl dispatch "hl.dsp.exec_cmd($(lua_quote "$TERM_CMD"), { workspace = $(lua_quote "$TARGET_WORKSPACE") })"
         else
-            hyprctl dispatch exec "[monitor:$MONITOR] $TERM_CMD"
+            hyprctl dispatch "hl.dsp.exec_cmd($(lua_quote "$TERM_CMD"), { monitor = $(lua_quote "$MONITOR") })"
         fi
         focus_hypr_window "$TITLE_REGEX"
     else

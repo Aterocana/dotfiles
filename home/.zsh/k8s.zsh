@@ -5,6 +5,7 @@ alias kctx="kubectx"
 alias lq="liqoctl"
 alias klogs="kubectl get pods | tail -n +2 | fzf-tmux -p | awk {'print \$1'} | xargs -I{} kubectl logs --tail 100 -f {}"
 alias dlogs='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" | tail -n +2 | fzf-tmux -p | awk {"print \$1"} | xargs -I{} docker logs --tail 100 -f {}'
+alias knr="k get po -A --field-selector status.phase!=Running"
 
 # kdesc <entity_type> gets all entity with provided type in current namespace, present them in a fzf popup and describe the resource you selected.
 function kdesc () {
