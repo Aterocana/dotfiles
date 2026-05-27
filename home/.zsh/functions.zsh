@@ -18,7 +18,59 @@ function insert_sudo () {
 
 function fcd() {
   local dir
-  dir=$(find . -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
+  dir=$(find . -type d -not -path '*/\.*' 2> /dev/null | fzf +m --border-label ' folders ' --border) && cd "$dir"
+}
+
+function wcd() {
+  local selected worktree
+
+  git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
+
+  selected=$(
+    git worktree list --porcelain |
+      awk '
+        function print_worktree() {
+          if (worktree == "") {
+            return
+          }
+
+          if (branch == "") {
+            branch = "(detached) " head
+          }
+
+          print branch "\t" worktree
+        }
+
+        /^worktree / {
+          print_worktree()
+          worktree = substr($0, 10)
+          head = ""
+          branch = ""
+          next
+        }
+
+        /^HEAD / {
+          head = substr($0, 6, 7)
+          next
+        }
+
+        /^branch / {
+          branch = substr($0, 8)
+          sub(/^refs\/heads\//, "", branch)
+          next
+        }
+
+        END {
+          print_worktree()
+        }
+      ' |
+      fzf-tmux +m --border-label ' worktrees ' --border --prompt 'worktree> ' --delimiter=$'\t' --with-nth=1
+  ) || return
+
+  worktree="${selected#*$'\t'}"
+
+  # using builtin cd to bypass z alias (I do not want to score the dir in zoxide)
+  [[ -n "$worktree" ]] && builtin cd "$worktree"
 }
 
 bindkey "^[[1;5C" forward-word

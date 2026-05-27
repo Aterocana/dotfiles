@@ -1,12 +1,15 @@
 [user]
-	name = Aterocana
-	email = dominicimaurizio@gmail.com
+	name = "Maurizio Dominici"
+	email = "dominicimaurizio@gmail.com"
 [alias]
 	st = status -sb
 	lg = log -p
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	ls = ls-files
+	wl = worktree list
+	wa = "!f() { branch=\"$1\"; repo=\"$(basename \"$(git rev-parse --show-toplevel)\")\"; branch_dir=\"$(printf '%s' \"$branch\" | tr / _)\"; git worktree add \"$HOME/Documents/Programming/worktrees/$repo/$branch_dir\" \"$branch\"; }; f"
+	wr = "!f() { branch=\"$1\"; repo=\"$(basename \"$(git rev-parse --show-toplevel)\")\"; branch_dir=\"$(printf '%s' \"$branch\" | tr / _)\"; git worktree remove \"$HOME/Documents/Programming/worktrees/$repo/$branch_dir\"; }; f"
 [color]
 	ui = auto
 [color "branch"]
