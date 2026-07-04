@@ -145,13 +145,9 @@ local function project_root()
   return root or cwd
 end
 
-vim.keymap.set("n", "<leader>cc", function()
-  local root = project_root()
-  local project = vim.fs.basename(root)
-  local target_screen = "HDMI-A-1"
-  -- local cmd = "claude"
-  local cmd = "codex"
+local ai_assistant = function(cmd, target_screen, root)
   local tmux_open = vim.fn.expand("~/.config/tmux/scripts/tmux_open")
+  local project = vim.fs.basename(root)
 
   if cmd == "claude" then
     vim.cmd("CodePreviewInstallClaudeCodeHooks")
@@ -159,8 +155,43 @@ vim.keymap.set("n", "<leader>cc", function()
     vim.cmd("CodePreviewInstallCodexCliHooks")
   end
 
-  local output = vim.fn.system({ tmux_open, "-d", root, "-c", cmd, "-s", project .. "_assistant", "-m", target_screen })
+  local output = vim.fn.system({ tmux_open, "-d", root, "-c", cmd, "-s", project .. "_assistant", "-m",
+  target_screen })
   if vim.v.shell_error ~= 0 then
     vim.notify(output, vim.log.levels.ERROR, { title = "tmux_open" })
   end
+end
+
+vim.keymap.set("n", "<leader>cc", function()
+  local root = project_root()
+  local target_screen = "HDMI-A-1"
+  local cmd = "claude"
+  ai_assistant(cmd, target_screen, root)
 end, { desc = "Open project root in new tmux session on right monitor" })
+
+vim.keymap.set("n", "<leader>cx", function()
+  local root = project_root()
+  local target_screen = "HDMI-A-1"
+  local cmd = "codex"
+  ai_assistant(cmd, target_screen, root)
+end, { desc = "Open project root in new tmux session on right monitor" })
+
+-- vim.keymap.set("n", "<leader>cc", function()
+  --   local root = project_root()
+  --   local project = vim.fs.basename(root)
+  --   local target_screen = "HDMI-A-1"
+  --   -- local cmd = "claude"
+  --   local cmd = "codex"
+  --   local tmux_open = vim.fn.expand("~/.config/tmux/scripts/tmux_open")
+  --
+  --   if cmd == "claude" then
+  --     vim.cmd("CodePreviewInstallClaudeCodeHooks")
+  --   elseif cmd == "codex" then
+  --     vim.cmd("CodePreviewInstallCodexCliHooks")
+  --   end
+  --
+  --   local output = vim.fn.system({ tmux_open, "-d", root, "-c", cmd, "-s", project .. "_assistant", "-m", target_screen })
+  --   if vim.v.shell_error ~= 0 then
+  --     vim.notify(output, vim.log.levels.ERROR, { title = "tmux_open" })
+  --   end
+  -- end, { desc = "Open project root in new tmux session on right monitor" })
