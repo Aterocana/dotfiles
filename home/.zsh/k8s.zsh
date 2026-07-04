@@ -29,17 +29,12 @@ function kdel() {
 
 # kc finds all kubeconfig files in ~/.kube, lets you select one or more of them with fzf and then merges the selected kubeconfig files into a single temporary kubeconfig file and sets the KUBECONFIG environment variable to point to that file. This allows you to easily switch between multiple Kubernetes contexts defined in different kubeconfig files.
 function kc() {
-  local files tmp
-  files=$(find ~/.kube -type f -name "*.yaml" | fzf-tmux -p -m)
+  local files
 
+  files=$(find ~/.kube -type f -name "*.yaml" | fzf-tmux -p -m)
   [ -z "$files" ] && return
 
-  tmp=$(mktemp).kubeconfig
-
-  KUBECONFIG=$(echo "$files" | paste -sd:) \
-    kubectl config view --flatten > "$tmp"
-
-  export KUBECONFIG="$tmp"
+  export KUBECONFIG="$(print -r -- "$files" | paste -sd: -)"
 }
 
 # Make "kubecolor" borrow the same completion logic as "kubectl"
