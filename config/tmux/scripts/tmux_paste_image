@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Author: Maurizio Dominici (Aterocana)
+# Description: paste the clipboard image into the current pane as a file path.
+# If the clipboard matches the newest screenshot taken by rofi's screenshot.sh,
+# its path is reused; otherwise the image is saved once under the cache dir.
+
+set -euo pipefail
+trap 'tmux display-message "[paste-image] error at line $LINENO"' ERR
+
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/tmux-paste-image"
+screenshot_dir="$(xdg-user-dir PICTURES)/screenshots"
+
+die() {
+  tmux display-message "[paste-image] $1"
+  exit 0
+}
+
+command -v wl-paste &>/dev/null || die "wl-paste not installed"
+[[ "$(wl-paste --list-types 2>/dev/null)" == *image/png* ]] || die "no PNG image in clipboard"
+
+tmp="$(mktemp --suffix=.png)"
+trap 'rm -f "$tmp"' EXIT
+wl-paste --type image/png >"$tmp" || die "clipboard read failed"
+[[ -s "$tmp" ]] || die "clipboard read failed"
+
+# Reuse the newest screenshot when it matches the clipboard byte-for-byte.
+newest="$(ls -1t "$screenshot_dir"/*.png 2>/dev/null | head -1 || true)"
+if [[ -n "$newest" ]] && cmp -s "$tmp" "$newest"; then
+  path="$newest"
+else
+  mkdir -p "$cache_dir"
+  path="$cache_dir/image_$(date +%Y-%m-%d_%H-%M-%S).png"
+  mv "$tmp" "$path"
+fi
+
+# run-shell does not always export TMUX_PANE: fall back to the current pane.
+pane=()
+[[ -n "${TMUX_PANE:-}" ]] && pane=(-t "$TMUX_PANE")
+tmux send-keys "${pane[@]}" -l "$path"
+tmux display-message "[paste-image] $path"

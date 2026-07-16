@@ -5,7 +5,18 @@ alias kctx="kubectx"
 alias lq="liqoctl"
 alias klogs="kubectl get pods | tail -n +2 | fzf-tmux -p | awk {'print \$1'} | xargs -I{} kubectl logs --tail 100 -f {}"
 alias dlogs='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" | tail -n +2 | fzf-tmux -p | awk {"print \$1"} | xargs -I{} docker logs --tail 100 -f {}'
-alias knr="k get po -A --field-selector status.phase!=Running"
+
+# knr lists every pod that is not fully healthy: not Running, or Running with
+# containers that aren't all ready. The obvious --field-selector status.phase!=Running
+# misses CrashLoopBackOff, because a crashlooping pod's phase is still Running --
+# the backoff lives in status.containerStatuses[].state.waiting.reason, which the
+# API server can't field-select on. So filter on the printed columns instead, and
+# strip kubecolor's escape sequences on a copy of the line to keep the colors.
+function knr() {
+  kubecolor --force-colors get po -A "$@" |
+    awk '{ c = $0; gsub(/\033\[[0-9;]*m/, "", c); split(c, f, " "); split(f[3], ready, "/")
+           if (NR == 1 || f[4] != "Running" || ready[1] != ready[2]) print }'
+}
 
 # kdesc <entity_type> gets all entity with provided type in current namespace, present them in a fzf popup and describe the resource you selected.
 function kdesc () {

@@ -1,6 +1,8 @@
 local pick = require("mini.pick")
 local pickcore = require("core.pick")
 local extra = require("mini.extra")
+local browser = require("fzf-oil").setup()
+
 vim.keymap.set("n", "<leader>pf", pickcore.pick_files_filters(), { desc = "[P]ick [F]iles" })
 vim.keymap.set('n', '<C-g>', pickcore.live_grep, { desc = 'Live grep (search file contents)' })
 vim.keymap.set("n", "<leader>pd", pickcore.pick_diagnostics, { desc = "[P]ick LSP [D]iagnostics" })
@@ -10,3 +12,4 @@ vim.keymap.set("n", "<leader>pkm", extra.pickers.keymaps, { desc = "[P]ick List 
 vim.keymap.set("n", "<leader>pm", extra.pickers.marks, { desc = "[P]ick [M]arks" })
 vim.keymap.set("n", "<leader>pr", extra.pickers.registers, { desc = "[P]ick [R]egisters" })
 vim.keymap.set("n", "<leader>pp", pick.builtin.resume, { desc = "[P]ick Resume" })
+vim.keymap.set("n", "<leader>po", browser.browse, { desc = "File Browser [O]il" })

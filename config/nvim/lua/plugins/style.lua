@@ -10,6 +10,20 @@ return {
     dependencies = { "echasnovski/mini.icons" },
   },
   {
+    "ingur/fzf-oil.nvim",
+    dependencies = {
+      "ibhagwan/fzf-lua",
+      "stevearc/oil.nvim",
+    },
+    config = function()
+      -- use fzf-oil's helpers so oil matches fzf-lua's styling
+      require("oil").setup({
+	float = require("fzf-oil").float,
+	preview_win = require("fzf-oil").preview_win,
+      })
+    end
+  },
+  {
     'b0o/incline.nvim',
     -- Optional: Lazy load Incline
     event = 'VeryLazy',
