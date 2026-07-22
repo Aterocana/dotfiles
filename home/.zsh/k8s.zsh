@@ -48,5 +48,9 @@ function kc() {
   export KUBECONFIG="$(print -r -- "$files" | paste -sd: -)"
 }
 
+function kimgID() {
+	kubectl get pod | tail -n +2 | fzf-tmux -p | awk {'print $1'} | xargs -I{} kubectl get po {} -o json | jq '.status.containerStatuses[].imageID'
+}
+
 # Make "kubecolor" borrow the same completion logic as "kubectl"
 compdef kubecolor=kubectl
