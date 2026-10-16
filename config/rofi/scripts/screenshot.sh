@@ -64,9 +64,10 @@ notify_view() {
   echo "Screenshot save as ${file}"
 }
 
-# Copy screenshot to clipboard for a single use.
+# Copy screenshot to clipboard. No --paste-once: clipboard managers read the
+# selection as soon as it changes, which would consume the single paste.
 copy_shot() {
-  wl-copy --paste-once < "${dir}/${file}"
+  wl-copy --type image/png < "${dir}/${file}"
 }
 
 # countdown

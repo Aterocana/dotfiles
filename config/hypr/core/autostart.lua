@@ -1,5 +1,5 @@
 hl.on("hyprland.start", function()
-  hl.exec_cmd("qs -c noctalia-shell")
+  hl.exec_cmd("noctalia")
   hl.exec_cmd("keymapp", { workspace = "1 silent" })
   hl.exec_cmd("/usr/bin/syncthing serve", { workspace = "2 silent" })
   hl.exec_cmd("Telegram", { workspace = "9 silent" })

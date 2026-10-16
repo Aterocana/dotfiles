@@ -10,3 +10,6 @@ require("core.input")
 require("core.key_bindings")
 require("core.modes")
 require("core.noctalia_colors")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()

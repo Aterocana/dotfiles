@@ -10,6 +10,7 @@ local languages = {
   "bash",
   "javascript",
   "json",
+  "sql",
   "lua",
   "vim",
   "vimdoc",

@@ -124,3 +124,75 @@ function gitpr() {
 
   [[ -n "$branch" ]] && git wa "$branch" && git_copy_worktree_context "$source_dir" "$target_dir"
 }
+
+function git_del_branch() {
+  local branches selected line branch checked_out_branches
+  local delete_status
+  local -a selected_branches
+
+  git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
+
+  checked_out_branches=$(
+    git worktree list --porcelain |
+      awk '
+        /^branch / {
+          branch = substr($0, 8)
+          sub(/^refs\/heads\//, "", branch)
+          print branch
+        }
+      '
+  ) || return
+
+  branches=$(
+    git for-each-ref --sort=-committerdate --format='%(refname:short)%09%(upstream:short)%09%(committerdate:relative)%09%(subject)' refs/heads |
+      awk -F '\t' -v checked_out="$checked_out_branches" '
+        BEGIN {
+          split(checked_out, branches, "\n")
+          for (i in branches) {
+            if (branches[i] != "") {
+              checked[branches[i]] = 1
+            }
+          }
+        }
+
+        !($1 in checked) {
+          print
+        }
+      '
+  ) || return
+
+  [[ -n "$branches" ]] || {
+    print -u2 -r -- "No deletable local branches found."
+    return 1
+  }
+
+  selected=$(
+    printf '%s\n' "$branches" |
+      fzf-tmux -p -m --border-label ' delete branches ' --border --prompt 'branch> ' --delimiter=$'\t' --with-nth=1,2,3,4
+  ) || return
+
+  selected_branches=()
+  for line in ${(f)selected}; do
+    branch="${line%%$'\t'*}"
+    [[ -n "$branch" ]] && selected_branches+=("$branch")
+  done
+
+  (( ${#selected_branches[@]} > 0 )) || return
+
+  print -r -- "Branches selected for force deletion:"
+  printf '  %s\n' "${selected_branches[@]}"
+
+  if ! read -q "confirm?Delete ${#selected_branches[@]} local branch(es), including unmerged commits? [y/N] "; then
+    print
+    print -r -- "Aborted."
+    return 1
+  fi
+  print
+
+  delete_status=0
+  for branch in "${selected_branches[@]}"; do
+    git branch -D -- "$branch" || delete_status=$?
+  done
+
+  return $delete_status
+}
