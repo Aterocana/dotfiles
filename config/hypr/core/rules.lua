@@ -19,6 +19,11 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  match = { class = "webex" },
+  workspace = "1",
+})
+
+hl.window_rule({
   match = { class = ".*" },
   suppress_event = "maximize",
 })

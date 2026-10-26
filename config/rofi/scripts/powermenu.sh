@@ -15,7 +15,7 @@ check_deps() {
   done
 }
 
-check_deps rofi systemctl swaylock
+check_deps rofi systemctl
 
 # CMDs
 uptime="$(uptime -p | sed -e 's/up //g')"
@@ -62,7 +62,13 @@ run_rofi() {
 }
 
 lock() {
-  swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --ring-color 98971a --key-hl-color d65d0e
+  if command -v noctalia &>/dev/null && pgrep -x noctalia &>/dev/null; then
+    noctalia msg session lock
+  elif command -v swaylock &>/dev/null; then
+    swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --ring-color 98971a --key-hl-color d65d0e
+  else
+    notify-send -u critical "Error" "No screen locker available"
+  fi
 }
 
 # Execute Command

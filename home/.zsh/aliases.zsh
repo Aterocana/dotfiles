@@ -14,7 +14,7 @@ alias mux='tmuxinator'
 alias tmuxa='tmux attach || tmux new-session'
 alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
 alias now="date +%Y%m%d%H%M%S"
-alias webex="env -u WAYLAND_DISPLAY /opt/Webex/bin/CiscoCollabHost"
+alias webex="env -u WAYLAND_DISPLAY LD_PRELOAD=/usr/lib/libcrypto.so.3:/usr/lib/libssl.so.3 /opt/Webex/bin/CiscoCollabHost"
 alias watch="watch "
 alias claude-work="CLAUDE_CONFIG_DIR=$HOME/.claude-work claude"
 
