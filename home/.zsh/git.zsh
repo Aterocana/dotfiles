@@ -196,3 +196,69 @@ function git_del_branch() {
 
   return $delete_status
 }
+
+# delete local branches whose upstream has been deleted on the remote (e.g. after a squash-merged PR)
+function git_remove_merged_branches() {
+  local checked_out_branches branches branch
+  local delete_status
+  local -a selected_branches
+
+  git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
+
+  git fetch --prune || return
+
+  checked_out_branches=$(
+    git worktree list --porcelain |
+      awk '
+        /^branch / {
+          branch = substr($0, 8)
+          sub(/^refs\/heads\//, "", branch)
+          print branch
+        }
+      '
+  ) || return
+
+  branches=$(
+    git for-each-ref --format='%(refname:short)%09%(upstream:track)' refs/heads |
+      awk -F '\t' -v checked_out="$checked_out_branches" '
+        BEGIN {
+          split(checked_out, branches, "\n")
+          for (i in branches) {
+            if (branches[i] != "") {
+              checked[branches[i]] = 1
+            }
+          }
+        }
+
+        $2 == "[gone]" && !($1 in checked) {
+          print $1
+        }
+      '
+  ) || return
+
+  [[ -n "$branches" ]] || {
+    print -r -- "No local branches with a gone upstream found."
+    return 0
+  }
+
+  selected_branches=(${(f)branches})
+
+  print -r -- "Local branches whose upstream is gone:"
+  for branch in "${selected_branches[@]}"; do
+    print -r -- "  $branch  $(git log -1 --format='%h %cr %s' "$branch")"
+  done
+
+  if ! read -q "confirm?Delete ${#selected_branches[@]} local branch(es)? [y/N] "; then
+    print
+    print -r -- "Aborted."
+    return 1
+  fi
+  print
+
+  delete_status=0
+  for branch in "${selected_branches[@]}"; do
+    git branch -D -- "$branch" || delete_status=$?
+  done
+
+  return $delete_status
+}

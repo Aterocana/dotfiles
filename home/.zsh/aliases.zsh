@@ -14,7 +14,20 @@ alias mux='tmuxinator'
 alias tmuxa='tmux attach || tmux new-session'
 alias pubkeys="find ~/.ssh/ | grep .pub | fzf --preview 'bat {}' | xargs -I{} cat {} | wl-copy"
 alias now="date +%Y%m%d%H%M%S"
-alias webex="env -u WAYLAND_DISPLAY LD_PRELOAD=/usr/lib/libcrypto.so.3:/usr/lib/libssl.so.3 /opt/Webex/bin/CiscoCollabHost"
+unalias webex 2>/dev/null
+function webex() {
+  local lib f
+  # Webex's self-updated builds bundle an OpenSSL without SM4, which breaks the
+  # system libtss2-esys; point them at the system OpenSSL instead.
+  for lib in ~/.local/share/WebexLauncher/*/lib(N/); do
+    for f in libcrypto.so.3 libssl.so.3; do
+      [[ -e $lib/$f && ! -L $lib/$f ]] && mv -f -- "$lib/$f" "$lib/$f.bundled"
+      [[ -L $lib/$f ]] || ln -s "/usr/lib/$f" "$lib/$f"
+    done
+  done
+  env -u WAYLAND_DISPLAY LD_PRELOAD=/usr/lib/libcrypto.so.3:/usr/lib/libssl.so.3 \
+    /opt/Webex/bin/CiscoCollabHost "$@"
+}
 alias watch="watch "
 alias claude-work="CLAUDE_CONFIG_DIR=$HOME/.claude-work claude"
 
