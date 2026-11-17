@@ -52,5 +52,27 @@ function kimgID() {
 	kubectl get pod | tail -n +2 | fzf-tmux -p | awk {'print $1'} | xargs -I{} kubectl get po {} -o json | jq '.status.containerStatuses[].imageID'
 }
 
+# kimgs prints namespace, pod, container, image and imageID of every running container.
+# Without arguments it uses the current namespace; pass -A for all namespaces or -n <namespace> for one.
+function kimgs() {
+  local -a flags
+  case "$1" in
+    "") ;;
+    -A|--all-namespaces) flags=(-A) ;;
+    -n|--namespace)
+      if [[ -z "$2" ]]; then
+        echo "usage: kimgs [-A | -n <namespace>]"
+        return 1
+      fi
+      flags=(-n "$2") ;;
+    *)
+      echo "usage: kimgs [-A | -n <namespace>]"
+      return 1 ;;
+  esac
+  kubectl get pods "${flags[@]}" -o json |
+    jq -r '.items[] | .metadata as $m | .status.containerStatuses[]? | [$m.namespace, $m.name, .name, .image, .imageID] | @tsv' |
+    column -t
+}
+
 # Make "kubecolor" borrow the same completion logic as "kubectl"
 compdef kubecolor=kubectl
